@@ -24,6 +24,21 @@ public class ValidadorContraseniaTests {
 
         Assertions.assertFalse(validadorContraseña.esUnaDeLasPeoresClaves("DDs2023"));
     }
+    @Test
+    @DisplayName("Password1 no cumple con guia NIST")
+    public void unaClaveNoesValidaNist() throws Exception {
+
+        Assertions.assertFalse(validadorContraseña.esValidaNist("Password1"));
+    }
+    @Test
+    @DisplayName("Password1* cumple con guia NIST")
+    public void unaClaveEsValidaNist() throws Exception {
+
+        Assertions.assertTrue(validadorContraseña.esValidaNist("Password1*"));
+    }
+
+
+
 
 }
 
