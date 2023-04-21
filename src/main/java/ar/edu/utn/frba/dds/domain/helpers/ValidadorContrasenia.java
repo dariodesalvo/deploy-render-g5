@@ -12,25 +12,38 @@ public class ValidadorContrasenia implements ValidadorContrasenias {
     private String URLPeoresClaves = "https://raw.githubusercontent.com/danielmiessler/SecLists/master/Passwords/Common-Credentials/10-million-password-list-top-10000.txt";
 
     public void validarPassword(String contrasenia) throws MalformedURLException {
+
+    }
+    public boolean laContraseniaEsValida (String contrasenia) throws Exception {
+        return !this.esUnaDeLasPeoresClaves(contrasenia) && this.esValidaNist(contrasenia);
     }
 
     public boolean esUnaDeLasPeoresClaves(String contrasenia) throws Exception {
-        try {
+        try{
             String clave;
-            URL peoresClaves = new URL(URLPeoresClaves);
-            BufferedReader bufferReaderclaves = new BufferedReader(new InputStreamReader(peoresClaves.openStream()));
-            while ((clave = bufferReaderclaves.readLine()) != null) {
+            BufferedReader peoresClaves= leerURL(this.URLPeoresClaves);
+
+            while ((clave = peoresClaves.readLine()) != null) {
                 if (clave.equals(contrasenia)) {
-                    bufferReaderclaves.close();
+                    peoresClaves.close();
                     return true;
                 }
             }
-            bufferReaderclaves.close();
+            peoresClaves.close();
             return false;
-        } catch (MalformedURLException e ) {
-            throw new MalformedURLException("La URL no ha sido encontrada");
+        } catch (Exception e){
+            throw new Exception("No se ha podido validar las peores claves");
+        }
+    }
+    public BufferedReader leerURL(String url) throws MalformedURLException {
+        try{
+            URL peoresClaves = new URL(url);
+            BufferedReader bufferReader = new BufferedReader(new InputStreamReader(peoresClaves.openStream()));
+            return bufferReader;
+        } catch (MalformedURLException e) {
+            throw new MalformedURLException("No se ha podido encontrar la URL");
         } catch (IOException e) {
-            throw new IOException("No se ha podido leer el archivo con las 10000 peores claves");
+            throw new RuntimeException("No se ha podido leer el archivo con las 10000 peores claves");
         }
     }
 

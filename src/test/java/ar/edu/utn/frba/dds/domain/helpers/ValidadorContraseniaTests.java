@@ -37,6 +37,21 @@ public class ValidadorContraseniaTests {
         Assertions.assertTrue(validadorContraseña.esValidaNist("Password1*"));
     }
 
+    @Test
+    @DisplayName("PasSSSword1* es una contraseña valida")
+    public void unaClaveEsValida() throws Exception {
+
+        Assertions.assertTrue(validadorContraseña.laContraseniaEsValida("PasSSSword1*"));
+    }
+
+    @Test
+    @DisplayName("pasSSword es una contraseña valida")
+    public void unaClaveEsInvalida() throws Exception {
+
+        Assertions.assertFalse(validadorContraseña.laContraseniaEsValida("pasSSword"));
+    }
+
+
 
 
 
