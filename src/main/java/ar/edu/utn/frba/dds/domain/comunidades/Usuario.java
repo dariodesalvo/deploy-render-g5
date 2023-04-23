@@ -32,4 +32,9 @@ public class Usuario {
 
   }
 
+  public void iniciarSesion(String nombreUsuario, String contrasenia) {
+    IniciarSesion inicioDeSesion = new IniciarSesion(this);
+    inicioDeSesion.validarUsuario(nombreUsuario, contrasenia);
+  }
+
 }
