@@ -13,7 +13,6 @@ public class IniciarSesion {
       if (usuario.getNombre().equals(nombreUsuario)
               && usuario.getContrasenia().equals(contrasenia)) {
         System.out.println("Inicio de sesión exitoso");
-        return;
       } else {
         System.out.printf("Usuario o contraseña incorrecta. Intente nuevamente. "
                 + "Intentos restantes:", cantidadIntentosDeLogin);
