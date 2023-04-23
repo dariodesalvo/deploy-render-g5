@@ -1,14 +1,13 @@
 package ar.edu.utn.frba.dds.domain.servicios;
 
+import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.util.List;
 
 @Getter
 @Setter
 public class Estacion {
-    private String nombre;
-    private Ubicacion ubicacion;
-    private List<Servicio> servicios;
+  private String nombre;
+  private Ubicacion ubicacion;
+  private List<Servicio> servicios;
 }

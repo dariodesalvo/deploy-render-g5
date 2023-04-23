@@ -1,10 +1,13 @@
 package ar.edu.utn.frba.dds.domain.comunidades;
 
-public class Prestador extends Usuario{
+public class Prestador extends RolesUsuario {
 
-    public void altaServicioPublico(){}
+  public void altaServicioPublico() {
+  }
 
-    public void bajaServicioPublico(){}
+  public void bajaServicioPublico() {
+  }
 
-    public void editarServicioPublico(){}
+  public void editarServicioPublico() {
+  }
 }

@@ -1,4 +1,4 @@
 package ar.edu.utn.frba.dds.domain.comunidades;
 
-public class Lector {
+public class Lector extends RolesUsuario {
 }

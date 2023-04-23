@@ -6,6 +6,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Ubicacion {
-    private float latitud;
-    private float longitud;
+  private float latitud;
+  private float longitud;
 }
