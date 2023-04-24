@@ -1,9 +1,13 @@
 package ar.edu.utn.frba.dds.domain.helpers;
 
 import ar.edu.utn.frba.dds.domain.comunidades.Usuario;
+import lombok.Getter;
+import lombok.Setter;
 
 public class IniciarSesion {
   private final Usuario usuario;
+  @Getter
+  @Setter
   private static int cantidadIntentosDeLogin = 3;
 
   public IniciarSesion(Usuario usuario) {
@@ -17,9 +21,9 @@ public class IniciarSesion {
         System.out.println("Inicio de sesión exitoso");
         return true;
       } else {
-        System.out.printf("Usuario o contraseña incorrecta. Intente nuevamente. "
-                + "Intentos restantes:", cantidadIntentosDeLogin);
         cantidadIntentosDeLogin--;
+        System.out.println("Usuario o contraseña incorrecta. Intente nuevamente. "
+                + "Intentos restantes: "+ cantidadIntentosDeLogin + "\n");
         return false;
       }
     } else {
