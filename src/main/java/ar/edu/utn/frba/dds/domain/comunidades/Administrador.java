@@ -12,16 +12,13 @@ import lombok.Setter;
 @Setter
 public class Administrador extends RolesUsuario {
 
-  public void altaServicio(Estacion estacion) {
-    List<Servicio> servicios = estacion.getServicios();
-    servicios.add(new Servicio());
-    estacion.setServicios(servicios);
+  public void altaServicio(Estacion estacion, Servicio servicio) {
+
+    estacion.agregarServicio(servicio);
   }
 
   public void bajaServicio(Estacion estacion, Servicio servicio) {
-    List<Servicio> servicios = estacion.getServicios();
-    servicios.remove(servicio);
-    estacion.setServicios(servicios);
+    estacion.eliminarServicio(servicio);
   }
 
   public void editarUbicacionServicio(Servicio servicio, Ubicacion ubicacion) {
@@ -39,5 +36,20 @@ public class Administrador extends RolesUsuario {
   public void editarElevacionServicio(Servicio servicio, Boolean nuevosEsDeElevacion) {
     servicio.setEsDeElevacion(nuevosEsDeElevacion);
   }
+
+  public void crearAdministrador(Usuario usuario){
+    RolesUsuario administrador = new Administrador();
+    usuario.setRol(administrador);
+  }
+
+  public void eliminarAdministrador(Usuario usuario){
+    RolesUsuario lector = new Lector();
+    usuario.setRol(lector);
+  }
+
+  //agregar miembro a comunidad
+
+  //eliminar miembro a comunidad
+
 
 }

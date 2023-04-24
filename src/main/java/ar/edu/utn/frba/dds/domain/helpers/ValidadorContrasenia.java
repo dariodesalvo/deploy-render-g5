@@ -9,25 +9,25 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ValidadorContrasenia implements ValidadorContrasenias {
-  private final String urlPeoresClaves = "https://raw.githubusercontent.com/danielmiessler/SecLists/master/Passwords/Common-Credentials/10-million-password-list-top-10000.txt";
+  private static final String urlPeoresClaves = "https://raw.githubusercontent.com/danielmiessler/SecLists/master/Passwords/Common-Credentials/10-million-password-list-top-10000.txt";
 
   public void validarPassword(String contrasenia) throws MalformedURLException {
 
   }
 
-  public boolean laContraseniaEsValida(String contrasenia) throws Exception {
+  public static boolean laContraseniaEsValida(String contrasenia) throws Exception {
     try {
-      return !this.esUnaDeLasPeoresClaves(contrasenia) && this.esValidaNist(contrasenia);
+      return !esUnaDeLasPeoresClaves(contrasenia) && esValidaNist(contrasenia);
 
     } catch (Exception e) {
       throw new Exception("No se ha podido validar la contraseña");
     }
   }
 
-  public boolean esUnaDeLasPeoresClaves(String contrasenia) throws Exception {
+  public static boolean esUnaDeLasPeoresClaves(String contrasenia) throws Exception {
     try {
       String clave;
-      BufferedReader peoresClaves = leerUrl(this.urlPeoresClaves);
+      BufferedReader peoresClaves = leerUrl(urlPeoresClaves);
 
       while ((clave = peoresClaves.readLine()) != null) {
         if (clave.equals(contrasenia)) {
@@ -42,7 +42,7 @@ public class ValidadorContrasenia implements ValidadorContrasenias {
     }
   }
 
-  public BufferedReader leerUrl(String url) throws MalformedURLException {
+  public static BufferedReader leerUrl(String url) throws MalformedURLException {
     try {
       URL peoresClaves = new URL(url);
       InputStreamReader streamReaderPeoresClaves = new InputStreamReader(peoresClaves.openStream());
@@ -55,7 +55,7 @@ public class ValidadorContrasenia implements ValidadorContrasenias {
     }
   }
 
-  public boolean esValidaNist(String contrasenia) {
+  public static boolean esValidaNist(String contrasenia) {
 
     String regex = "^(?=.*[0-9])" //Al menos un dígito
             + "(?=.*[a-z])(?=.*[A-Z])" // Mayúsculas y minúsculas

@@ -10,25 +10,35 @@ import lombok.Setter;
 @Setter
 public class Usuario {
   private String nombre;
+  private String apellido;
   private String contrasenia;
   private String email;
-  private List<String> intereses = new ArrayList<String>();
+  private List<Interes> intereses = new ArrayList<Interes>();
   private List<Comunidad> comunidades = new ArrayList<Comunidad>();
   private RolesUsuario rol = new Lector();
-  private ValidadorContrasenia validadorDeContrasenia = new ValidadorContrasenia();
+  public Usuario(String email, String contrasenia)
+        throws Exception
+  {
 
-  public void registrarUsuario(String nombreUsuario, String contrasenia, String email)
-          throws Exception {
-    try {
-      if (validadorDeContrasenia.laContraseniaEsValida(contrasenia)) {
-        this.nombre = nombreUsuario;
-        this.contrasenia = contrasenia;
-        this.email = email;
-
+    try{
+      if(ValidadorContrasenia.laContraseniaEsValida(contrasenia))
+      {
+        this.contrasenia=contrasenia;
+        this.email=email;
+        // this.registrarUsuario(this);
       }
-    } catch (Exception e) {
-      throw new Exception("No se ha podido validar la contraseñia. Usuario no creado");
+      else{
+        System.out.println("El password no cumple con los requerimientos de seguridad.");
+      }
+    }catch (Exception e){
+      new Exception("No se ha podido registrar un nuevo usuario.");
     }
+
+  }
+
+  public void registrarUsuario(Usuario usuario){
+
+    //se guarda en la base de datos
 
   }
 

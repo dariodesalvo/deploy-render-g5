@@ -11,4 +11,5 @@ public class Servicio {
   private Ubicacion ubicacion;
   private List<Ubicacion> tramos;
   private boolean esDeElevacion;
+  private boolean estaActivo;
 }
