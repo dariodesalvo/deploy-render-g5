@@ -47,9 +47,21 @@ public class Administrador extends RolesUsuario {
     usuario.setRol(lector);
   }
 
-  //agregar miembro a comunidad
+  public void agregarMiembro(Comunidad comunidad, Usuario usuario){
+    comunidad.agregarMiembro(usuario);
+  }
 
-  //eliminar miembro a comunidad
+  public void agregarMiembroAdministrador(Comunidad comunidad, Usuario usuario){
+    comunidad.agregarMiembroAdministrador(usuario);
+  }
+
+  public void eliminarMiembro(Comunidad comunidad, Usuario usuario){
+    comunidad.eliminarMiembro(usuario);
+  }
+
+  public void eliminarMiembroAdministrador(Comunidad comunidad, Usuario usuario){
+    comunidad.eliminarMiembroAdministrador(usuario);
+  }
 
 
 }

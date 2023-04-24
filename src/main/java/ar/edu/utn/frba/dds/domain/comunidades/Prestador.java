@@ -39,4 +39,5 @@ public class Prestador extends RolesUsuario {
   public void eliminarEstacionServicioPublico(ServicioPublico servicioPublico, Estacion estacion) {
     servicioPublico.eliminarEstacion(estacion);
   }
+
 }
