@@ -6,9 +6,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class ValidadorContraseniaTests {
-
-
-
   @Test
   @DisplayName("qwerty es una de las peores claves")
   public void unaClaveseEncuentraDentroDeLaListaDePeoresClaves() throws Exception {
