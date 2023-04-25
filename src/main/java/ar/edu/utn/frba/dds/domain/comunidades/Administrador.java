@@ -12,12 +12,12 @@ import lombok.Setter;
 @Setter
 public class Administrador extends RolesUsuario {
 
-  public void altaServicio(Estacion estacion, Servicio servicio) {
+  public void altaServicio(Estacion estacion, Servicio servicio) throws Exception {
 
     estacion.agregarServicio(servicio);
   }
 
-  public void bajaServicio(Estacion estacion, Servicio servicio) {
+  public void bajaServicio(Estacion estacion, Servicio servicio) throws Exception {
     estacion.eliminarServicio(servicio);
   }
 
