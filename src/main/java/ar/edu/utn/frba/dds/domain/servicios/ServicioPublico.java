@@ -4,6 +4,7 @@ import ar.edu.utn.frba.dds.domain.comunidades.Interes;
 import lombok.Getter;
 import lombok.Setter;
 import java.text.CollationElementIterator;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -21,6 +22,7 @@ public class ServicioPublico {
     this.medioDeTransporte = medioDeTransporte;
     this.estacionOrigen = estacionOrigen;
     this.estacionDestino = estacionDestino;
+    this.estaciones = new ArrayList<>();
   }
 
   public void agregarEstacion(Estacion estacion){
