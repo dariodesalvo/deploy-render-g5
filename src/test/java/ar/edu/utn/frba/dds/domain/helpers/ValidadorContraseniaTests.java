@@ -35,6 +35,13 @@ public class ValidadorContraseniaTests {
   }
 
   @Test
+  @DisplayName("dario123+ es trivial para usuario dariodesalvo")
+  public void unaClaveEsTrivial() throws Exception {
+
+    Assertions.assertTrue(ValidadorContrasenia.esTrivial("dario", "dario123+"));
+  }
+
+  @Test
   @DisplayName("PasSSSword1* es una contraseña valida")
   public void unaClaveEsValida() throws Exception {
 

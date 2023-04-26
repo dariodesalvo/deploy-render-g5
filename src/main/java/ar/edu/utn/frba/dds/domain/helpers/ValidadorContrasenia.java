@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
 public class ValidadorContrasenia implements ValidadorContrasenias {
   private static final String urlPeoresClaves = "https://raw.githubusercontent.com/danielmiessler/SecLists/master/Passwords/Common-Credentials/10-million-password-list-top-10000.txt";
 
-  public void validarPassword(String contrasenia) throws MalformedURLException {
+  public void validarPassword(String nombreUsuario, String contrasenia) throws MalformedURLException {
 
   }
 
@@ -22,6 +22,11 @@ public class ValidadorContrasenia implements ValidadorContrasenias {
     } catch (Exception e) {
       throw new Exception("No se ha podido validar la contraseña");
     }
+  }
+
+  public static boolean esTrivial(String nombreUsuario, String contrasenia){
+
+    return contrasenia.contains(nombreUsuario);
   }
 
   public static boolean esUnaDeLasPeoresClaves(String contrasenia) throws Exception {

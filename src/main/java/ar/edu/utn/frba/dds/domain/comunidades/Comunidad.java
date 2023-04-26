@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.domain.comunidades;
 
+import java.util.ArrayList;
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,6 +11,12 @@ public class Comunidad {
   private String nombre;
   private List<Usuario> miembros;
   private List<Usuario> administradores;
+
+  public Comunidad(String nombre){
+    this.nombre = nombre ;
+    this.miembros = new ArrayList<>();
+    this.administradores = new ArrayList<>();
+  }
 
 
   public void agregarMiembro(Usuario usuario) {
