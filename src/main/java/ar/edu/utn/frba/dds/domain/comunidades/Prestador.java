@@ -2,7 +2,7 @@ package ar.edu.utn.frba.dds.domain.comunidades;
 
 import ar.edu.utn.frba.dds.domain.servicios.Estacion;
 import ar.edu.utn.frba.dds.domain.servicios.MedioDeTransporte;
-import ar.edu.utn.frba.dds.domain.servicios.ServicioPublico;
+import ar.edu.utn.frba.dds.domain.servicios.Linea;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,38 +13,38 @@ import java.util.List;
 @Setter
 public class Prestador extends RolesUsuario {
 
-    private List<ServicioPublico> serviciosPublicos = new ArrayList<>();
+    private List<Linea> serviciosPublicos = new ArrayList<>();
 
-    public void altaServicioPublico(ServicioPublico servicioPublico) {
-        serviciosPublicos.add(servicioPublico);
+    public void altaServicioPublico(Linea linea) {
+        serviciosPublicos.add(linea);
     }
 
-    public void bajaServicioPublico(ServicioPublico servicioPublico) {
-        serviciosPublicos.remove(servicioPublico);
+    public void bajaServicioPublico(Linea linea) {
+        serviciosPublicos.remove(linea);
     }
 
-    public void editarNombreServicioPublico(ServicioPublico servicioPublico, String nombre) {
-        servicioPublico.setNombre(nombre);
+    public void editarNombreServicioPublico(Linea linea, String nombre) {
+        linea.setNombre(nombre);
     }
 
-    public void editarMedioDeTransporteServicioPublico(ServicioPublico servicioPublico, MedioDeTransporte medio) {
-        servicioPublico.setMedioDeTransporte(medio);
+    public void editarMedioDeTransporteServicioPublico(Linea linea, MedioDeTransporte medio) {
+        linea.setMedioDeTransporte(medio);
     }
 
-    public void editarEstacionOrigenServicioPublico(ServicioPublico servicioPublico, Estacion estacion) {
-        servicioPublico.setEstacionOrigen(estacion);
+    public void editarEstacionOrigenServicioPublico(Linea linea, Estacion estacion) {
+        linea.setEstacionOrigen(estacion);
     }
 
-    public void editarEstacionDestinoServicioPublico(ServicioPublico servicioPublico, Estacion estacion) {
-        servicioPublico.setEstacionDestino(estacion);
+    public void editarEstacionDestinoServicioPublico(Linea linea, Estacion estacion) {
+        linea.setEstacionDestino(estacion);
     }
 
-    public void agregarEstacionServicioPublico(ServicioPublico servicioPublico, Estacion estacion) {
-        servicioPublico.agregarEstacion(estacion);
+    public void agregarEstacionServicioPublico(Linea linea, Estacion estacion) {
+        linea.agregarEstacion(estacion);
     }
 
-    public void eliminarEstacionServicioPublico(ServicioPublico servicioPublico, Estacion estacion) {
-        servicioPublico.eliminarEstacion(estacion);
+    public void eliminarEstacionServicioPublico(Linea linea, Estacion estacion) {
+        linea.eliminarEstacion(estacion);
     }
 
 }

@@ -4,13 +4,13 @@ import ar.edu.utn.frba.dds.builders.EstacionBuilder;
 import ar.edu.utn.frba.dds.builders.UbicacionBuilder;
 import ar.edu.utn.frba.dds.domain.servicios.Estacion;
 import ar.edu.utn.frba.dds.domain.servicios.MedioDeTransporte;
-import ar.edu.utn.frba.dds.domain.servicios.ServicioPublico;
+import ar.edu.utn.frba.dds.domain.servicios.Linea;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class ABMServiciosPublicosTest {
+public class ABMLineaTest {
 
     private final Prestador prestador = new Prestador();
     private final EstacionBuilder estacionBuilder = new EstacionBuilder(new UbicacionBuilder());
@@ -19,7 +19,7 @@ public class ABMServiciosPublicosTest {
     private final Estacion ezeiza = estacionBuilder.buildEstacionSinServicios("Ezeiza", -34.8553F, -58.5258F);
     private final Estacion retiro = estacionBuilder.buildEstacionSinServicios("Retiro", -34.5877F, -58.3749F);
     private final Estacion avellaneda = estacionBuilder.buildEstacionSinServicios("Avellaneda", -34.6625F, -58.365F);
-    private final ServicioPublico nuevaLineaDeTren = new ServicioPublico("Constitucion-Ezeiza", MedioDeTransporte.FERROCARRIL, constitucion, ezeiza);
+    private final Linea nuevaLineaDeTren = new Linea("Constitucion-Ezeiza", MedioDeTransporte.FERROCARRIL, constitucion, ezeiza);
 
     @BeforeEach
     public void inicializar() throws Exception {
@@ -41,7 +41,7 @@ public class ABMServiciosPublicosTest {
     @DisplayName("Un prestador quiere dar de baja un servicio publico: Linea de Subte")
     public void givenSeQuiereDarBajaServicioPublicoWhenBajaServicioThenOK() throws Exception {
 
-        ServicioPublico nuevaLineaDeSubte = new ServicioPublico("Subte C", MedioDeTransporte.SUBTERRANEO, constitucion, retiro);
+        Linea nuevaLineaDeSubte = new Linea("Subte C", MedioDeTransporte.SUBTERRANEO, constitucion, retiro);
         prestador.altaServicioPublico(nuevaLineaDeSubte);
         prestador.bajaServicioPublico(nuevaLineaDeSubte);
         Assertions.assertFalse(prestador.getServiciosPublicos().contains(nuevaLineaDeSubte));
