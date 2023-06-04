@@ -1,8 +1,12 @@
 package ar.edu.utn.frba.dds.domain.comunidades;
 
+import ar.edu.utn.frba.dds.domain.archivoCSV.AdapterCSVFileReader;
+import ar.edu.utn.frba.dds.domain.archivoCSV.LectorCSV;
 import ar.edu.utn.frba.dds.domain.servicios.Estacion;
 import ar.edu.utn.frba.dds.domain.servicios.Servicio;
 import ar.edu.utn.frba.dds.domain.servicios.Ubicacion;
+
+import java.io.IOException;
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
@@ -63,5 +67,13 @@ public class Administrador extends RolesUsuario {
     comunidad.eliminarMiembroAdministrador(usuario);
   }
 
+  public void cargarArchivo(String archivo) throws IOException {
+    AdapterCSVFileReader adaptadorCSV = new LectorCSV();
+    try{
+      adaptadorCSV.leerArchivoCSV(archivo);
 
+    } catch(IOException e){
+      throw new IOException("No se ha podido leer el archivo");
+    }
+  }
 }
