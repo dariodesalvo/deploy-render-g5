@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.domain.servicios;
 
+import ar.edu.utn.frba.dds.domain.entidades.Entidad;
 import lombok.Getter;
 import lombok.Setter;
 import java.util.ArrayList;
@@ -7,7 +8,7 @@ import java.util.List;
 
 @Getter
 @Setter
-public class Linea {
+public class Linea extends Entidad {
   private String nombre;
   private MedioDeTransporte medioDeTransporte;
   private Estacion estacionOrigen;
