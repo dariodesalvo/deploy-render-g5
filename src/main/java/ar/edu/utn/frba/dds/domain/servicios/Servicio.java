@@ -7,6 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Servicio {
+  private int codigoServicio;
   private String nombre;
   private Ubicacion ubicacion;
   private List<Ubicacion> tramos;

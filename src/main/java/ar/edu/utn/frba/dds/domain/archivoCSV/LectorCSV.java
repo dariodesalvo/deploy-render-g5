@@ -1,9 +1,13 @@
 package ar.edu.utn.frba.dds.domain.archivoCSV;
 
+import ar.edu.utn.frba.dds.domain.servicios.Ubicacion;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class LectorCSV implements AdapterCSVFileReader {
   @Override
@@ -13,14 +17,18 @@ public class LectorCSV implements AdapterCSVFileReader {
       Iterable<CSVRecord> atributosArchivo = CSVFormat.DEFAULT.withDelimiter(';').withHeader().parse(archivo);
 
       for (CSVRecord atributoArchivo : atributosArchivo) {
-        String codigoEmpresa = atributoArchivo.get("Codigo Empresa");
+        int codigoEmpresa = Integer.parseInt(atributoArchivo.get("Codigo Empresa"));
         String nombreEmpresa = atributoArchivo.get("Nombre Empresa");
-        String codigoServico = atributoArchivo.get("Codigo Servicio");
-        String nombreServicio = atributoArchivo.get("Nombre Servicio");
         String usuarioResponsable = atributoArchivo.get("Usuario Responsable");
+        int codigoServico = Integer.parseInt(atributoArchivo.get("Codigo Servicio"));
+        String nombreServicio = atributoArchivo.get("Nombre Servicio");
+        String ubicacion = atributoArchivo.get("Ubicacion");
+        String tramos = atributoArchivo.get("Tramos");
+        boolean esDeElvacion = Boolean.parseBoolean(atributoArchivo.get("Es de elevacion"));
+        boolean estaActivo = Boolean.parseBoolean(atributoArchivo.get("Esta Activo"));
 
-        ArchivoCSV lecturaArchivoCSV = new ArchivoCSV(codigoEmpresa, nombreEmpresa, codigoServico, nombreServicio, usuarioResponsable);
-        RepositorioDeArchivos.agregarLecturaDeArchivo(lecturaArchivoCSV);
+       // ArchivoCSV lecturaArchivoCSV = new ArchivoCSV(codigoEmpresa, nombreEmpresa, codigoServico, usuarioResponsable);
+        //RepositorioDeArchivos.agregarLecturaDeArchivo(lecturaArchivoCSV);
       }
       archivo.close();
     } catch (IOException e) {
