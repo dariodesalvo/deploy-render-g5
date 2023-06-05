@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 @Getter
 @Setter
-public class RepositorioEmpresas
+public class RepositorioEmpresas{
         private static List<Servicio> empresas = new ArrayList<>();
 
         public static void agregarServicio(Servicio servicio){
