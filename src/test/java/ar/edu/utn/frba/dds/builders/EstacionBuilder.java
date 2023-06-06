@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.dds.builders;
 
-import ar.edu.utn.frba.dds.domain.servicios.Estacion;
+import ar.edu.utn.frba.dds.domain.entidades.Estacion;
+import ar.edu.utn.frba.dds.domain.helpers.Municipio;
 
 import java.util.ArrayList;
 
@@ -14,8 +15,8 @@ public class EstacionBuilder {
 
     public Estacion buildEstacionSinServicios(String nombre, Float latitud, Float longitud){
         Estacion nuevaEstacion = new Estacion();
-        nuevaEstacion.setNombre(nombre);
-        nuevaEstacion.setUbicacion(ubicacionBuilder.buildUbicacion(latitud, longitud));
+        nuevaEstacion.setLeyenda(nombre);
+        nuevaEstacion.setLocalizacion(new Municipio("flores",ubicacionBuilder.buildUbicacion(latitud, longitud)));
         nuevaEstacion.setServicios(new ArrayList<>());
         return nuevaEstacion;
     }

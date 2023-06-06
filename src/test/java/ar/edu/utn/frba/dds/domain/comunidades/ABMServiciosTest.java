@@ -2,7 +2,7 @@ package ar.edu.utn.frba.dds.domain.comunidades;
 
 import ar.edu.utn.frba.dds.builders.EstacionBuilder;
 import ar.edu.utn.frba.dds.builders.UbicacionBuilder;
-import ar.edu.utn.frba.dds.domain.servicios.Estacion;
+import ar.edu.utn.frba.dds.domain.entidades.Estacion;
 import ar.edu.utn.frba.dds.domain.servicios.Servicio;
 
 import org.junit.jupiter.api.*;
@@ -24,7 +24,7 @@ public class ABMServiciosTest {
 
     @Test
     @DisplayName("Un administrador quiere dar de alta un servicio para una estacion")
-    public void givenSeQuiereDarAltaNuevoServicioWhenAltaServicioThenOK() throws Exception {
+    public void altaNuevoServicioEstacion() throws Exception {
 
         Estacion estacion = estacionBuilder.buildEstacionSinServicios("Primera Junta", 34.55490F, 22.55472F );
         Servicio nuevoServicio = new Servicio();
@@ -34,8 +34,8 @@ public class ABMServiciosTest {
     }
 
     @Test
-    @DisplayName("Un administrador quiere dar de alta un servicio para una estacion")
-    public void givenSeQuiereDarAltaServicioExistenteWhenAltaServicioThenERROR() {
+    @DisplayName("Un administrador quiere dar de alta nuevos servicios para una estacion")
+    public void altaServiciosDeEstacion() {
 
         Assertions.assertThrows(e.getClass(), ()->{
             Estacion estacion = estacionBuilder.buildEstacionSinServicios("Primera Junta", 34.55490F, 22.55472F );
@@ -47,8 +47,8 @@ public class ABMServiciosTest {
     }
 
     @Test
-    @DisplayName("Un administrador quiere dar de alta un servicio para una estacion")
-    public void givenSeQuiereDarBajaServicioWhenBajaServicioThenOK() throws Exception {
+    @DisplayName("Un administrador quiere dar de alta y de baja un servicio para una estacion")
+    public void altaYBajaServicioDeEstacion() throws Exception {
 
         Estacion estacion = estacionBuilder.buildEstacionSinServicios("Primera Junta", 34.55490F, 22.55472F );
         Servicio nuevoServicio = new Servicio();
@@ -59,8 +59,8 @@ public class ABMServiciosTest {
     }
 
     @Test
-    @DisplayName("Un administrador quiere dar de alta un servicio para una estacion")
-    public void givenSeQuiereDarBajaServicioInexistenteWhenBajaServicioThenERROR() {
+    @DisplayName("Un administrador quiere dar de baja un servicio para una estacion")
+    public void bajaServicioDeEstacion() {
 
         Assertions.assertThrows(e.getClass(), ()->{
             Estacion estacion = estacionBuilder.buildEstacionSinServicios("Primera Junta", 34.55490F, 22.55472F );

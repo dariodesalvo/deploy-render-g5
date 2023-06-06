@@ -1,4 +1,4 @@
-package ar.edu.utn.frba.dds.domain.servicios;
+package ar.edu.utn.frba.dds.domain.helpers;
 
 import lombok.Getter;
 import lombok.Setter;

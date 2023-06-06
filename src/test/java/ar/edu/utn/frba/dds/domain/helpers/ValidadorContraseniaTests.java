@@ -8,14 +8,14 @@ import org.junit.jupiter.api.Test;
 public class ValidadorContraseniaTests {
   @Test
   @DisplayName("qwerty es una de las peores claves")
-  public void unaClaveseEncuentraDentroDeLaListaDePeoresClaves() throws Exception {
+  public void esUnaDeLasPeoresClaves() throws Exception {
 
     Assertions.assertTrue(ValidadorContrasenia.esUnaDeLasPeoresClaves("qwerty"));
   }
 
   @Test
   @DisplayName("DDs2023 no es una de las peores claves")
-  public void unaClaveseNoEncuentraDentroDeLaListaDePeoresClaves() throws Exception {
+  public void noEsDeLasPeoresClaves() throws Exception {
 
     Assertions.assertFalse(ValidadorContrasenia.esUnaDeLasPeoresClaves("DDs2023"));
   }

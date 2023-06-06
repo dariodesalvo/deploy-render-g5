@@ -19,11 +19,11 @@ public class AdministrarComunidadesTest {
     }
 
     @Test
-    @DisplayName("Un administrador de una comunidad agrega un nuevo miembro")
+    @DisplayName("Se setea un administrador y una comunidad agrega un nuevo miembro")
     public void adminAgregaMiembro() throws Exception {
         Usuario juan = new Usuario("juan", "Delantero6576*");
         Administrador administrador = (Administrador) capitan.getRol();
-        administrador.agregarMiembro(losMurcielagos, juan);
+        losMurcielagos.agregarMiembro(juan);
         Assertions.assertTrue(losMurcielagos.getMiembros().contains(juan));
 
     }

@@ -1,8 +1,8 @@
 package ar.edu.utn.frba.dds.domain.comunidades;
 
-import ar.edu.utn.frba.dds.domain.servicios.Estacion;
-import ar.edu.utn.frba.dds.domain.servicios.MedioDeTransporte;
-import ar.edu.utn.frba.dds.domain.servicios.Linea;
+import ar.edu.utn.frba.dds.domain.entidades.Estacion;
+import ar.edu.utn.frba.dds.domain.entidades.MedioDeTransporte;
+import ar.edu.utn.frba.dds.domain.entidades.Linea;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,20 +23,12 @@ public class Prestador extends RolesUsuario {
         serviciosPublicos.remove(linea);
     }
 
-    public void editarNombreServicioPublico(Linea linea, String nombre) {
-        linea.setNombre(nombre);
+    public void editarLeyendaServicioPublico(Linea linea, String nombre) {
+        linea.setLeyenda(nombre);
     }
 
     public void editarMedioDeTransporteServicioPublico(Linea linea, MedioDeTransporte medio) {
         linea.setMedioDeTransporte(medio);
-    }
-
-    public void editarEstacionOrigenServicioPublico(Linea linea, Estacion estacion) {
-        linea.setEstacionOrigen(estacion);
-    }
-
-    public void editarEstacionDestinoServicioPublico(Linea linea, Estacion estacion) {
-        linea.setEstacionDestino(estacion);
     }
 
     public void agregarEstacionServicioPublico(Linea linea, Estacion estacion) {

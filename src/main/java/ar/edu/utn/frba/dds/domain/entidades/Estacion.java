@@ -1,14 +1,16 @@
-package ar.edu.utn.frba.dds.domain.servicios;
+package ar.edu.utn.frba.dds.domain.entidades;
 
 import java.util.List;
+
+import ar.edu.utn.frba.dds.domain.helpers.Ubicacion;
+import ar.edu.utn.frba.dds.domain.servicios.Servicio;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class Estacion {
-  private String nombre;
-  private Ubicacion ubicacion;
+public class Estacion extends Establecimiento {
+
   private List<Servicio> servicios;
 
 
