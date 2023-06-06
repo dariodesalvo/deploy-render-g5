@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.domain.archivoCSV;
 
+import ar.edu.utn.frba.dds.domain.servicios.Servicio;
 import ar.edu.utn.frba.dds.domain.servicios.Ubicacion;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
@@ -22,10 +23,12 @@ public class LectorCSV implements AdapterCSVFileReader {
         String usuarioResponsable = atributoArchivo.get("Usuario Responsable");
         int codigoServico = Integer.parseInt(atributoArchivo.get("Codigo Servicio"));
         String nombreServicio = atributoArchivo.get("Nombre Servicio");
-        String ubicacion = atributoArchivo.get("Ubicacion");
-        String tramos = atributoArchivo.get("Tramos");
-        boolean esDeElvacion = Boolean.parseBoolean(atributoArchivo.get("Es de elevacion"));
-        boolean estaActivo = Boolean.parseBoolean(atributoArchivo.get("Esta Activo"));
+        String municipio = atributoArchivo.get("Municipio");
+        String esServicioDeElvacion = atributoArchivo.get("Es de elevacion").toLowerCase();
+        String elServicioEstaActivo = atributoArchivo.get("Esta Activo");
+
+        Boolean esDeElvacion = esServicioDeElvacion.contains("si") ? true : false;
+        Boolean estaActivo = elServicioEstaActivo.contains("si") ? true : false;
 
        // ArchivoCSV lecturaArchivoCSV = new ArchivoCSV(codigoEmpresa, nombreEmpresa, codigoServico, usuarioResponsable);
         //RepositorioDeArchivos.agregarLecturaDeArchivo(lecturaArchivoCSV);

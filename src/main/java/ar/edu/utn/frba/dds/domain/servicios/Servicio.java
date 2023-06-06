@@ -13,4 +13,17 @@ public class Servicio {
   private List<Ubicacion> tramos;
   private boolean esDeElevacion;
   private boolean estaActivo;
+
+
+  public Servicio() {
+  }
+
+  public Servicio(int codigoServicio, String nombre, Ubicacion ubicacion, List<Ubicacion> tramos, boolean esDeElevacion, boolean estaActivo) {
+    this.codigoServicio = codigoServicio;
+    this.nombre = nombre;
+    this.ubicacion = ubicacion;
+    this.tramos = tramos;
+    this.esDeElevacion = esDeElevacion;
+    this.estaActivo = estaActivo;
+  }
 }

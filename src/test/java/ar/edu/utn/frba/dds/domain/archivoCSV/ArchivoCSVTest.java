@@ -2,6 +2,8 @@ package ar.edu.utn.frba.dds.domain.archivoCSV;
 
 import ar.edu.utn.frba.dds.domain.archivoCSV.ArchivoCSV;
 import ar.edu.utn.frba.dds.domain.archivoCSV.RepositorioDeArchivos;
+import ar.edu.utn.frba.dds.domain.comunidades.Administrador;
+import ar.edu.utn.frba.dds.domain.comunidades.Usuario;
 import ar.edu.utn.frba.dds.domain.servicios.Estacion;
 import ar.edu.utn.frba.dds.domain.servicios.Servicio;
 import org.junit.jupiter.api.*;
@@ -11,12 +13,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ArchivoCSVTest {
-  /*
-  Empresa transporteDDS = new Empresa();
 
+    private Administrador administrador;
   @BeforeEach
   public void inicializar() throws IOException {
-    transporteDDS.cargarArchivo("src/test/java/ar/edu/utn/frba/dds/domain/archivoCSV/archivoCSVPrueba.csv");
+      administrador = new Administrador();
+      administrador.cargarArchivo("src/test/java/ar/edu/utn/frba/dds/domain/archivoCSV/DatosEmpresasYServicios.csv");
   }
   @AfterEach
   public void limpiarRepositio (){
@@ -24,12 +26,13 @@ public class ArchivoCSVTest {
   }
 
   @Test
-  @DisplayName("Una empresa puede cargar un archivo CSV")
-  public void empresaCargaCSVCorrectamente() throws Exception {
+  @DisplayName("Una administrador puede cargar un archivo CSV")
+  public void administradorCargaCSVCorrectamente() throws Exception {
 
-    Assertions.assertEquals(6,RepositorioDeArchivos.getArchivos().size());
-    Assertions.assertDoesNotThrow(()->{inicializar();});
+   /* Assertions.assertEquals(6,RepositorioDeArchivos.getArchivos().size());
+    Assertions.assertDoesNotThrow(()->{inicializar();}); */
   }
+  /*
   @Test
   @DisplayName("Una empresa no puede cargar un archivo CSV")
   public void empresaNoCargaCSVCorrectamente() throws Exception {
