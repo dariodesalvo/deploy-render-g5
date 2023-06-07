@@ -1,6 +1,8 @@
 package ar.edu.utn.frba.dds.domain.archivoCSV;
 
 import ar.edu.utn.frba.dds.domain.comunidades.Administrador;
+import ar.edu.utn.frba.dds.domain.entidades.Empresa;
+import ar.edu.utn.frba.dds.domain.repositorios.RepositorioEmpresas;
 import ar.edu.utn.frba.dds.domain.repositorios.RepositorioServicios;
 import ar.edu.utn.frba.dds.domain.servicios.Servicio;
 import org.junit.jupiter.api.*;
@@ -18,8 +20,9 @@ public class ArchivoCSVTest {
       administrador.cargarArchivo("src/test/java/ar/edu/utn/frba/dds/domain/archivoCSV/DatosEmpresasYServicios.csv");
   }
   @AfterEach
-  public void limpiarRepositio (){
+  public void limpiarRepositorios (){
     RepositorioServicios.servicios = new ArrayList<Servicio>();
+    RepositorioEmpresas.empresas= new ArrayList<Empresa>();
   }
 
   @Test
@@ -27,6 +30,7 @@ public class ArchivoCSVTest {
   public void administradorCargaCSVCorrectamente() throws Exception {
 
     Assertions.assertEquals(5, RepositorioServicios.servicios.size());
+    Assertions.assertEquals(5, RepositorioEmpresas.empresas.size());
     Assertions.assertDoesNotThrow(()->{inicializar();});
   }
 
@@ -51,40 +55,17 @@ public class ArchivoCSVTest {
     }
     @Test
     @DisplayName("El codigo del molinete es 46388")
-    public void leerCodigoEmpresa() throws Exception {
+    public void leerCodigoServicio() throws Exception {
         Servicio molinete = RepositorioServicios.servicios.get(3);
         Assertions.assertEquals(46388,molinete.getCodigoServicio());
     }
-  /*
+
   @Test
-  @DisplayName("El codigo de la empresa es 12345")
+  @DisplayName("El codigo de la empresa AscensoresDDS es 68888")
   public void leerCodigoEmpresa() throws Exception {
-    ArchivoCSV primerRecord = RepositorioDeArchivos.getArchivos().get(0);
-    Assertions.assertEquals("12345",primerRecord.getCodigoEmpresa());
+    Empresa ascensoresDDS = RepositorioEmpresas.empresas.get(1);
+    Assertions.assertEquals(68888,ascensoresDDS.getCodigoEmpresa());
   }
-  @Test
-  @DisplayName("La empresa presta como servicios: EstacionCampus, EstacionMedrano, KioskoCampus,KioskoMedrano,PuntoCargaCampus,PuntoCargaMedrano")
-  public void leerServiciosQuePrestaLaEmpresa() throws Exception {
-    List<ArchivoCSV> archivos = RepositorioDeArchivos.getArchivos();
-    List<String> servicios =  archivos.stream().map(archivo -> archivo.getNombreServicio()).toList();
 
-    Assertions.assertTrue(servicios.contains("EstacionCampus"));
-    Assertions.assertTrue(servicios.contains("EstacionMedrano"));
-    Assertions.assertTrue(servicios.contains("KioskoCampus"));
-    Assertions.assertTrue(servicios.contains("KioskoMedrano"));
-    Assertions.assertTrue(servicios.contains("PuntoCargaCampus"));
-    Assertions.assertTrue(servicios.contains("PuntoCargaMedrano"));
-
-  }
-  @Test
-  @DisplayName("La empresa no presta un banio como servicio")
-  public void laEmpresaNoPrestaUnServicio() throws Exception {
-    List<ArchivoCSV> archivos = RepositorioDeArchivos.getArchivos();
-    List<String> servicios =  archivos.stream().map(archivo -> archivo.getNombreServicio()).toList();
-
-    Assertions.assertFalse(servicios.contains("banio"));
-
-  }
-  */
 
 }

@@ -3,6 +3,7 @@ package ar.edu.utn.frba.dds.domain.comunidades;
 import ar.edu.utn.frba.dds.domain.archivoCSV.AdapterCSVFileReader;
 import ar.edu.utn.frba.dds.domain.archivoCSV.LectorCSV;
 import ar.edu.utn.frba.dds.domain.georef.entities.Municipio;
+import ar.edu.utn.frba.dds.domain.repositorios.RepositorioEmpresas;
 import ar.edu.utn.frba.dds.domain.repositorios.RepositorioServicios;
 import ar.edu.utn.frba.dds.domain.servicios.Estacion;
 import ar.edu.utn.frba.dds.domain.servicios.Servicio;
@@ -75,6 +76,7 @@ public class Administrador extends RolesUsuario {
     try{
      List<CSVRecord> lecturaCSV =  adaptadorCSV.leerArchivoCSV(archivo);
      RepositorioServicios.crearServicio(lecturaCSV);
+     RepositorioEmpresas.crearEmpresa(lecturaCSV);
 
     } catch(IOException e){
       throw new IOException("No se ha podido leer el archivo");
