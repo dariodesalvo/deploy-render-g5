@@ -66,6 +66,4 @@ public class ArchivoCSVTest {
     Empresa ascensoresDDS = RepositorioEmpresas.empresas.get(1);
     Assertions.assertEquals(68888,ascensoresDDS.getCodigoEmpresa());
   }
-
-
 }

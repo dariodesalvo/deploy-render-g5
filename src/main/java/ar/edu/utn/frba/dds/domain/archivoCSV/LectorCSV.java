@@ -16,17 +16,6 @@ public class LectorCSV implements AdapterCSVFileReader {
       Iterable<CSVRecord> atributosArchivo = CSVFormat.DEFAULT.withDelimiter(';').withHeader().parse(archivo);
 
       for (CSVRecord atributoArchivo : atributosArchivo) {
-        int codigoEmpresa = Integer.parseInt(atributoArchivo.get("Codigo Empresa"));
-        String nombreEmpresa = atributoArchivo.get("Nombre Empresa");
-        String usuarioResponsable = atributoArchivo.get("Usuario Responsable");
-        int codigoServico = Integer.parseInt(atributoArchivo.get("Codigo Servicio"));
-        String nombreServicio = atributoArchivo.get("Nombre Servicio");
-        String municipio = atributoArchivo.get("Municipio");
-        String esServicioDeElvacion = atributoArchivo.get("Es de elevacion").toLowerCase();
-        String elServicioEstaActivo = atributoArchivo.get("Esta Activo");
-
-        Boolean esDeElvacion = esServicioDeElvacion.contains("si") ? true : false;
-        Boolean estaActivo = elServicioEstaActivo.contains("si") ? true : false;
 
         lecturasDeArchivo.add(atributoArchivo);
       }
