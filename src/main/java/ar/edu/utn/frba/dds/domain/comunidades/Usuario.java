@@ -3,7 +3,7 @@ package ar.edu.utn.frba.dds.domain.comunidades;
 import ar.edu.utn.frba.dds.domain.georef.entities.Municipio;
 import ar.edu.utn.frba.dds.domain.helpers.IniciarSesion;
 import ar.edu.utn.frba.dds.domain.helpers.ValidadorContrasenia;
-import ar.edu.utn.frba.dds.domain.helpers.Ubicacion;
+
 import java.util.ArrayList;
 import java.util.List;
 

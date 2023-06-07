@@ -2,7 +2,6 @@ package ar.edu.utn.frba.dds.domain.entidades;
 
 import java.util.List;
 
-import ar.edu.utn.frba.dds.domain.helpers.Ubicacion;
 import ar.edu.utn.frba.dds.domain.servicios.Servicio;
 import lombok.Getter;
 import lombok.Setter;
