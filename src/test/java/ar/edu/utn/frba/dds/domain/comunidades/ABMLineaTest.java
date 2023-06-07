@@ -1,7 +1,7 @@
 package ar.edu.utn.frba.dds.domain.comunidades;
 
 import ar.edu.utn.frba.dds.builders.EstacionBuilder;
-import ar.edu.utn.frba.dds.builders.UbicacionBuilder;
+import ar.edu.utn.frba.dds.builders.CentroideBuilder;
 import ar.edu.utn.frba.dds.domain.entidades.Estacion;
 import ar.edu.utn.frba.dds.domain.entidades.MedioDeTransporte;
 import ar.edu.utn.frba.dds.domain.entidades.Linea;
@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 public class ABMLineaTest {
 
     private final Prestador prestador = new Prestador();
-    private final EstacionBuilder estacionBuilder = new EstacionBuilder(new UbicacionBuilder());
+    private final EstacionBuilder estacionBuilder = new EstacionBuilder(new CentroideBuilder());
     private final Exception e = new Exception();
     private final MedioDeTransporte subterraneo = new MedioDeTransporte("SUBTERRANEO");
     private final MedioDeTransporte ferrocarril = new MedioDeTransporte("FERROCARRIL");

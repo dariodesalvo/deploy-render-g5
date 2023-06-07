@@ -1,7 +1,7 @@
 package ar.edu.utn.frba.dds.domain.comunidades;
 
 import ar.edu.utn.frba.dds.builders.EstacionBuilder;
-import ar.edu.utn.frba.dds.builders.UbicacionBuilder;
+import ar.edu.utn.frba.dds.builders.CentroideBuilder;
 import ar.edu.utn.frba.dds.domain.entidades.Estacion;
 import ar.edu.utn.frba.dds.domain.servicios.Servicio;
 
@@ -11,7 +11,7 @@ public class ABMServiciosTest {
 
     private Administrador administrador = new Administrador();
 
-    private EstacionBuilder estacionBuilder = new EstacionBuilder(new UbicacionBuilder());
+    private EstacionBuilder estacionBuilder = new EstacionBuilder(new CentroideBuilder());
 
     private Exception e = new Exception();
 

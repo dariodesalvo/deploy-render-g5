@@ -48,7 +48,7 @@ public class AsociarLocalizacionAUsuarioTest {
 
     @Test
     @DisplayName("A un Usuario con Municipio ID en Lanus se le asocia su localizacion (latitud, longitud y su nombre) mediante Api")
-    public void asociarLocaliacionLanusAUsuario() throws IOException {
+    public void asociarLocalizacionLanusAUsuario() throws IOException {
         this.asociarLocalizacionAUsuario(caro);
 
         Assertions.assertEquals("Lanús", caro.getLocalizacion().getNombre());
@@ -60,7 +60,7 @@ public class AsociarLocalizacionAUsuarioTest {
 
     @Test
     @DisplayName("A un Usuario con Municipio ID en Lomas de Zamora se le asocia su localizacion (latitud, longitud y su nombre) mediante Api")
-    public void asociarLocaliacionLomasAUsuario() throws IOException {
+    public void asociarLocalizacionLomasAUsuario() throws IOException {
 
         this.asociarLocalizacionAUsuario(mica);
 
