@@ -2,6 +2,8 @@ package ar.edu.utn.frba.dds.domain.comunidades;
 
 import ar.edu.utn.frba.dds.domain.archivoCSV.AdapterCSVFileReader;
 import ar.edu.utn.frba.dds.domain.archivoCSV.LectorCSV;
+import ar.edu.utn.frba.dds.domain.georef.entities.Municipio;
+import ar.edu.utn.frba.dds.domain.repositorios.RepositorioServicios;
 import ar.edu.utn.frba.dds.domain.servicios.Estacion;
 import ar.edu.utn.frba.dds.domain.servicios.Servicio;
 import ar.edu.utn.frba.dds.domain.servicios.Ubicacion;
@@ -10,6 +12,7 @@ import java.io.IOException;
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
+import org.apache.commons.csv.CSVRecord;
 
 
 @Getter
@@ -25,8 +28,8 @@ public class Administrador extends RolesUsuario {
     estacion.eliminarServicio(servicio);
   }
 
-  public void editarUbicacionServicio(Servicio servicio, Ubicacion ubicacion) {
-    servicio.setUbicacion(ubicacion);
+  public void editarUbicacionServicio(Servicio servicio, Municipio municipio) {
+    servicio.setUbicacion(municipio);
   }
 
   public void editarNombreServicio(Servicio servicio, String nuevoNombre) {
@@ -70,7 +73,8 @@ public class Administrador extends RolesUsuario {
   public void cargarArchivo(String archivo) throws IOException {
     AdapterCSVFileReader adaptadorCSV = new LectorCSV();
     try{
-      adaptadorCSV.leerArchivoCSV(archivo);
+     List<CSVRecord> lecturaCSV =  adaptadorCSV.leerArchivoCSV(archivo);
+     RepositorioServicios.crearServicio(lecturaCSV);
 
     } catch(IOException e){
       throw new IOException("No se ha podido leer el archivo");

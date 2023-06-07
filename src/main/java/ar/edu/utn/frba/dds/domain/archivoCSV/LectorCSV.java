@@ -1,18 +1,16 @@
 package ar.edu.utn.frba.dds.domain.archivoCSV;
 
-import ar.edu.utn.frba.dds.domain.servicios.Servicio;
-import ar.edu.utn.frba.dds.domain.servicios.Ubicacion;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class LectorCSV implements AdapterCSVFileReader {
   @Override
-  public void leerArchivoCSV(String archivoCSV) throws IOException {
+  public List<CSVRecord> leerArchivoCSV(String archivoCSV) throws IOException {
+    List<CSVRecord> lecturasDeArchivo = new ArrayList<CSVRecord>();
     try {
       Reader archivo = new FileReader(archivoCSV);
       Iterable<CSVRecord> atributosArchivo = CSVFormat.DEFAULT.withDelimiter(';').withHeader().parse(archivo);
@@ -30,12 +28,12 @@ public class LectorCSV implements AdapterCSVFileReader {
         Boolean esDeElvacion = esServicioDeElvacion.contains("si") ? true : false;
         Boolean estaActivo = elServicioEstaActivo.contains("si") ? true : false;
 
-       // ArchivoCSV lecturaArchivoCSV = new ArchivoCSV(codigoEmpresa, nombreEmpresa, codigoServico, usuarioResponsable);
-        //RepositorioDeArchivos.agregarLecturaDeArchivo(lecturaArchivoCSV);
+        lecturasDeArchivo.add(atributoArchivo);
       }
       archivo.close();
     } catch (IOException e) {
       throw new IOException("No se ha encontrado el archivo");
     }
+    return lecturasDeArchivo;
   }
 }

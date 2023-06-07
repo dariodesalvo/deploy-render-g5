@@ -5,4 +5,12 @@ public class Municipio {
     public String nombre;
     public Centroide centroide;
 
+    public Municipio() {
+    }
+
+    public Municipio(int id, String nombre, Centroide centroide) {
+        this.id = id;
+        this.nombre = nombre;
+        this.centroide = centroide;
+    }
 }

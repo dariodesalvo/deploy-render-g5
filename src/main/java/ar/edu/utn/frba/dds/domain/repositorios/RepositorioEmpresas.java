@@ -10,8 +10,9 @@ import java.util.List;
 @Setter
 public class RepositorioEmpresas{
         private static List<Servicio> empresas = new ArrayList<>();
-
-        public static void agregarServicio(Servicio servicio){
+        public static void agregarEmpresa(Servicio servicio){
             empresas.add(servicio);
         }
+
+        public void crearEmpresa (){}
 }

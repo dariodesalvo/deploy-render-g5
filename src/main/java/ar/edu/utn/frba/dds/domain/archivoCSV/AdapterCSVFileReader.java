@@ -1,8 +1,10 @@
 package ar.edu.utn.frba.dds.domain.archivoCSV;
 
-import java.io.FileNotFoundException;
+import org.apache.commons.csv.CSVRecord;
+
 import java.io.IOException;
+import java.util.List;
 
 public interface AdapterCSVFileReader {
-  public void leerArchivoCSV(String archivoCSV) throws IOException;
+  public List<CSVRecord> leerArchivoCSV(String archivoCSV) throws IOException;
 }
