@@ -12,5 +12,4 @@ import java.util.Collection;
 public class Entidad {
     public String leyenda;
     public Collection<Usuario> followers;
-    public Municipio localizacion;
 }

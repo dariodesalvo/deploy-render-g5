@@ -11,6 +11,5 @@ import java.util.Collection;
 @Setter
 public class Establecimiento {
     public String leyenda;
-    public Collection<Usuario> followers;
     public Municipio localizacion;
 }

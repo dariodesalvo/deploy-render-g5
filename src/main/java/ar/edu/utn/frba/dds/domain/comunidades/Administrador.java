@@ -42,31 +42,7 @@ public class Administrador extends RolesUsuario {
   public void editarElevacionServicio(Servicio servicio, Boolean nuevosEsDeElevacion) {
     servicio.setEsDeElevacion(nuevosEsDeElevacion);
   }
-  public void crearAdministrador(Usuario usuario){
-    RolesUsuario administrador = new Administrador();
-    usuario.setRol(administrador);
-  }
 
-  public void eliminarAdministrador(Usuario usuario){
-    RolesUsuario lector = new Lector();
-    usuario.setRol(lector);
-  }
-
-  public void agregarMiembro(Comunidad comunidad, Usuario usuario){
-    comunidad.agregarMiembro(usuario);
-  }
-
-  public void agregarMiembroAdministrador(Comunidad comunidad, Usuario usuario){
-    comunidad.agregarMiembroAdministrador(usuario);
-  }
-
-  public void eliminarMiembro(Comunidad comunidad, Usuario usuario){
-    comunidad.eliminarMiembro(usuario);
-  }
-
-  public void eliminarMiembroAdministrador(Comunidad comunidad, Usuario usuario){
-    comunidad.eliminarMiembroAdministrador(usuario);
-  }
 
   public void cargarArchivo(String archivo) throws IOException {
     AdapterCSVFileReader adaptadorCSV = new LectorCSV();
