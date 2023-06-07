@@ -9,7 +9,7 @@ import java.util.Collection;
 
 @Getter
 @Setter
-public class Entidad {
+public class Establecimiento {
     public String leyenda;
     public Collection<Usuario> followers;
     public Municipio localizacion;

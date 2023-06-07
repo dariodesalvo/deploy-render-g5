@@ -5,11 +5,11 @@ import ar.edu.utn.frba.dds.domain.archivoCSV.LectorCSV;
 import ar.edu.utn.frba.dds.domain.georef.entities.Municipio;
 import ar.edu.utn.frba.dds.domain.repositorios.RepositorioEmpresas;
 import ar.edu.utn.frba.dds.domain.repositorios.RepositorioServicios;
-import ar.edu.utn.frba.dds.domain.servicios.Estacion;
 import ar.edu.utn.frba.dds.domain.servicios.Servicio;
-import ar.edu.utn.frba.dds.domain.servicios.Ubicacion;
 
 import java.io.IOException;
+import ar.edu.utn.frba.dds.domain.entidades.Estacion;
+
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
@@ -37,14 +37,13 @@ public class Administrador extends RolesUsuario {
     servicio.setNombre(nuevoNombre);
   }
 
-  public void editarTramosServicio(Servicio servicio, List<Ubicacion> nuevosTramos) {
+  public void editarTramosServicio(Servicio servicio, List<Municipio> nuevosTramos) {
     servicio.setTramos(nuevosTramos);
   }
 
   public void editarElevacionServicio(Servicio servicio, Boolean nuevosEsDeElevacion) {
     servicio.setEsDeElevacion(nuevosEsDeElevacion);
   }
-
   public void crearAdministrador(Usuario usuario){
     RolesUsuario administrador = new Administrador();
     usuario.setRol(administrador);
