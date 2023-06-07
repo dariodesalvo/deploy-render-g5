@@ -5,6 +5,8 @@ import ar.edu.utn.frba.dds.domain.helpers.Municipio;
 import ar.edu.utn.frba.dds.domain.helpers.ValidadorContrasenia;
 import java.util.ArrayList;
 import java.util.List;
+
+import ar.edu.utn.frba.dds.domain.servicios.Ubicacion;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,6 +21,9 @@ public class Usuario {
   private List<Interes> intereses = new ArrayList<Interes>();
   private List<Comunidad> comunidades = new ArrayList<Comunidad>();
   private RolesUsuario rol = new Lector();
+  private String municipio;
+  private Ubicacion ubicacion = new Ubicacion();
+
   private Municipio localizacion;
 
   public Usuario(String email, String contrasenia)
