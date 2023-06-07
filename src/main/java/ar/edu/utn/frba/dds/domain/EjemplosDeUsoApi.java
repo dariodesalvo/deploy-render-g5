@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 
-public class EjemplosDeUso {
+public class EjemplosDeUsoApi {
 
     public static void main(String[] args) throws IOException {
         ServicioGeoref servicioGeoref = ServicioGeoref.getInstancia();
