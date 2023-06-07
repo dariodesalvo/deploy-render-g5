@@ -72,8 +72,8 @@ public class Administrador extends RolesUsuario {
     AdapterCSVFileReader adaptadorCSV = new LectorCSV();
     try{
      List<CSVRecord> lecturaCSV =  adaptadorCSV.leerArchivoCSV(archivo);
-     RepositorioServicios.crearServicio(lecturaCSV);
-     RepositorioEmpresas.crearEmpresa(lecturaCSV);
+     List<Servicio> nuevosServicios = RepositorioServicios.crearServicio(lecturaCSV);
+     RepositorioEmpresas.crearEmpresa(lecturaCSV,nuevosServicios);
 
     } catch(IOException e){
       throw new IOException("No se ha podido leer el archivo");

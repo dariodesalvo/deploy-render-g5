@@ -22,7 +22,8 @@ public class RepositorioServicios {
         servicios.add(servicio);
     }
 
-    public static void crearServicio(List<CSVRecord> lectura) throws IOException {
+    public static List<Servicio> crearServicio(List<CSVRecord> lectura) throws IOException {
+        List<Servicio> nuevosServicio = new ArrayList<Servicio>();
         for(int i = 0;i<lectura.size();i++){
 
             int codigoServico = Integer.parseInt(lectura.get(i).get("Codigo Servicio"));
@@ -42,8 +43,10 @@ public class RepositorioServicios {
                 }
             }
             Servicio nuevoServicio = new Servicio(codigoServico,nombreServicio,ubicacionDelServicio,esDeElvacion,estaActivo);
+            nuevosServicio.add(nuevoServicio);
             agregarServicio(nuevoServicio);
         }
+        return nuevosServicio;
 
     }
 }

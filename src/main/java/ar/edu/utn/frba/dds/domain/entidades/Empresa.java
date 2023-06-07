@@ -20,4 +20,7 @@ public class Empresa {
         this.nombreEmpresa = nombreEmpresa;
         this.usuarioResponsable = usuarioResponsable;
     }
+    public void darServicioDeAlta(Servicio nuevoServicio){
+        this.serviciosQuePresta.add(nuevoServicio);
+    }
 }

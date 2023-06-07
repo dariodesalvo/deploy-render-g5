@@ -19,13 +19,15 @@ public class RepositorioEmpresas{
             empresas.add(empresa);
         }
 
-        public static void crearEmpresa (List<CSVRecord> lectura){
+        public static void crearEmpresa (List<CSVRecord> lectura, List<Servicio> nuevosServicios){
             for(int i = 0;i<lectura.size();i++){
                 int codigoEmpresa = Integer.parseInt(lectura.get(i).get("Codigo Empresa"));
                 String nombreEmpresa = lectura.get(i).get("Nombre Empresa");
                 String usuarioResponsable = lectura.get(i).get("Usuario Responsable");
 
                 Empresa nuevaEmpresa = new Empresa(codigoEmpresa,nombreEmpresa,usuarioResponsable);
+                Servicio servicioDeLaEmpresa = nuevosServicios.get(i);
+                nuevaEmpresa.darServicioDeAlta(servicioDeLaEmpresa);
                 agregarEmpresa(nuevaEmpresa);
             }
         }
