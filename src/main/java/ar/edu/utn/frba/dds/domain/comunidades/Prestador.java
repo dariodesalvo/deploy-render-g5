@@ -3,6 +3,7 @@ package ar.edu.utn.frba.dds.domain.comunidades;
 import ar.edu.utn.frba.dds.domain.entidades.Estacion;
 import ar.edu.utn.frba.dds.domain.entidades.MedioDeTransporte;
 import ar.edu.utn.frba.dds.domain.entidades.Linea;
+import ar.edu.utn.frba.dds.domain.entidades.Entidad;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,30 +14,18 @@ import java.util.List;
 @Setter
 public class Prestador extends RolesUsuario {
 
-    private List<Linea> serviciosPublicos = new ArrayList<>();
+    private List<Entidad> entidades = new ArrayList<>();
 
-    public void altaServicioPublico(Linea linea) {
-        serviciosPublicos.add(linea);
+    public void altaEntidad(Entidad entidad) {
+        entidades.add(entidad);
     }
 
-    public void bajaServicioPublico(Linea linea) {
-        serviciosPublicos.remove(linea);
+    public void bajaEntidad(Entidad entidad) {
+        entidades.remove(entidad);
     }
 
-    public void editarLeyendaServicioPublico(Linea linea, String nombre) {
-        linea.setLeyenda(nombre);
-    }
-
-    public void editarMedioDeTransporteServicioPublico(Linea linea, MedioDeTransporte medio) {
-        linea.setMedioDeTransporte(medio);
-    }
-
-    public void agregarEstacionServicioPublico(Linea linea, Estacion estacion) {
-        linea.agregarEstacion(estacion);
-    }
-
-    public void eliminarEstacionServicioPublico(Linea linea, Estacion estacion) {
-        linea.eliminarEstacion(estacion);
+    public void editarLeyendaEntidad(Entidad entidad, String nombre) {
+        entidad.setLeyenda(nombre);
     }
 
 }

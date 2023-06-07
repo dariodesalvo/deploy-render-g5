@@ -14,8 +14,9 @@ public class AdministrarComunidadesTest {
     @BeforeEach
     public void inicializar() throws Exception {
         capitan = new Usuario("capitan", "Arquero2245+");
-        capitan.setRol(rolAdministrador);
-        losMurcielagos.agregarMiembroAdministrador(capitan);
+        capitan.solicitarSerMiembro(losMurcielagos);
+        losMurcielagos.darAdministradorA(capitan);
+        Assertions.assertTrue(capitan.esAdministrador(losMurcielagos));
     }
 
     @Test

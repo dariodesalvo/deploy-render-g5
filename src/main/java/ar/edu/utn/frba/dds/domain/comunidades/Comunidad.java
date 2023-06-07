@@ -18,51 +18,19 @@ public class Comunidad {
     this.administradores = new ArrayList<>();
   }
 
-
   public void agregarMiembro(Usuario usuario) {
     this.miembros.add(usuario);
-  }
-
-  public void agregarMiembroAdministrador(Usuario usuario) {
-    this.administradores.add(usuario);
   }
 
   public void eliminarMiembro(Usuario usuario) {
     this.miembros.remove(usuario);
   }
 
-  public void eliminarMiembroAdministrador(Usuario usuario) {
-    this.administradores.remove(usuario);
-  }
-
-  public boolean esAdministrador(Usuario usuario) {
-    return this.administradores.contains(usuario);
-  }
-
-  public boolean esUsuario(Usuario usuario) {
-    return this.miembros.contains(usuario);
-  }
-
-  public void sacarAdministradorA(Usuario usuario){
-
-    if (this.esAdministrador(usuario)){
-      this.eliminarMiembroAdministrador(usuario);
-      this.agregarMiembro(usuario);
+  public void sacarAdministrador(Usuario usuario){
+      administradores.remove(usuario);
     }
-    else {
-      //TODO Exception el usuario no es admin
-    }
-  }
 
-  public void darAdministradorA(Usuario usuario){
-
-    if (this.esUsuario(usuario)){
-      this.eliminarMiembro(usuario);
-      this.agregarMiembroAdministrador(usuario);
-    }
-    else {
-      this.agregarMiembroAdministrador(usuario);
-      //TODO deberia agregarlo como admin o lanzar Exception el usuario no es miembro?
-    }
+  public void darAdministradorA(Usuario usuario) {
+    administradores.add(usuario);
   }
 }

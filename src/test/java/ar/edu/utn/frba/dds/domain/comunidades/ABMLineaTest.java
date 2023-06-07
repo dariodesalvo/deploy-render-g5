@@ -34,8 +34,8 @@ public class ABMLineaTest {
     @DisplayName("Un prestador quiere dar de alta un servicio publico: Linea de Tren")
     public void altaServicioPublico() throws Exception {
 
-        prestador.altaServicioPublico(nuevaLineaDeTren);
-        Assertions.assertTrue(prestador.getServiciosPublicos().contains(nuevaLineaDeTren));
+        prestador.altaEntidad(nuevaLineaDeTren);
+        Assertions.assertTrue(prestador.getEntidades().contains(nuevaLineaDeTren));
 
     }
 
@@ -44,9 +44,9 @@ public class ABMLineaTest {
     public void bajaServicioPublico() throws Exception {
 
         Linea nuevaLineaDeSubte = new Linea("Subte C", subterraneo);
-        prestador.altaServicioPublico(nuevaLineaDeSubte);
-        prestador.bajaServicioPublico(nuevaLineaDeSubte);
-        Assertions.assertFalse(prestador.getServiciosPublicos().contains(nuevaLineaDeSubte));
+        prestador.altaEntidad(nuevaLineaDeSubte);
+        prestador.bajaEntidad(nuevaLineaDeSubte);
+        Assertions.assertFalse(prestador.getEntidades().contains(nuevaLineaDeSubte));
 
     }
 
@@ -54,7 +54,7 @@ public class ABMLineaTest {
     @DisplayName("Un prestador quiere agregar una estacion en un servicio publico")
     public void agregarEstacion() {
 
-        prestador.agregarEstacionServicioPublico(nuevaLineaDeTren, avellaneda);
+        nuevaLineaDeTren.agregarEstacion(avellaneda);
         Assertions.assertTrue(nuevaLineaDeTren.getEstaciones().contains(avellaneda));
 
     }
@@ -63,7 +63,7 @@ public class ABMLineaTest {
     @DisplayName("Un prestador quiere eliminar una estacion en un servicio publico")
     public void eliminarEstacion() {
 
-        prestador.eliminarEstacionServicioPublico(nuevaLineaDeTren, avellaneda);;
+        nuevaLineaDeTren.eliminarEstacion(avellaneda);;
         Assertions.assertFalse(nuevaLineaDeTren.getEstaciones().contains(avellaneda));
 
     }

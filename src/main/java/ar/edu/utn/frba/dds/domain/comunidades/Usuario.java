@@ -43,20 +43,18 @@ public class Usuario {
 
   }
 
-  public void registrarUsuario(Usuario usuario){
-
-    //se guarda en la base de datos
-
-  }
-
-  public void iniciarSesion(String nombreUsuario, String contrasenia) {
+  private void iniciarSesion(String nombreUsuario, String contrasenia) {
     IniciarSesion inicioDeSesion = new IniciarSesion(this);
     inicioDeSesion.validarUsuario(nombreUsuario, contrasenia);
   }
 
-  private void solicitarSerMiembro(Comunidad comunidad){
+  public void solicitarSerMiembro(Comunidad comunidad){
     comunidad.agregarMiembro(this);
     comunidades.add(comunidad);
+  }
+
+  public boolean esAdministrador(Comunidad comunidad){
+    return comunidad.getAdministradores().contains(this);
   }
 
 }

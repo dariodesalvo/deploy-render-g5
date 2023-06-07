@@ -15,4 +15,5 @@ public class Miembro extends RolesUsuario {
         this.apellido=apellido;
     }
 
+
 }

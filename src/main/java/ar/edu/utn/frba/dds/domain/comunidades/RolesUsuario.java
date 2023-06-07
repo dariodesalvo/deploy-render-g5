@@ -2,6 +2,8 @@ package ar.edu.utn.frba.dds.domain.comunidades;
 
 public abstract class RolesUsuario {
 
-  public void compartirInformacion() {
+  public String descripcion;
+
+  public void desactivarAlertas() {
   }
 }
