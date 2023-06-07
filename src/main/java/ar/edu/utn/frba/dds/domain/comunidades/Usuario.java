@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.domain.comunidades;
 
+import ar.edu.utn.frba.dds.domain.georef.entities.Municipio;
 import ar.edu.utn.frba.dds.domain.helpers.IniciarSesion;
 import ar.edu.utn.frba.dds.domain.helpers.ValidadorContrasenia;
 import ar.edu.utn.frba.dds.domain.helpers.Ubicacion;
@@ -19,8 +20,7 @@ public class Usuario {
   private List<Interes> intereses = new ArrayList<Interes>();
   private List<Comunidad> comunidades = new ArrayList<Comunidad>();
   private RolesUsuario rol = new Lector();
-  private String municipio;
-  private Ubicacion ubicacion = new Ubicacion();
+  private Municipio localizacion;
 
 
   public Usuario(String email, String contrasenia)
