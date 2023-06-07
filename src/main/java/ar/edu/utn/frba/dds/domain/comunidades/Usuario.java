@@ -1,16 +1,14 @@
 package ar.edu.utn.frba.dds.domain.comunidades;
 
 import ar.edu.utn.frba.dds.domain.helpers.IniciarSesion;
-import ar.edu.utn.frba.dds.domain.helpers.Municipio;
 import ar.edu.utn.frba.dds.domain.helpers.ValidadorContrasenia;
+import ar.edu.utn.frba.dds.domain.helpers.Ubicacion;
 import java.util.ArrayList;
 import java.util.List;
 
-import ar.edu.utn.frba.dds.domain.servicios.Ubicacion;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.swing.*;
 
 @Getter
 @Setter
@@ -24,7 +22,6 @@ public class Usuario {
   private String municipio;
   private Ubicacion ubicacion = new Ubicacion();
 
-  private Municipio localizacion;
 
   public Usuario(String email, String contrasenia)
         throws Exception
