@@ -13,10 +13,10 @@ import java.util.List;
 import java.util.Optional;
 
 public class JobTests  {
-  private JobInvoker task;
+  private NotificadorJob task;
   @BeforeEach
   public void inicializar() throws IOException {
-    task = new JobInvoker();
+    task = new NotificadorJob(1000);
     task.runJob();
   }
 

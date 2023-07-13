@@ -1,20 +1,17 @@
 package ar.edu.utn.frba.dds.jobs;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.TimerTask;
 
 public class JobTask extends TimerTask {
-  public boolean isRunning() {
-    return isRunning;
-  }
-
-  private boolean isRunning;
+  private List<String> tareasAEjecutar = new ArrayList<>();
   public JobTask() {
   }
 
   @Override
   public void run() {
     try {
-isRunning =true;
       System.out.println("Ejecutando rutina");
 
     } catch (Exception ex) {
