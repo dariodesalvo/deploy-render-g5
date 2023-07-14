@@ -1,10 +1,13 @@
 package ar.edu.utn.frba.dds.domain.comunidades;
+import ar.edu.utn.frba.dds.domain.entidades.Establecimiento;
+import ar.edu.utn.frba.dds.domain.incidentes.Incidente;
 import ar.edu.utn.frba.dds.domain.incidentes.mediosNotificacion.MedioNotificable;
 import ar.edu.utn.frba.dds.domain.servicios.Servicio;
 
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
@@ -25,7 +28,10 @@ public class Miembro extends RolesUsuario {
         this.apellido=apellido;
     }
 
-    public void abrirIncidente(Servicio servicio){}
+    public Incidente abrirIncidente(Servicio servicio, Establecimiento establecimiento, Comunidad comunidad){
+        return new Incidente(servicio,establecimiento,this,comunidad,true,"", LocalDateTime.now());
+    }
+
     public void cerrarIncidente(Servicio servicio){}
 
 }

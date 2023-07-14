@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.dds.domain.incidentes;
 
 import ar.edu.utn.frba.dds.domain.comunidades.Comunidad;
+import ar.edu.utn.frba.dds.domain.comunidades.Miembro;
 import ar.edu.utn.frba.dds.domain.comunidades.Usuario;
 import ar.edu.utn.frba.dds.domain.entidades.Establecimiento;
 import ar.edu.utn.frba.dds.domain.servicios.Servicio;
@@ -15,14 +16,25 @@ import java.util.List;
 public class Incidente {
 
     private Servicio servicio;
-    private Usuario abiertoPor;
-    private Usuario cerradoPor;
+    private Establecimiento establecimiento;
+    private Miembro abiertoPor;
+    private Miembro cerradoPor;
     private Comunidad comunidad;
     private Boolean estado;
     private String observaciones;
     private LocalDateTime fechaApertura;
     private LocalDateTime fechaCierre;
     private Notificador notificador;
+
+    public Incidente(Servicio servicio, Establecimiento establecimiento, Miembro abiertoPor, Comunidad comunidad, Boolean estado, String observaciones, LocalDateTime fechaApertura) {
+        this.servicio = servicio;
+        this.establecimiento = establecimiento;
+        this.abiertoPor = abiertoPor;
+        this.comunidad = comunidad;
+        this.estado = estado;
+        this.observaciones = observaciones;
+        this.fechaApertura = fechaApertura;
+    }
 
     public void notificarCercania(String mensaje,List<Comunidad> comunidades){}
 
