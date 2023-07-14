@@ -1,11 +1,13 @@
 package ar.edu.utn.frba.dds.domain.incidentes;
 
 import ar.edu.utn.frba.dds.domain.comunidades.Comunidad;
+import ar.edu.utn.frba.dds.domain.comunidades.Usuario;
 import ar.edu.utn.frba.dds.domain.entidades.Establecimiento;
 import ar.edu.utn.frba.dds.domain.servicios.Servicio;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
@@ -20,6 +22,7 @@ public class Incidente {
     private String observaciones;
     private LocalDateTime fechaApertura;
     private LocalDateTime fechaCierre;
+    private Notificador notificador;
 
     public void notificarCercania(String mensaje,List<Comunidad> comunidades){}
 

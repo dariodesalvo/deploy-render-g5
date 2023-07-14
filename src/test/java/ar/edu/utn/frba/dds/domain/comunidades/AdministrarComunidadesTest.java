@@ -14,7 +14,7 @@ public class AdministrarComunidadesTest {
     @BeforeEach
     public void inicializar() throws Exception {
         capitan = new Usuario("capitan", "Arquero2245+");
-        capitan.solicitarSerMiembro(losMurcielagos);
+        //capitan.solicitarSerMiembro(losMurcielagos);
         losMurcielagos.darAdministradorA(capitan);
         Assertions.assertTrue(capitan.esAdministrador(losMurcielagos));
     }
@@ -24,7 +24,7 @@ public class AdministrarComunidadesTest {
     public void adminAgregaMiembro() throws Exception {
         Usuario juan = new Usuario("juan", "Delantero6576*");
         losMurcielagos.darAdministradorA(juan);
-        losMurcielagos.agregarMiembro(juan);
+        //losMurcielagos.agregarMiembro(juan);
         Assertions.assertTrue(losMurcielagos.getMiembros().contains(juan));
 
     }

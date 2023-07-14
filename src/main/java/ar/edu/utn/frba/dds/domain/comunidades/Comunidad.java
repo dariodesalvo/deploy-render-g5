@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 public class Comunidad {
   private String nombre;
-  private List<Usuario> miembros;
+  private List<Miembro> miembros;
   private List<Usuario> administradores;
 
   public Comunidad(String nombre){
@@ -18,12 +18,12 @@ public class Comunidad {
     this.administradores = new ArrayList<>();
   }
 
-  public void agregarMiembro(Usuario usuario) {
-    this.miembros.add(usuario);
+  public void agregarMiembro(Miembro miembro) {
+    this.miembros.add(miembro);
   }
 
-  public void eliminarMiembro(Usuario usuario) {
-    this.miembros.remove(usuario);
+  public void eliminarMiembro(Miembro miembro) {
+    this.miembros.remove(miembro);
   }
 
   public void sacarAdministrador(Usuario usuario){
