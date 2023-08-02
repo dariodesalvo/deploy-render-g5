@@ -48,10 +48,10 @@ public class Usuario {
     inicioDeSesion.validarUsuario(nombreUsuario, contrasenia);
   }
 
-  public void solicitarSerMiembro(Comunidad comunidad){
+ /* public void solicitarSerMiembro(Comunidad comunidad){
     comunidad.agregarMiembro(this);
     comunidades.add(comunidad);
-  }
+  }*/
 
   public boolean esAdministrador(Comunidad comunidad){
     return comunidad.getAdministradores().contains(this);
