@@ -17,8 +17,6 @@ public class Usuario {
 
   private String contrasenia;
   private String email;
-  private List<Interes> intereses = new ArrayList<Interes>();
-  private List<Comunidad> comunidades = new ArrayList<Comunidad>();
   private RolesUsuario rol = new Lector();
   private Municipio localizacion;
 

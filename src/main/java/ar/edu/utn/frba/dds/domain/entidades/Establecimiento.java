@@ -11,19 +11,31 @@ import java.util.List;
 
 @Getter
 @Setter
-public class Establecimiento {
-    private String leyenda;
-    private Municipio localizacion;
-    private List<Servicio> servicios;
+public abstract class Establecimiento {
+    protected String leyenda;
+    protected Municipio localizacion;
+    protected List<Servicio> servicios;
 
-    public Establecimiento(String leyenda, List<Servicio> servicios) {
-        this.leyenda = leyenda;
-        this.servicios = servicios;
+
+    public void agregarServicio(Servicio servicio) throws Exception {
+        this.validarRepetido(servicio);
+        servicios.add(servicio);
     }
 
-    public Establecimiento(String leyenda, Municipio localizacion, List<Servicio> servicios) {
-        this.leyenda = leyenda;
-        this.localizacion = localizacion;
-        this.servicios = servicios;
+    public void eliminarServicio(Servicio servicio) throws Exception {
+        this.validarServicioExistente(servicio);
+        servicios.remove(servicio);
+    }
+
+    public void validarRepetido(Servicio servicio) throws Exception {
+        if(servicios.contains(servicio)){
+            throw new Exception("El servicio ya fue dado de alta");
+        }
+    }
+
+    public void validarServicioExistente(Servicio servicio) throws Exception {
+        if(!servicios.contains(servicio)){
+            throw new Exception("No se encuentra el servicio que se quiere dar de baja");
+        }
     }
 }

@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.dds.domain.comunidades;
 import ar.edu.utn.frba.dds.domain.entidades.Establecimiento;
 import ar.edu.utn.frba.dds.domain.incidentes.Incidente;
+import ar.edu.utn.frba.dds.domain.incidentes.TipoNotificacion;
 import ar.edu.utn.frba.dds.domain.incidentes.mediosNotificacion.MedioNotificable;
 import ar.edu.utn.frba.dds.domain.servicios.Servicio;
 
@@ -8,6 +9,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
 
 @Getter
@@ -17,10 +19,10 @@ public class Miembro extends RolesUsuario {
     private String nombre;
     private String apellido;
     private String celular;
-    private String email;
     private MedioNotificable medioComunicacionPreferido;
+    private TipoNotificacion tipoNotificacion;
     private List<Comunidad> comunidades;
-    private List<Servicio> serviciosDeInteres;
+    private HashMap<Servicio,Boolean> serviciosDeInteres;
 
 
     public Miembro(String nombre, String apellido){

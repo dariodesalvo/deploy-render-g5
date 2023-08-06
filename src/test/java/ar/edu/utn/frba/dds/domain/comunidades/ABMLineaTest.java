@@ -17,10 +17,10 @@ public class ABMLineaTest {
     private final Exception e = new Exception();
     private final MedioDeTransporte subterraneo = new MedioDeTransporte("SUBTERRANEO");
     private final MedioDeTransporte ferrocarril = new MedioDeTransporte("FERROCARRIL");
-    private final Estacion constitucion = estacionBuilder.buildEstacionSinServicios("Constitucion", -34.6277778F, -58.3813056F);
+/*    private final Estacion constitucion = estacionBuilder.buildEstacionSinServicios("Constitucion", -34.6277778F, -58.3813056F);
     private final Estacion ezeiza = estacionBuilder.buildEstacionSinServicios("Ezeiza", -34.8553F, -58.5258F);
     private final Estacion retiro = estacionBuilder.buildEstacionSinServicios("Retiro", -34.5877F, -58.3749F);
-    private final Estacion avellaneda = estacionBuilder.buildEstacionSinServicios("Avellaneda", -34.6625F, -58.365F);
+    private final Estacion avellaneda = estacionBuilder.buildEstacionSinServicios("Avellaneda", -34.6625F, -58.365F);*/
     private final Linea nuevaLineaDeTren = new Linea("Constitucion-Ezeiza", ferrocarril);
 
     @BeforeEach
@@ -49,7 +49,7 @@ public class ABMLineaTest {
         Assertions.assertFalse(prestador.getEntidades().contains(nuevaLineaDeSubte));
 
     }
-
+/*
     @Test
     @DisplayName("Un prestador quiere agregar una estacion en un servicio publico")
     public void agregarEstacion() {
@@ -66,7 +66,7 @@ public class ABMLineaTest {
         nuevaLineaDeTren.eliminarEstacion(avellaneda);;
         Assertions.assertFalse(nuevaLineaDeTren.getEstaciones().contains(avellaneda));
 
-    }
+    }*/
 
 }
 

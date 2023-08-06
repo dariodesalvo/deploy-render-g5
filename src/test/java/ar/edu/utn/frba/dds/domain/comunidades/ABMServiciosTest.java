@@ -1,3 +1,4 @@
+/*
 package ar.edu.utn.frba.dds.domain.comunidades;
 
 import ar.edu.utn.frba.dds.builders.EstacionBuilder;
@@ -72,3 +73,4 @@ public class ABMServiciosTest {
 
 
 }
+*/

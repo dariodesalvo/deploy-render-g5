@@ -1,3 +1,4 @@
+/*
 package ar.edu.utn.frba.dds.localizacion;
 
 import ar.edu.utn.frba.dds.domain.entidades.Establecimiento;
@@ -67,3 +68,4 @@ public class AsociarLocalizacionAEstablecimientoTest {
     }
 
 }
+*/

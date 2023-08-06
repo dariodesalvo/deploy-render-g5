@@ -8,7 +8,7 @@ import java.net.URL;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class ValidadorContrasenia implements ValidadorContrasenias {
+public class ValidadorContrasenia implements IValidable {
   private static final String urlPeoresClaves = "https://raw.githubusercontent.com/danielmiessler/SecLists/master/Passwords/Common-Credentials/10-million-password-list-top-10000.txt";
 
   public void validarPassword(String nombreUsuario, String contrasenia) throws MalformedURLException {
