@@ -3,17 +3,12 @@ package ar.edu.utn.frba.dds.domain.incidentes.envioNotificacion;
 import ar.edu.utn.frba.dds.domain.comunidades.Comunidad;
 import ar.edu.utn.frba.dds.domain.comunidades.Miembro;
 import ar.edu.utn.frba.dds.domain.comunidades.Usuario;
-import ar.edu.utn.frba.dds.domain.incidentes.mediosNotificacion.Email;
-import ar.edu.utn.frba.dds.domain.incidentes.mediosNotificacion.MedioNotificable;
-import ar.edu.utn.frba.dds.domain.incidentes.mediosNotificacion.Whatsapp;
-import com.twilio.Twilio;
-import com.twilio.rest.api.v2010.account.Message;
-import com.twilio.type.PhoneNumber;
+import ar.edu.utn.frba.dds.domain.incidentes.mediosNotificacion.email.NotificarPorEmail;
+import ar.edu.utn.frba.dds.domain.incidentes.mediosNotificacion.whatsapp.AdapterWhatsappTwilio;
 import org.apache.commons.mail.EmailException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
 import org.mockito.Mockito;
 
 import static org.mockito.Mockito.*;
@@ -35,9 +30,8 @@ public class EnvioNotificacionTest {
         caro.setRol(miembro2);
 
         miembro.setCelular("+5491121754632");
-        miembro.setMedioComunicacionPreferido(new Whatsapp(miembro.getCelular()));
-       // miembro2.setEmail("rinaldicarolina@hotmail.com");
-        miembro2.setMedioComunicacionPreferido(new Email(caro.getEmail()));
+        miembro.setMedioNotificacionPreferido(new AdapterWhatsappTwilio(miembro.getCelular()));
+        miembro2.setMedioNotificacionPreferido(new NotificarPorEmail(caro.getEmail()));
         comunidad.agregarMiembro(miembro);
         comunidad.agregarMiembro(miembro2);
 
@@ -48,9 +42,9 @@ public class EnvioNotificacionTest {
     @DisplayName("Se envia notificacion por whatsapp a miembro")
     public void enviarWhatsapp() throws EmailException {
 
-        Whatsapp medio = mock(Whatsapp.class);
+        AdapterWhatsappTwilio medio = mock(AdapterWhatsappTwilio.class);
         doNothing().when(medio).enviarNotificacion();
-        miembro.getMedioComunicacionPreferido().enviarNotificacion();
+        miembro.getMedioNotificacionPreferido().enviarNotificacion();
         verify(medio, Mockito.times(1)).enviarNotificacion();
 
     }
@@ -58,7 +52,7 @@ public class EnvioNotificacionTest {
     @Test
     @DisplayName("Se envia notificacion por email a miembro")
     public void enviarCorreo() throws EmailException {
-        miembro2.getMedioComunicacionPreferido().enviarNotificacion();
+        miembro2.getMedioNotificacionPreferido().enviarNotificacion();
 
     }
 
@@ -66,7 +60,7 @@ public class EnvioNotificacionTest {
     @DisplayName("Se envia notificacion a 2 miembros con distintos Medios de Comunicacion")
     public void enviarNotificacionesAComunidad() throws EmailException {
         for (Miembro unMiembro:comunidad.getMiembros()) {
-            unMiembro.getMedioComunicacionPreferido().enviarNotificacion();
+            unMiembro.getMedioNotificacionPreferido().enviarNotificacion();
         }
     }
 

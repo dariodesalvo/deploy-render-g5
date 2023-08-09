@@ -2,7 +2,7 @@ package ar.edu.utn.frba.dds.domain.comunidades;
 import ar.edu.utn.frba.dds.domain.entidades.Establecimiento;
 import ar.edu.utn.frba.dds.domain.incidentes.Incidente;
 import ar.edu.utn.frba.dds.domain.incidentes.TipoNotificacion;
-import ar.edu.utn.frba.dds.domain.incidentes.mediosNotificacion.MedioNotificable;
+import ar.edu.utn.frba.dds.domain.incidentes.mediosNotificacion.MedioDeNotificacion;
 import ar.edu.utn.frba.dds.domain.servicios.Servicio;
 
 import lombok.Getter;
@@ -19,7 +19,7 @@ public class Miembro extends RolesUsuario {
     private String nombre;
     private String apellido;
     private String celular;
-    private MedioNotificable medioComunicacionPreferido;
+    private MedioDeNotificacion medioNotificacionPreferido;
     private TipoNotificacion tipoNotificacion;
     private List<Comunidad> comunidades;
     private HashMap<Servicio,Boolean> serviciosDeInteres;

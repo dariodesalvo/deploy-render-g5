@@ -1,18 +1,19 @@
-package ar.edu.utn.frba.dds.domain.incidentes.mediosNotificacion;
+package ar.edu.utn.frba.dds.domain.incidentes.mediosNotificacion.email;
 
+import ar.edu.utn.frba.dds.domain.incidentes.mediosNotificacion.MedioDeNotificacion;
 import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.mail.DefaultAuthenticator;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.SimpleEmail;
 
-public class Email implements MedioNotificable {
+public class NotificarPorEmail implements MedioDeNotificacion {
     public static final String MY_SENDER_EMAIL = "carorinaldi10@gmail.com";
     public static final String PASS = "rpclpatskhtmqppv";
     @Getter @Setter
     private String emailMiembro;
 
-    public Email(String emailMiembro) {
+    public NotificarPorEmail(String emailMiembro) {
         this.emailMiembro = emailMiembro;
     }
 

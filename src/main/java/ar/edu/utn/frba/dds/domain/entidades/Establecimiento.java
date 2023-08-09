@@ -15,6 +15,7 @@ public abstract class Establecimiento {
     protected String leyenda;
     protected Municipio localizacion;
     protected List<Servicio> servicios;
+    protected Entidad entidad;
 
 
     public void agregarServicio(Servicio servicio) throws Exception {
