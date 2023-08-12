@@ -20,6 +20,7 @@ public class Comunidad {
 
   public void agregarMiembro(Miembro miembro) {
     this.miembros.add(miembro);
+    miembro.sosParte(this);
   }
 
   public void eliminarMiembro(Miembro miembro) {

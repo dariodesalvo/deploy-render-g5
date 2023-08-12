@@ -16,7 +16,7 @@ import java.util.List;
 public class Incidente {
 
     private Servicio servicio;
-    private Establecimiento establecimiento;
+    //private Establecimiento establecimiento; -> no deberia ir en servicio?
     private Miembro abiertoPor;
     private Miembro cerradoPor;
     private Comunidad comunidad;
@@ -26,20 +26,21 @@ public class Incidente {
     private LocalDateTime fechaCierre;
     private Notificador notificador;
 
-    public Incidente(Servicio servicio, Establecimiento establecimiento, Miembro abiertoPor, Comunidad comunidad, Boolean estado, String observaciones, LocalDateTime fechaApertura) {
+    public Incidente(Servicio servicio, Miembro abiertoPor, Comunidad comunidad, String observaciones, LocalDateTime fechaApertura) {
         this.servicio = servicio;
-        this.establecimiento = establecimiento;
         this.abiertoPor = abiertoPor;
         this.comunidad = comunidad;
-        this.estado = estado;
+        this.estado = true;
         this.observaciones = observaciones;
         this.fechaApertura = fechaApertura;
     }
 
     public void notificarCercania(String mensaje,List<Comunidad> comunidades){}
 
-
-
+    public void cerrar(Miembro miembro){
+        this.setEstado(false);
+        this.setCerradoPor(miembro);
+    }
 
 }
 
