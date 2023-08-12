@@ -47,23 +47,37 @@ public class MiembroCierraIncidente{
         miembroQueCierraB = new Miembro("Cierro", "B");
         comunidadA.agregarMiembro(miembroQueCierraA);
         comunidadB.agregarMiembro(miembroQueCierraB);
+
+        incidentes = miembro.abrirIncidente(servicio);
+
+        /* se crean dos instancias de incidentes */
+        /* se puede filtrar asi */
+        incidenteA = incidentes.stream()
+                .filter(incidente -> comunidadA.equals(incidente.getComunidad()))
+                .collect(Collectors.toList());
+        /* se puede filtrar asi tambien*/
+        for (Incidente incidente : incidentes) {
+            if (incidente.getComunidad()==comunidadB) {
+                incidenteB.add(incidente);
+            }
+        }
     }
 
     @Test
-    @DisplayName("Un miembro que se encuentra en dos comunidades abre un incidente")
-    public void abrirIndicente() throws Exception {
+    @DisplayName("miembro esta en comunidad A")
+    public void miembroEstaEnA() throws Exception {
 
-        incidentes = miembro.abrirIncidente(servicio);
-        Assertions.assertEquals(incidentes.size(), 2);
-
-        /* se crean dos instancias de incidentes */
-        incidenteA = incidentes.stream()
-                               .filter(incidente -> incidente.getComunidad().equals(comunidadA))
-                               .collect(Collectors.toList());
-        incidenteB = incidentes.stream()
-                .filter(incidente -> incidente.getComunidad().equals(comunidadB))
-                .collect(Collectors.toList());
+        Assertions.assertTrue(miembro.getComunidades().contains(comunidadA));
     }
+    @Test
+    @DisplayName("hay abierto un total de dos incidentes")
+    public void hayAbiertosDosIncidentes() throws Exception {
+
+        Assertions.assertEquals(incidentes.size(), 2);
+    }
+
+
+
 
     @Test
     @DisplayName("Size incidentes A es 1")
