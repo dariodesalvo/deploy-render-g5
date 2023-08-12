@@ -25,6 +25,7 @@ public class Miembro extends RolesUsuario {
     private List<Comunidad> comunidades = new ArrayList<>();
     private HashMap<Servicio,Boolean> serviciosDeInteres;
     private Integer numero;
+    private String email;
 
     public Miembro(String nombre, String apellido){
         this.nombre=nombre;
