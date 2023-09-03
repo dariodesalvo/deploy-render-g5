@@ -2,11 +2,13 @@ package ar.edu.utn.frba.dds.domain.incidentes;
 
 import ar.edu.utn.frba.dds.domain.comunidades.Comunidad;
 import ar.edu.utn.frba.dds.domain.comunidades.Miembro;
-import ar.edu.utn.frba.dds.domain.comunidades.Usuario;
-import ar.edu.utn.frba.dds.domain.entidades.Establecimiento;
+import ar.edu.utn.frba.dds.domain.incidentes.mensajes.AperturaIncidente;
+import ar.edu.utn.frba.dds.domain.incidentes.mensajes.CierreIncidente;
+import ar.edu.utn.frba.dds.domain.incidentes.mensajes.Mensaje;
 import ar.edu.utn.frba.dds.domain.servicios.Servicio;
 import lombok.Getter;
 import lombok.Setter;
+import org.apache.commons.mail.EmailException;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -26,21 +28,35 @@ public class Incidente {
     private LocalDateTime fechaCierre;
     private Notificador notificador;
 
-    public Incidente(Servicio servicio, Miembro abiertoPor, Comunidad comunidad, String observaciones, LocalDateTime fechaApertura) {
+    public Incidente(Servicio servicio, Miembro abiertoPor, Comunidad comunidad, String observaciones) throws EmailException {
         this.servicio = servicio;
         this.abiertoPor = abiertoPor;
         this.comunidad = comunidad;
-        this.estado = true;
         this.observaciones = observaciones;
-        this.fechaApertura = fechaApertura;
+        this.fechaApertura = LocalDateTime.now();
+
+        //llamar a notificador pasarle la comunidad y el incidente
+
+        Mensaje mensaje = new AperturaIncidente();
+
+        this.notificador.notificar(comunidad, this, mensaje);
+
+    }
+
+    public Incidente(){
+
     }
 
     public void notificarCercania(String mensaje,List<Comunidad> comunidades){}
 
-    public void cerrar(Miembro miembro){
-        this.setEstado(false);
+    public void cerrar(Miembro miembro) throws EmailException {
         this.setCerradoPor(miembro);
+        this.fechaCierre= LocalDateTime.now();
+        Mensaje mensaje = new CierreIncidente();
+        this.notificador.notificar(comunidad, this, mensaje);
+
     }
+
 
 }
 

@@ -7,6 +7,7 @@ import ar.edu.utn.frba.dds.domain.servicios.Servicio;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.apache.commons.mail.EmailException;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -36,12 +37,16 @@ public class Miembro extends RolesUsuario {
         List<Incidente> incidentes = new ArrayList<>();
         numero=0;
         comunidades.forEach(comunidad -> { numero++;
-            incidentes.add(new Incidente(servicio,this,comunidad,"", LocalDateTime.now()));
+            try {
+                incidentes.add(new Incidente(servicio,this,comunidad,""));
+            } catch (EmailException e) {
+                throw new RuntimeException(e);
+            }
         });
         return incidentes;
     }
 
-    public void cerrarIncidente(Incidente incidente) {
+    public void cerrarIncidente(Incidente incidente) throws EmailException {
         incidente.cerrar(this);
     }
 

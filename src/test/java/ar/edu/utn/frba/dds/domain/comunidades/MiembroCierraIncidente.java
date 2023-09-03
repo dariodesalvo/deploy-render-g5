@@ -77,8 +77,6 @@ public class MiembroCierraIncidente{
     }
 
 
-
-
     @Test
     @DisplayName("Size incidentes A es 1")
     public void incidentesAesUno() throws Exception {
@@ -109,6 +107,8 @@ public class MiembroCierraIncidente{
         Assertions.assertEquals(incidente.getCerradoPor(), miembroQueCierraA);
 
     }
+
+
 
     @Test
     @DisplayName("Miembro B cierra incidente para B")
