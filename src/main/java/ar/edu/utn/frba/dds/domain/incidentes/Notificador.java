@@ -2,6 +2,7 @@ package ar.edu.utn.frba.dds.domain.incidentes;
 
 import ar.edu.utn.frba.dds.domain.comunidades.Comunidad;
 import ar.edu.utn.frba.dds.domain.comunidades.Miembro;
+import ar.edu.utn.frba.dds.domain.incidentes.TurnoDeNotificaciones.TurnoNotificacion;
 import ar.edu.utn.frba.dds.domain.incidentes.mensajes.Mensaje;
 import org.apache.commons.mail.EmailException;
 
@@ -28,4 +29,20 @@ public final class Notificador {
         }
 
     }
+
+    public void notificarPendientes(TurnoNotificacion turno) throws EmailException {
+
+        for (String notificacion: turno.getNotificaciones()
+             ) {
+            // hay que notificar a todos los miembros
+            for (Miembro miembro : turno.getMiembros()
+                 ) {
+                miembro.getMedioNotificacionPreferido().enviarNotificacion(miembro, notificacion);
+            }
+            //removes la notificacion
+            turno.quitarNotificacion(notificacion);
+        }
+
+    }
+
 }

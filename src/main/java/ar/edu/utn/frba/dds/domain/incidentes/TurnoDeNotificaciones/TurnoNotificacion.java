@@ -15,4 +15,8 @@ public abstract class TurnoNotificacion {
         notificaciones.add(notificacion);
     }
 
+    public void quitarNotificacion(String notificacion){
+        notificaciones.remove(notificacion);
+    }
+
 }
