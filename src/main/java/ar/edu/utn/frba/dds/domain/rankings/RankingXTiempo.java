@@ -20,49 +20,37 @@ public class RankingXTiempo implements IRankeable {
     private LocalDateTime reporteDesde;
     private LocalDateTime reportehasta;
 
+    private CalculadorPromedioCierre calculadorPromedioCierre;
+
     //clase auxiliar para ordenar listado
     @Getter
     @Setter
     public class EntidadConSegundos{
         private Entidad entidad; // quedarse con el ID de la entidad solamente
-        private Long segundosAcumulados;
-        private int cantidadIncidentes;
-
-        public Long promedioCierre(){
-            return segundosAcumulados/cantidadIncidentes;
-        }
+        private Long promedioCierre;
     }
 
     private List<EntidadConSegundos> segundosxEntidades = new ArrayList<>();
     private EntidadConSegundos reporteEntidad;
-    private List<Incidente> incidentes = new ArrayList<>();
     private List<Entidad> entidadesRankeadas= new ArrayList<>();
     private Entidad entidad;
     @Override
     public Ranking rankear(List<Entidad> entidades) {
         for (Entidad entidad: entidades
              ) {
-
             reporteEntidad.entidad=entidad;
-            reporteEntidad.segundosAcumulados=0L;
-            reporteEntidad.cantidadIncidentes = 0;
-
-            incidentes = entidad.listarIncidentes(reporteDesde, reportehasta);
-            for (Incidente incidente : incidentes
-                 ) {
-                // x cada incidente se calcula el cierre
-                reporteEntidad.segundosAcumulados += this.segundosEntreFechas(incidente.getFechaApertura(), incidente.getFechaCierre());
-                reporteEntidad.cantidadIncidentes += 1;
-            }
+            //uso calculador de promedio
+            reporteEntidad.promedioCierre = calculadorPromedioCierre.promedio(entidad, reporteDesde, reportehasta);
             segundosxEntidades.add(reporteEntidad);
         }
 
         // finalmente se ordena la lista para obtener el ranking
         List<EntidadConSegundos> entidadesOrdenadas =
                 segundosxEntidades.stream()
-                                  .sorted(Comparator.comparingLong(EntidadConSegundos::promedioCierre))
+                                  .sorted(Comparator.comparingLong(EntidadConSegundos::getPromedioCierre))
                                   .toList();
 
+        //solo me quedo con las entidades
         for (EntidadConSegundos EntidadxSegundos: entidadesOrdenadas
              ) {
             entidad = EntidadxSegundos.getEntidad();
@@ -73,8 +61,5 @@ public class RankingXTiempo implements IRankeable {
 
     }
 
-    public long segundosEntreFechas(LocalDateTime apertura, LocalDateTime cierre){
 
-        return  apertura.toEpochSecond(ZoneOffset.of("-03:00"))-cierre.toEpochSecond(ZoneOffset.of("-3:00"));
-    }
 }
