@@ -9,7 +9,7 @@ import ar.edu.utn.frba.dds.domain.incidentes.TurnoDeNotificaciones.TurnoNotifica
 import ar.edu.utn.frba.dds.domain.incidentes.mediosNotificacion.adapterImpl.NotificarPorEmail;
 import ar.edu.utn.frba.dds.domain.incidentes.mediosNotificacion.sender.EmailSender;
 
-
+//test de notificador cada 10 minutos
 public class CronNotificadorTest {
     public static void main(String arglist[]) throws Exception {
         // ejemplo de uso

@@ -12,6 +12,7 @@ import org.apache.commons.mail.EmailException;
 
 @Getter
 @Setter
+//otra forma de crear una tarea programada
 public class CronNotificador {
 
     private Notificador notificador;
