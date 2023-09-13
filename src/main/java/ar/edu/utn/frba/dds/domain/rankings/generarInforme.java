@@ -10,18 +10,16 @@ import java.util.TimerTask;
 
 public class generarInforme {
 
-    private IRankeable rankearXCantidad;
-    private IRankeable rankearXImpacto;
-    private IRankeable rankearXTiempo;
+    private IRankeable criterio;
+
     private List<Entidad> entidades;
 
     private void inicializar(){
         //query de entidades
         entidades = new ArrayList<>();
 
-        rankearXCantidad = new RankingXCantidad();
-        rankearXTiempo = new RankingXTiempo();
-        rankearXImpacto = new RankingXImpacto();
+        criterio = new RankingXCantidad();
+
     }
 
     public void ejecutar(){
@@ -32,10 +30,14 @@ public class generarInforme {
             @Override
             public void run()
             {
-
-                    rankearXImpacto.rankear(entidades);
-                    rankearXTiempo.rankear(entidades);
-                    rankearXCantidad.rankear(entidades);
+                //primero por cantidad
+                criterio.rankear(entidades);
+                // por tiempo
+                criterio = new RankingXTiempo();
+                criterio.rankear(entidades);
+                //por impacto
+                criterio = new RankingXImpacto();
+                criterio.rankear(entidades);
                     //persistir los listados en repo
             }
         };
