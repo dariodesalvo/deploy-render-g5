@@ -15,6 +15,7 @@ public class Entidad  {
     public List<Establecimiento> establecimientos = new ArrayList<>();
 
     public List<Incidente> listarIncidentes(LocalDateTime desde, LocalDateTime hasta) {
+        //query de incidentes de esa entidad
         return null;
     }
 
