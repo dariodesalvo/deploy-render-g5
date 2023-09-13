@@ -1,4 +1,4 @@
-package ar.edu.utn.frba.dds.jobs;
+package ar.edu.utn.frba.dds.domain.jobs;
 
 import ar.edu.utn.frba.dds.domain.tarea.Tarea;
 import lombok.Setter;

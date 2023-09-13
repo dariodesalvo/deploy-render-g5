@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.jobs;
 
+import ar.edu.utn.frba.dds.domain.jobs.NotificadorJob;
 import ar.edu.utn.frba.dds.domain.tarea.GenerarInforme;
 import ar.edu.utn.frba.dds.domain.tarea.NotificarSinApuro;
 import ar.edu.utn.frba.dds.domain.tarea.Tarea;

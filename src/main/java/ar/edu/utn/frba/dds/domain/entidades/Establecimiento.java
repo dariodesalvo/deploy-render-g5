@@ -1,23 +1,35 @@
 package ar.edu.utn.frba.dds.domain.entidades;
 
-import ar.edu.utn.frba.dds.domain.comunidades.Usuario;
 import ar.edu.utn.frba.dds.domain.georef.entities.Municipio;
 import ar.edu.utn.frba.dds.domain.servicios.Servicio;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Collection;
+import javax.persistence.*;
 import java.util.List;
 
 @Getter
 @Setter
+@Entity
+@Table(name = "establecimiento")
 public abstract class Establecimiento {
+    @Id
+    @GeneratedValue
+    private Long id;
+    @Column(name = "leyenda")
     protected String leyenda;
-    protected Municipio localizacion;
-    protected List<Servicio> servicios;
+    @ManyToOne
+    @JoinColumn(name = "entidad_id", referencedColumnName = "id")
     protected Entidad entidad;
 
+    @Transient
+    protected Municipio localizacion;
+    @Transient
+    protected List<Servicio> servicios;
 
+    public Establecimiento(){
+
+    }
     public void agregarServicio(Servicio servicio) throws Exception {
         this.validarRepetido(servicio);
         servicios.add(servicio);
