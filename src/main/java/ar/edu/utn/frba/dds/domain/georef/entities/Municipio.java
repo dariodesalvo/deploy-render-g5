@@ -16,19 +16,11 @@ public class Municipio {
     @Id
     @GeneratedValue
     public int id;
+
     @Column(name = "nombre")
     public String nombre;
-
-    @OneToMany(mappedBy = "municipio")
+    @OneToOne(mappedBy = "municipio")
     public Centroide centroide;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="establecimiento_id", nullable=false)
-    private Establecimiento establecimiento;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="servicio_id", nullable=false)
-    private Servicio servicio;
 
     public Municipio() {
     }

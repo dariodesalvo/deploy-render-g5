@@ -18,18 +18,18 @@ public class AsociarLocalizacionAUsuarioTest {
 
     public void asociarLocalizacionAUsuario(Usuario usuario) throws IOException {
         ServicioGeoref servicioGeoref = ServicioGeoref.getInstancia();
-        ListadoDeMunicipios municipios = servicioGeoref.listadoDeMunicipiosPorID(usuario.getLocalizacion().id);
+        ListadoDeMunicipios municipios = servicioGeoref.listadoDeMunicipiosPorID(usuario.getMunicipio().id);
 
         //tomo el primero de la lista porque filtre por nombre
         Municipio municipio = municipios.municipios.get(0);
 
         System.out.println("Municipio: " + municipio.nombre + " Longitud: " + municipio.centroide.lon + " Latitud: " + municipio.centroide.lat);
 
-        usuario.getLocalizacion().setNombre(municipio.nombre);
+        usuario.getMunicipio().setNombre(municipio.nombre);
         Centroide centroide = new Centroide();
         centroide.lat = municipio.centroide.lat;
         centroide.lon = municipio.centroide.lon;
-        usuario.getLocalizacion().setCentroide(centroide);
+        usuario.getMunicipio().setCentroide(centroide);
 
     }
 
@@ -37,11 +37,11 @@ public class AsociarLocalizacionAUsuarioTest {
     public void inicializar() throws Exception {
         caro = new Usuario("caroLR@gmail.com", "Pa$$W0rd");
         int idLanus = 60434;
-        caro.setLocalizacion(new Municipio(idLanus));
+        caro.setMunicipio(new Municipio(idLanus));
 
         mica = new Usuario("micaO@gmail.com", "Pa$$W0rd");
         int idLomasDeZamora = 60490;
-        mica.setLocalizacion(new Municipio(idLomasDeZamora));
+        mica.setMunicipio(new Municipio(idLomasDeZamora));
 
     }
 
@@ -51,9 +51,9 @@ public class AsociarLocalizacionAUsuarioTest {
     public void asociarLocalizacionLanusAUsuario() throws IOException {
         this.asociarLocalizacionAUsuario(caro);
 
-        Assertions.assertEquals("Lanús", caro.getLocalizacion().getNombre());
-        Assertions.assertEquals(-34.70578384399414, caro.getLocalizacion().getCentroide().lat);
-        Assertions.assertEquals(-58.39544677734375, caro.getLocalizacion().getCentroide().lon);
+        Assertions.assertEquals("Lanús", caro.getMunicipio().getNombre());
+        Assertions.assertEquals(-34.70578384399414, caro.getMunicipio().getCentroide().lat);
+        Assertions.assertEquals(-58.39544677734375, caro.getMunicipio().getCentroide().lon);
 
 
     }
@@ -64,9 +64,9 @@ public class AsociarLocalizacionAUsuarioTest {
 
         this.asociarLocalizacionAUsuario(mica);
 
-        Assertions.assertEquals("Lomas de Zamora", mica.getLocalizacion().getNombre());
-        Assertions.assertEquals(-34.755462646484375, mica.getLocalizacion().getCentroide().lat);
-        Assertions.assertEquals(-58.4240837097168, mica.getLocalizacion().getCentroide().lon);
+        Assertions.assertEquals("Lomas de Zamora", mica.getMunicipio().getNombre());
+        Assertions.assertEquals(-34.755462646484375, mica.getMunicipio().getCentroide().lat);
+        Assertions.assertEquals(-58.4240837097168, mica.getMunicipio().getCentroide().lon);
 
     }
 }

@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.domain.entidades;
 
+import ar.edu.utn.frba.dds.domain.comunidades.Prestador;
 import ar.edu.utn.frba.dds.domain.incidentes.Incidente;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,6 +22,10 @@ public class Entidad  {
     public String leyenda;
     @OneToMany(mappedBy = "entidad")
     public List<Establecimiento> establecimientos = new ArrayList<>();
+
+    @ManyToOne
+    @JoinColumn(name = "prestador_id", referencedColumnName = "id")
+    protected Prestador prestador;
 
     public Entidad(){
 

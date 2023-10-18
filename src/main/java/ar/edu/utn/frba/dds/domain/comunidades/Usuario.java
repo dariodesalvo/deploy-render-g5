@@ -10,15 +10,29 @@ import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.*;
+
 
 @Getter
 @Setter
+@Entity
+@Table(name = "Usuario")
 public class Usuario {
 
+  @Id
+  @GeneratedValue
+  private Long id;
+  @Column(name = "contrasenia")
   private String contrasenia;
+  @Column(name = "email")
   private String email;
+
+  @OneToOne(cascade = CascadeType.ALL)
+  @JoinColumn(name = "rol_id")
   private RolesUsuario rol = new Lector();
-  private Municipio localizacion;
+  @OneToOne(cascade = CascadeType.ALL)
+  @JoinColumn(name = "municipio_id")
+  private Municipio municipio;
 
 
   public Usuario(String email, String contrasenia)

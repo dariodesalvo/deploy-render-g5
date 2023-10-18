@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.dds.main;
 
 import ar.edu.utn.frba.dds.domain.entidades.Entidad;
+import ar.edu.utn.frba.dds.domain.entidades.Establecimiento;
 import com.sun.tools.javac.Main;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 

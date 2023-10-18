@@ -3,6 +3,7 @@ package ar.edu.utn.frba.dds.domain.comunidades;
 import ar.edu.utn.frba.dds.domain.archivoCSV.AdapterCSVFileReader;
 import ar.edu.utn.frba.dds.domain.archivoCSV.LectorCSV;
 import ar.edu.utn.frba.dds.domain.georef.entities.Municipio;
+import ar.edu.utn.frba.dds.domain.georef.entities.Ubicacion;
 import ar.edu.utn.frba.dds.domain.repositorios.RepositorioEmpresas;
 import ar.edu.utn.frba.dds.domain.repositorios.RepositorioServicios;
 import ar.edu.utn.frba.dds.domain.servicios.Servicio;
@@ -15,8 +16,13 @@ import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.csv.CSVRecord;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 @Getter
 @Setter
+@Entity
+@Table(name = "Administrador")
 public class Administrador extends RolesUsuario {
 
   public void altaServicio(Estacion estacion, Servicio servicio) throws Exception {
@@ -27,8 +33,8 @@ public class Administrador extends RolesUsuario {
     estacion.eliminarServicio(servicio);
   }
 
-  public void editarUbicacionServicio(Servicio servicio, Municipio municipio) {
-    servicio.setUbicacion(municipio);
+  public void editarUbicacionServicio(Servicio servicio, Ubicacion ubicacion) {
+    servicio.setUbicacion(ubicacion);
   }
 
   public void editarNombreServicio(Servicio servicio, String nuevoNombre) {

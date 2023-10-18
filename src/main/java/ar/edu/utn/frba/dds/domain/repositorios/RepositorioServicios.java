@@ -4,6 +4,7 @@ import ar.edu.utn.frba.dds.domain.georef.GeorefService;
 import ar.edu.utn.frba.dds.domain.georef.ServicioGeoref;
 import ar.edu.utn.frba.dds.domain.georef.entities.ListadoDeMunicipios;
 import ar.edu.utn.frba.dds.domain.georef.entities.Municipio;
+import ar.edu.utn.frba.dds.domain.georef.entities.Ubicacion;
 import ar.edu.utn.frba.dds.domain.servicios.Servicio;
 import lombok.Getter;
 import lombok.Setter;
@@ -35,13 +36,14 @@ public class RepositorioServicios {
             Boolean estaActivo = elServicioEstaActivo.contains("si") ? true : false;
 
             ListadoDeMunicipios municipios = ServicioGeoref.getInstancia().listadoDeMunicipiosPorNombre(municipio);
-
+            /*
             Municipio ubicacionDelServicio = new Municipio();
             for(Municipio mun: municipios.municipios) {
                 if(mun.nombre == municipio) {
                     ubicacionDelServicio = new Municipio(mun.id, mun.nombre, mun.centroide);
                 }
-            }
+            }*/
+            Ubicacion ubicacionDelServicio = new Ubicacion();
             Servicio nuevoServicio = new Servicio(codigoServico,nombreServicio,ubicacionDelServicio,esDeElvacion,estaActivo);
             nuevosServicio.add(nuevoServicio);
             agregarServicio(nuevoServicio);

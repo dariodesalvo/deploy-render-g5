@@ -6,6 +6,7 @@ import java.util.List;
 import ar.edu.utn.frba.dds.domain.entidades.Empresa;
 import ar.edu.utn.frba.dds.domain.entidades.Establecimiento;
 import ar.edu.utn.frba.dds.domain.georef.entities.Municipio;
+import ar.edu.utn.frba.dds.domain.georef.entities.Ubicacion;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,10 +24,12 @@ public class Servicio {
   private int codigoServicio;
   @Column(name = "nombre")
   private String nombre;
-  @Column(name = "ubicacion")
-  private Municipio ubicacion;
+  @OneToOne(cascade = CascadeType.ALL)
+  @JoinColumn(name = "ubicacion_id")
+  private Ubicacion ubicacion;
 
   //ver forma de persistir consultar si es necesario
+  @Transient
   private List<Municipio> tramos = new ArrayList<Municipio>();
 
   @Column(name = "esDeElevacion")
@@ -46,7 +49,7 @@ public class Servicio {
   public Servicio() {
   }
 
-  public Servicio(int codigoServicio, String nombre, Municipio ubicacion, boolean esDeElevacion, boolean estaActivo) {
+  public Servicio(int codigoServicio, String nombre, Ubicacion ubicacion, boolean esDeElevacion, boolean estaActivo) {
     this.codigoServicio = codigoServicio;
     this.nombre = nombre;
     this.ubicacion = ubicacion;

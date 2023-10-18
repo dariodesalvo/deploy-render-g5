@@ -18,13 +18,14 @@ public abstract class Establecimiento {
     private Long id;
     @Column(name = "leyenda")
     protected String leyenda;
+
     @ManyToOne
     @JoinColumn(name = "entidad_id", referencedColumnName = "id")
     protected Entidad entidad;
 
     @Transient
     //@OneToMany(mappedBy = "establecimiento")
-    protected Municipio localizacion;
+    protected Municipio municipio;
 
     @OneToMany(mappedBy = "establecimiento")
     protected List<Servicio> servicios;
