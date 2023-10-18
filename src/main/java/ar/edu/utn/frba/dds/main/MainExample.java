@@ -13,7 +13,7 @@ public static void main(String[] args) {new MainExample().start();}
 
     private void start(){
         Entidad unaEntidad = new Entidad();
-        unaEntidad.setLeyenda("Tren Roca");
+        unaEntidad.setLeyenda("Tren Roca a");
 
         EntityTransaction tx = entityManager().getTransaction();
         tx.begin();

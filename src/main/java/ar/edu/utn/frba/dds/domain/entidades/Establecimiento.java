@@ -23,8 +23,10 @@ public abstract class Establecimiento {
     protected Entidad entidad;
 
     @Transient
+    //@OneToMany(mappedBy = "establecimiento")
     protected Municipio localizacion;
-    @Transient
+
+    @OneToMany(mappedBy = "establecimiento")
     protected List<Servicio> servicios;
 
     public Establecimiento(){
