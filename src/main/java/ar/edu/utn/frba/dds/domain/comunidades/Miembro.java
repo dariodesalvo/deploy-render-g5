@@ -9,10 +9,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.mail.EmailException;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -33,16 +30,27 @@ public class Miembro extends RolesUsuario {
 
     @Transient
     private MedioDeNotificacion medioNotificacionPreferido;
+
     @Transient
     private TipoNotificacion tipoNotificacion;
+
+    //se hace la tabla intermedia en comunidad y esto se resuelve via query
     @Transient
     private List<Comunidad> comunidades = new ArrayList<>();
-    @Transient
-    private HashMap<Servicio,Boolean> serviciosDeInteres;
-    @Transient
+
+    @OneToMany(mappedBy = "miembro")
+    private List<ServicioDeInteres> serviciosDeInteres;
+
+    @Column(name = "numero")
     private Integer numero;
-    @Transient
+
+    //revisar porque el email ya esta en usuario
+    @Column(name = "email")
     private String email;
+
+    public Miembro(){
+
+    }
 
     public Miembro(String nombre, String apellido){
         this.nombre=nombre;

@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.dds.domain.entidades;
 
 import ar.edu.utn.frba.dds.domain.georef.entities.Municipio;
+import ar.edu.utn.frba.dds.domain.georef.entities.Ubicacion;
 import ar.edu.utn.frba.dds.domain.servicios.Servicio;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,7 +15,7 @@ import java.util.List;
 @Table(name = "establecimiento")
 public abstract class Establecimiento {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
     @Column(name = "leyenda")
     protected String leyenda;
@@ -23,9 +24,10 @@ public abstract class Establecimiento {
     @JoinColumn(name = "entidad_id", referencedColumnName = "id")
     protected Entidad entidad;
 
-    @Transient
-    //@OneToMany(mappedBy = "establecimiento")
-    protected Municipio municipio;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "ubicacion_id")
+    protected Ubicacion ubicacion_id;
 
     @OneToMany(mappedBy = "establecimiento")
     protected List<Servicio> servicios;

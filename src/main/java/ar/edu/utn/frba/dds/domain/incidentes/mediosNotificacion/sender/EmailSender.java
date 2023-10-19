@@ -5,9 +5,21 @@ import ar.edu.utn.frba.dds.domain.incidentes.mediosNotificacion.MedioDeNotificac
 import ar.edu.utn.frba.dds.domain.incidentes.mediosNotificacion.adapter.AdapterEmail;
 import org.apache.commons.mail.EmailException;
 
-public class EmailSender implements MedioDeNotificacion {
+import javax.persistence.*;
 
+@Entity
+@Table(name = "EmailSender")
+public class EmailSender implements MedioDeNotificacion {
+    @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    private Long id;
+
+    @Transient
     AdapterEmail emailAdapater;
+
+    public EmailSender(){
+
+    }
 
     public EmailSender(AdapterEmail emailAdapater){
         this.emailAdapater = emailAdapater;

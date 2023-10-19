@@ -12,7 +12,7 @@ import javax.persistence.*;
 public class MedioDeTransporte {
 
   @Id
-  @GeneratedValue
+  @GeneratedValue(strategy= GenerationType.IDENTITY)
   private Long id;
   @Column(name = "tipo")
   String tipo;

@@ -14,7 +14,7 @@ import javax.persistence.*;
 public class Municipio {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     public int id;
 
     @Column(name = "nombre")

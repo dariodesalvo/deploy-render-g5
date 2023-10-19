@@ -8,7 +8,7 @@ import javax.persistence.*;
 public abstract class RolesUsuario {
 
   @Id
-  @GeneratedValue
+  @GeneratedValue(strategy= GenerationType.IDENTITY)
   private Long id;
   public void desactivarAlertas() {
   }

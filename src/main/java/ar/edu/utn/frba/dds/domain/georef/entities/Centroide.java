@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Table(name = "centroide")
 public class Centroide {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     public int id;
     @Column(name = "lat")
     public float lat;
