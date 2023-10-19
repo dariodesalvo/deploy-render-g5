@@ -6,6 +6,7 @@ public class FactoryController {
         Object controller = null;
         switch (nombre) {
             case "login": controller = new IndexController(); break;
+            case "incidente": controller = new IncidenteController(); break;
         }
         return controller;
     }

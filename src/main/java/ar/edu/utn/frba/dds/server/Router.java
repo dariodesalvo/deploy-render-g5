@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.dds.server;
 
 import ar.edu.utn.frba.dds.controllers.FactoryController;
+import ar.edu.utn.frba.dds.controllers.IncidenteController;
 import ar.edu.utn.frba.dds.controllers.IndexController;
 
 import static io.javalin.apibuilder.ApiBuilder.*;
@@ -28,6 +29,7 @@ public class Router {
 
         Server.app().routes(() -> {
             get("login", ((IndexController) FactoryController.controller("login"))::index);
+            get("apertura_incidente", ((IncidenteController) FactoryController.controller("incidente"))::index);
         });
     }
 }
