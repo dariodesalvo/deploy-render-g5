@@ -1,10 +1,10 @@
 package ar.edu.utn.frba.dds.localizacion;
 
-import ar.edu.utn.frba.dds.domain.comunidades.Usuario;
-import ar.edu.utn.frba.dds.domain.georef.ServicioGeoref;
-import ar.edu.utn.frba.dds.domain.georef.entities.Centroide;
-import ar.edu.utn.frba.dds.domain.georef.entities.ListadoDeMunicipios;
-import ar.edu.utn.frba.dds.domain.georef.entities.Municipio;
+import ar.edu.utn.frba.dds.models.comunidades.Usuario;
+import ar.edu.utn.frba.dds.models.georef.ServicioGeoref;
+import ar.edu.utn.frba.dds.models.georef.entities.Centroide;
+import ar.edu.utn.frba.dds.models.georef.entities.ListadoDeMunicipios;
+import ar.edu.utn.frba.dds.models.georef.entities.Municipio;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

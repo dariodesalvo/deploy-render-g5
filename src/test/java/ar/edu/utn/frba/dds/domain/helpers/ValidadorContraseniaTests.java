@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.domain.helpers;
 
+import ar.edu.utn.frba.dds.models.helpers.ValidadorContrasenia;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

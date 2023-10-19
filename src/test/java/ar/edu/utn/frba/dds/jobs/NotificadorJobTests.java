@@ -1,9 +1,9 @@
 package ar.edu.utn.frba.dds.jobs;
 
-import ar.edu.utn.frba.dds.domain.jobs.NotificadorJob;
-import ar.edu.utn.frba.dds.domain.tarea.GenerarInforme;
-import ar.edu.utn.frba.dds.domain.tarea.NotificarSinApuro;
-import ar.edu.utn.frba.dds.domain.tarea.Tarea;
+import ar.edu.utn.frba.dds.models.jobs.NotificadorJob;
+import ar.edu.utn.frba.dds.models.tarea.GenerarInforme;
+import ar.edu.utn.frba.dds.models.tarea.NotificarSinApuro;
+import ar.edu.utn.frba.dds.models.tarea.Tarea;
 import org.junit.jupiter.api.*;
 import org.mockito.Mockito;
 

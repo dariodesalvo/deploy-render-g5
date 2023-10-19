@@ -1,10 +1,10 @@
 package ar.edu.utn.frba.dds.domain.archivoCSV;
 
-import ar.edu.utn.frba.dds.domain.comunidades.Administrador;
-import ar.edu.utn.frba.dds.domain.entidades.Empresa;
-import ar.edu.utn.frba.dds.domain.repositorios.RepositorioEmpresas;
-import ar.edu.utn.frba.dds.domain.repositorios.RepositorioServicios;
-import ar.edu.utn.frba.dds.domain.servicios.Servicio;
+import ar.edu.utn.frba.dds.models.comunidades.Administrador;
+import ar.edu.utn.frba.dds.models.entidades.Empresa;
+import ar.edu.utn.frba.dds.models.repositorios.RepositorioEmpresas;
+import ar.edu.utn.frba.dds.models.repositorios.RepositorioServicios;
+import ar.edu.utn.frba.dds.models.servicios.Servicio;
 import org.junit.jupiter.api.*;
 
 import java.io.IOException;

@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.dds.domain.helpers;
 
-import ar.edu.utn.frba.dds.domain.comunidades.Usuario;
+import ar.edu.utn.frba.dds.models.comunidades.Usuario;
+import ar.edu.utn.frba.dds.models.helpers.IniciarSesion;
 import org.junit.jupiter.api.*;
 
 public class IniciarSesiónTests {

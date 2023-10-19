@@ -1,7 +1,10 @@
 package ar.edu.utn.frba.dds.domain.comunidades;
 
-import ar.edu.utn.frba.dds.domain.incidentes.Incidente;
-import ar.edu.utn.frba.dds.domain.servicios.Servicio;
+import ar.edu.utn.frba.dds.models.comunidades.Comunidad;
+import ar.edu.utn.frba.dds.models.comunidades.Miembro;
+import ar.edu.utn.frba.dds.models.comunidades.Usuario;
+import ar.edu.utn.frba.dds.models.incidentes.Incidente;
+import ar.edu.utn.frba.dds.models.servicios.Servicio;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -11,7 +14,7 @@ import java.util.List;
 
 public class MiembroAbreIncidente{
 
-    private  Usuario usuario;
+    private Usuario usuario;
     private Miembro miembro;
 
     private Comunidad comunidadA;

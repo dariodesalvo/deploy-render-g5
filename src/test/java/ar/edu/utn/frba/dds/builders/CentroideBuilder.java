@@ -1,6 +1,6 @@
 package ar.edu.utn.frba.dds.builders;
 
-import ar.edu.utn.frba.dds.domain.georef.entities.Centroide;
+import ar.edu.utn.frba.dds.models.georef.entities.Centroide;
 
 public class CentroideBuilder {
 

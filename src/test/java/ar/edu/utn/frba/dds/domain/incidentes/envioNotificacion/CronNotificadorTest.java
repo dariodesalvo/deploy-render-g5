@@ -1,13 +1,13 @@
 package ar.edu.utn.frba.dds.domain.incidentes.envioNotificacion;
 
-import ar.edu.utn.frba.dds.domain.comunidades.Miembro;
-import ar.edu.utn.frba.dds.domain.comunidades.Usuario;
-import ar.edu.utn.frba.dds.domain.incidentes.CronNotificador;
-import ar.edu.utn.frba.dds.domain.incidentes.Notificador;
-import ar.edu.utn.frba.dds.domain.incidentes.TurnoDeNotificaciones.TurnoM;
-import ar.edu.utn.frba.dds.domain.incidentes.TurnoDeNotificaciones.TurnoNotificacion;
-import ar.edu.utn.frba.dds.domain.incidentes.mediosNotificacion.adapterImpl.NotificarPorEmail;
-import ar.edu.utn.frba.dds.domain.incidentes.mediosNotificacion.sender.EmailSender;
+import ar.edu.utn.frba.dds.models.comunidades.Miembro;
+import ar.edu.utn.frba.dds.models.comunidades.Usuario;
+import ar.edu.utn.frba.dds.models.incidentes.CronNotificador;
+import ar.edu.utn.frba.dds.models.incidentes.Notificador;
+import ar.edu.utn.frba.dds.models.incidentes.TurnoDeNotificaciones.TurnoM;
+import ar.edu.utn.frba.dds.models.incidentes.TurnoDeNotificaciones.TurnoNotificacion;
+import ar.edu.utn.frba.dds.models.incidentes.mediosNotificacion.adapterImpl.NotificarPorEmail;
+import ar.edu.utn.frba.dds.models.incidentes.mediosNotificacion.sender.EmailSender;
 
 //test de notificador cada 10 minutos
 public class CronNotificadorTest {

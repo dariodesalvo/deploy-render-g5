@@ -2,9 +2,10 @@ package ar.edu.utn.frba.dds.domain.comunidades;
 
 import ar.edu.utn.frba.dds.builders.EstacionBuilder;
 import ar.edu.utn.frba.dds.builders.CentroideBuilder;
-import ar.edu.utn.frba.dds.domain.entidades.Estacion;
-import ar.edu.utn.frba.dds.domain.entidades.MedioDeTransporte;
-import ar.edu.utn.frba.dds.domain.entidades.Linea;
+import ar.edu.utn.frba.dds.models.comunidades.Prestador;
+import ar.edu.utn.frba.dds.models.comunidades.Usuario;
+import ar.edu.utn.frba.dds.models.entidades.MedioDeTransporte;
+import ar.edu.utn.frba.dds.models.entidades.Linea;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

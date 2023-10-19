@@ -1,14 +1,14 @@
 package ar.edu.utn.frba.dds.domain.incidentes.envioNotificacion;
 
-import ar.edu.utn.frba.dds.domain.comunidades.Comunidad;
-import ar.edu.utn.frba.dds.domain.comunidades.Miembro;
-import ar.edu.utn.frba.dds.domain.comunidades.Usuario;
-import ar.edu.utn.frba.dds.domain.incidentes.mediosNotificacion.adapter.AdapterEmail;
-import ar.edu.utn.frba.dds.domain.incidentes.mediosNotificacion.adapter.AdapterCelular;
-import ar.edu.utn.frba.dds.domain.incidentes.mediosNotificacion.adapterImpl.NotificarPorEmail;
-import ar.edu.utn.frba.dds.domain.incidentes.mediosNotificacion.adapterImpl.Twilio;
-import ar.edu.utn.frba.dds.domain.incidentes.mediosNotificacion.sender.EmailSender;
-import ar.edu.utn.frba.dds.domain.incidentes.mediosNotificacion.sender.WhatsappSender;
+import ar.edu.utn.frba.dds.models.comunidades.Comunidad;
+import ar.edu.utn.frba.dds.models.comunidades.Miembro;
+import ar.edu.utn.frba.dds.models.comunidades.Usuario;
+import ar.edu.utn.frba.dds.models.incidentes.mediosNotificacion.adapter.AdapterEmail;
+import ar.edu.utn.frba.dds.models.incidentes.mediosNotificacion.adapter.AdapterCelular;
+import ar.edu.utn.frba.dds.models.incidentes.mediosNotificacion.adapterImpl.NotificarPorEmail;
+import ar.edu.utn.frba.dds.models.incidentes.mediosNotificacion.adapterImpl.Twilio;
+import ar.edu.utn.frba.dds.models.incidentes.mediosNotificacion.sender.EmailSender;
+import ar.edu.utn.frba.dds.models.incidentes.mediosNotificacion.sender.WhatsappSender;
 import org.apache.commons.mail.EmailException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
