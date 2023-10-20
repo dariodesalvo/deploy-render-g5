@@ -1,9 +1,6 @@
 package ar.edu.utn.frba.dds.server;
 
-import ar.edu.utn.frba.dds.controllers.FactoryController;
-import ar.edu.utn.frba.dds.controllers.IncidenteController;
-import ar.edu.utn.frba.dds.controllers.IndexController;
-import ar.edu.utn.frba.dds.controllers.UsuarioController;
+import ar.edu.utn.frba.dds.controllers.*;
 
 import static io.javalin.apibuilder.ApiBuilder.*;
 public class Router {
@@ -32,6 +29,7 @@ public class Router {
             get("login", ((IndexController) FactoryController.controller("login"))::index);
             get("apertura-incidente", ((IncidenteController) FactoryController.controller("incidente"))::index);
             get("administrar-usuarios", ((UsuarioController) FactoryController.controller("usuario"))::index);
+            get("cargar-organizaciones", ((ArchivoController) FactoryController.controller("archivo"))::index);
         });
     }
 }
