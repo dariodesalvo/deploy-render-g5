@@ -45,6 +45,9 @@ public class Miembro extends RolesUsuario {
     @Column(name = "email")
     private String email;
 
+    @Column(name = "puntaje")
+    private Integer puntaje;
+
     public Miembro(){
 
     }
