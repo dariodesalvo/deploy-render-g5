@@ -3,6 +3,7 @@ package ar.edu.utn.frba.dds.server;
 import ar.edu.utn.frba.dds.controllers.FactoryController;
 import ar.edu.utn.frba.dds.controllers.IncidenteController;
 import ar.edu.utn.frba.dds.controllers.IndexController;
+import ar.edu.utn.frba.dds.controllers.UsuarioController;
 
 import static io.javalin.apibuilder.ApiBuilder.*;
 public class Router {
@@ -29,7 +30,8 @@ public class Router {
 
         Server.app().routes(() -> {
             get("login", ((IndexController) FactoryController.controller("login"))::index);
-            get("apertura_incidente", ((IncidenteController) FactoryController.controller("incidente"))::index);
+            get("apertura-incidente", ((IncidenteController) FactoryController.controller("incidente"))::index);
+            get("administrar-usuarios", ((UsuarioController) FactoryController.controller("usuario"))::index);
         });
     }
 }
