@@ -11,7 +11,7 @@ public class Router {
             ctx.result("Hola mundo");
         });*/
 
-        Server.app().get("/", ((IndexController) FactoryController.controller("login"))::index);
+        Server.app().get("/", ((IndexController) FactoryController.controller("Login"))::index);
 
         /*
         Server.app().get("/saluda", ctx -> {
@@ -26,10 +26,15 @@ public class Router {
         ));
 
         Server.app().routes(() -> {
-            get("login", ((IndexController) FactoryController.controller("login"))::index);
-            get("apertura-incidente", ((IncidenteController) FactoryController.controller("incidente"))::index);
-            get("administrar-usuarios", ((UsuarioController) FactoryController.controller("usuario"))::index);
-            get("cargar-organizaciones", ((ArchivoController) FactoryController.controller("archivo"))::index);
+            get("login", ((IndexController) FactoryController.controller("Login"))::index);
+            get("apertura-incidente", ((IncidenteController) FactoryController.controller("Incidentes"))::index);
+            get("administrar-usuarios", ((UsuarioController) FactoryController.controller("Usuarios"))::index);
+            get("cargar-organizaciones", ((ArchivoController) FactoryController.controller("Archivos"))::index);
+            get("entidades", ((EntidadesController) FactoryController.controller("Entidades"))::index);
+            get("entidades/crear", ((EntidadesController) FactoryController.controller("Entidades"))::create);
+            get("entidades/{id}/editar", ((EntidadesController) FactoryController.controller("Entidades"))::edit);
+            post("entidades/{id}", ((EntidadesController) FactoryController.controller("Entidades"))::update);
+            post("entidades", ((EntidadesController) FactoryController.controller("Entidades"))::save);
         });
     }
 }

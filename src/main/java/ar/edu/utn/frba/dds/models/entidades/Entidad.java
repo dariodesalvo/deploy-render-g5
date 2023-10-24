@@ -36,4 +36,8 @@ public class Entidad  {
         return null;
     }
 
+    public int cantEstablecimientos() {
+        return this.establecimientos.size();
+    }
+
 }

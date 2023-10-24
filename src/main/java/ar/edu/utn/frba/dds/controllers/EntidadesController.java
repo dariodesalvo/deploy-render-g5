@@ -1,0 +1,88 @@
+package ar.edu.utn.frba.dds.controllers;
+
+import ar.edu.utn.frba.dds.models.entidades.Entidad;
+import ar.edu.utn.frba.dds.models.repositorios.RepositorioDeEntidades;
+import ar.edu.utn.frba.dds.models.servicios.Servicio;
+import ar.edu.utn.frba.dds.server.utils.ICrudViewsHandler;
+import io.javalin.http.Context;
+import io.javalin.http.HttpStatus;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+
+public class EntidadesController extends Controller implements ICrudViewsHandler {
+
+    private RepositorioDeEntidades repositorioDeEntidades;
+
+    public EntidadesController(RepositorioDeEntidades repositorioDeEntidades) {
+        this.repositorioDeEntidades = repositorioDeEntidades;
+    }
+
+    @Override
+    public void index(Context context) {
+
+        Map<String, Object> model = new HashMap<>();
+        List<Entidad> entidades = this.repositorioDeEntidades.buscarTodos();
+        model.put("entidades", entidades);
+        context.render("entidades/entidades.hbs", model);
+
+    }
+
+    @Override
+    public void show(Context context) {
+
+        //context vas a tener el id
+
+        //query usando el id
+
+        //retornas la vista hidratada con el query
+
+    }
+
+    @Override
+    public void create(Context context) {
+        Entidad entidad = null;
+        Map<String, Object> model = new HashMap<>();
+        model.put("entidad", entidad);
+        context.render("entidades/entidad.hbs", model);
+    }
+
+    @Override
+    public void save(Context context) {
+        Entidad entidad = new Entidad();
+        this.asignarParametros(entidad, context);
+        this.repositorioDeEntidades.guardar(entidad);
+        context.status(HttpStatus.CREATED);
+        context.redirect("/entidades");
+    }
+
+    @Override
+    public void edit(Context context) {
+        Entidad entidad = (Entidad) this.repositorioDeEntidades.buscar(Long.parseLong(context.pathParam("id")));
+        Map<String, Object> model = new HashMap<>();
+        model.put("entidad", entidad);
+        context.render("entidades/entidad.hbs", model);
+    }
+
+    @Override
+    public void update(Context context) {
+        Entidad entidad = (Entidad) this.repositorioDeEntidades.buscar(Long.parseLong(context.pathParam("id")));
+        this.asignarParametros(entidad, context);
+        this.repositorioDeEntidades.actualizar(entidad);
+        context.redirect("/entidades");
+    }
+
+    @Override
+    public void delete(Context context) {
+
+    }
+
+    private void asignarParametros(Entidad entidad, Context context) {
+        if(!Objects.equals(context.formParam("leyenda"), "")) {
+            entidad.setLeyenda(context.formParam("leyenda"));
+        }
+    }
+
+}

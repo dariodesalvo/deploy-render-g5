@@ -32,6 +32,9 @@ public class Comunidad {
   )
   private List<Usuario> administradores;
 
+  @Column(name = "confiabilidad")
+  private Double confiabilidad;
+
   public Comunidad(){
 
   }

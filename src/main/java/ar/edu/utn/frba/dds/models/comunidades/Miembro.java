@@ -45,8 +45,11 @@ public class Miembro extends RolesUsuario {
     @Column(name = "email")
     private String email;
 
-    @Column(name = "puntaje")
-    private Integer puntaje;
+    @Column(name = "confiabilidad")
+    private Double confiabilidad;
+
+    @Column(name = "activo")
+    private Boolean activo;
 
     public Miembro(){
 

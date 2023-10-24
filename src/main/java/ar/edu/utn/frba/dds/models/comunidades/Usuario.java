@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.models.comunidades;
 
+import ar.edu.utn.frba.dds.models.Persistente;
 import ar.edu.utn.frba.dds.models.georef.entities.Municipio;
 import ar.edu.utn.frba.dds.models.helpers.IniciarSesion;
 import ar.edu.utn.frba.dds.models.helpers.ValidadorContrasenia;
@@ -14,11 +15,13 @@ import javax.persistence.*;
 @Setter
 @Entity
 @Table(name = "Usuario")
-public class Usuario {
-
+public class Usuario extends Persistente {
+/*
   @Id
   @GeneratedValue(strategy= GenerationType.IDENTITY)
   private Long id;
+*/
+
   @Column(name = "contrasenia")
   private String contrasenia;
   @Column(name = "email")

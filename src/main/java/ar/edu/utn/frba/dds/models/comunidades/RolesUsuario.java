@@ -12,4 +12,10 @@ public abstract class RolesUsuario {
   private Long id;
   public void desactivarAlertas() {
   }
+
+  public boolean tenesPermiso(String nombreInterno) {
+      return true;
+
+  }
+
 }
