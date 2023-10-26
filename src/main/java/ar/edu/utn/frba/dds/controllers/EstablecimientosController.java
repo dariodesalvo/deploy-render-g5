@@ -49,7 +49,6 @@ public class EstablecimientosController extends Controller implements ICrudViews
     public void create(Context context) {
 
         Entidad entidad = (Entidad) this.repositorioDeEntidades.buscar(Long.parseLong(context.pathParam("idEntidad")));
-
         Establecimiento establecimiento = null;
         Map<String, Object> model = new HashMap<>();
         model.put("establecimiento", establecimiento);
