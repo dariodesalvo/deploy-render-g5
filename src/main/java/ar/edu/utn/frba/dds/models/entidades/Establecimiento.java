@@ -29,7 +29,7 @@ public class Establecimiento {
     protected Ubicacion ubicacion_id;
 
     @OneToMany(mappedBy = "establecimiento")
-    protected List<Servicio> servicios;
+    private List<Servicio> servicios;
 
     public Establecimiento(){
 

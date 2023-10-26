@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.models.repositorios;
 
+import ar.edu.utn.frba.dds.models.entidades.Establecimiento;
 import ar.edu.utn.frba.dds.models.georef.ServicioGeoref;
 import ar.edu.utn.frba.dds.models.georef.entities.ListadoDeMunicipios;
 import ar.edu.utn.frba.dds.models.georef.entities.Ubicacion;
@@ -42,7 +43,7 @@ public class RepositorioServicios {
                 }
             }*/
             Ubicacion ubicacionDelServicio = new Ubicacion();
-            Servicio nuevoServicio = new Servicio(codigoServico,nombreServicio,ubicacionDelServicio,esDeElvacion,estaActivo);
+            Servicio nuevoServicio = new Servicio(codigoServico,nombreServicio,ubicacionDelServicio,esDeElvacion,estaActivo, new Establecimiento());
             nuevosServicio.add(nuevoServicio);
             agregarServicio(nuevoServicio);
         }

@@ -18,6 +18,8 @@ public class EstablecimientosController extends Controller implements ICrudViews
 
     private RepositorioDeEstablecimientos repositorioDeEstablecimientos;
 
+    private EntidadesController entidadesController = new EntidadesController(new RepositorioDeEntidades());
+
     private RepositorioDeEntidades repositorioDeEntidades;
     public EstablecimientosController(RepositorioDeEstablecimientos repositorioDeEstablecimientos, RepositorioDeEntidades repositorioDeEntidades) {
         this.repositorioDeEstablecimientos = repositorioDeEstablecimientos;
@@ -59,13 +61,16 @@ public class EstablecimientosController extends Controller implements ICrudViews
     @Override
     public void save(Context context) {
 
-        //Entidad entidad = new Entidad();
         Establecimiento establecimiento = new Establecimiento();
         this.asignarParametros(establecimiento, context);
         this.repositorioDeEstablecimientos.guardar(establecimiento);
         context.status(HttpStatus.CREATED);
-        //context.redirect("/establecimientos/"+context.pathParam("idEntidad")+"/crear");
-        context.redirect("/entidades");
+        Map<String, Object> model = new HashMap<>();
+        model.put("entidad", establecimiento.getEntidad());
+        model.put("establecimientos", establecimiento.getEntidad().misEstablecimientos());
+        context.render("establecimientos/establecimientos.hbs", model);
+
+
     }
 
     @Override
@@ -73,6 +78,7 @@ public class EstablecimientosController extends Controller implements ICrudViews
         Establecimiento establecimiento = (Establecimiento) this.repositorioDeEstablecimientos.buscar(Long.parseLong(context.pathParam("id")));
         Map<String, Object> model = new HashMap<>();
         model.put("establecimiento", establecimiento);
+        model.put("entidad", establecimiento.getEntidad());
         context.render("establecimientos/establecimiento.hbs", model);
     }
 
@@ -81,7 +87,10 @@ public class EstablecimientosController extends Controller implements ICrudViews
         Establecimiento establecimiento = (Establecimiento) this.repositorioDeEstablecimientos.buscar(Long.parseLong(context.pathParam("id")));
         this.asignarParametros(establecimiento, context);
         this.repositorioDeEstablecimientos.actualizar(establecimiento);
-        context.redirect("/establecimientos");
+        Map<String, Object> model = new HashMap<>();
+        model.put("entidad", establecimiento.getEntidad());
+        model.put("establecimientos", establecimiento.getEntidad().misEstablecimientos());
+        context.render("establecimientos/establecimientos.hbs", model);
     }
 
     @Override
@@ -92,9 +101,18 @@ public class EstablecimientosController extends Controller implements ICrudViews
     private void asignarParametros(Establecimiento establecimiento, Context context) {
         if(!Objects.equals(context.formParam("leyenda"), "")) {
             establecimiento.setLeyenda(context.formParam("leyenda"));
-            Entidad entidad = (Entidad) this.repositorioDeEntidades.buscar(Long.parseLong(context.formParam("leyenda")));
+            Entidad entidad = (Entidad) this.repositorioDeEntidades.buscar(Long.parseLong(context.formParam("idEntidad")));
             establecimiento.setEntidad(entidad);
         }
+    }
+
+    public void showServicios(Context context){
+        Establecimiento establecimiento = (Establecimiento) this.repositorioDeEstablecimientos.buscar(Long.parseLong(context.pathParam("id")));
+        Map<String, Object> model = new HashMap<>();
+        model.put("establecimiento", establecimiento);
+        model.put("servicios", establecimiento.getServicios());
+        context.render("servicios/servicios.hbs", model);
+
     }
 
 }

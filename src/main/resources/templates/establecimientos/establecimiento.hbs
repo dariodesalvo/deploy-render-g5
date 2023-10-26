@@ -1,5 +1,5 @@
 {{#partial "contenido" }}
-    <h3>Agregando Establecimiento a {{entidad.leyenda}}</h3>
+    <h3>Establecimiento perteneciente a {{entidad.leyenda}}</h3>
     <form method="POST" {{#if establecimiento}} action="/establecimientos/{{establecimiento.id}}" {{else}} action="/establecimientos" {{/if}}>
         <div class="form-group mb-10">
             <label>Leyenda: </label>

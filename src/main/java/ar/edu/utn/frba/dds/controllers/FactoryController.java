@@ -2,6 +2,7 @@ package ar.edu.utn.frba.dds.controllers;
 
 import ar.edu.utn.frba.dds.models.repositorios.RepositorioDeEntidades;
 import ar.edu.utn.frba.dds.models.repositorios.RepositorioDeEstablecimientos;
+import ar.edu.utn.frba.dds.models.repositorios.RepositorioDeServicios;
 
 public class FactoryController {
 
@@ -14,6 +15,7 @@ public class FactoryController {
             case "Archivos" : controller = new ArchivoController() ; break;
             case "Entidades" : controller = new EntidadesController(new RepositorioDeEntidades()) ; break;
             case "Establecimientos" : controller = new EstablecimientosController(new RepositorioDeEstablecimientos(), new RepositorioDeEntidades()) ; break;
+            case "Servicios" : controller = new ServiciosController(new RepositorioDeServicios()) ; break;
 
         }
         return controller;

@@ -37,24 +37,25 @@ public class Servicio {
   @Column(name = "estaActivo")
   private boolean estaActivo;
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name="empresa_id", nullable=false)
+  @ManyToOne
+  @JoinColumn(name="empresa_id", referencedColumnName = "id")
   private Empresa empresa;
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name="establecimiento_id", nullable=false)
+  @ManyToOne
+  @JoinColumn(name="establecimiento_id" , referencedColumnName = "id")
   private Establecimiento establecimiento;
 
 
   public Servicio() {
   }
 
-  public Servicio(int codigoServicio, String nombre, Ubicacion ubicacion, boolean esDeElevacion, boolean estaActivo) {
+  public Servicio(int codigoServicio, String nombre, Ubicacion ubicacion, boolean esDeElevacion, boolean estaActivo, Establecimiento establecimiento) {
     this.codigoServicio = codigoServicio;
     this.nombre = nombre;
     this.ubicacion = ubicacion;
     this.esDeElevacion = esDeElevacion;
     this.estaActivo = estaActivo;
+    this.establecimiento = establecimiento;
   }
 
 }
