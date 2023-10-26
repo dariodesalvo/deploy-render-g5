@@ -21,12 +21,18 @@
     <form class="formulario-apertura-incidente">
         <h1 class="cargar-text">Abrir incidente</h1>
         <div class="form-group">
-          <label for="servicio">Servicio:</label>
-          <input type="text" class="form-control" id="servicio" placeholder="Ingrese el servicio afectado">
+          <label class="mb-2" for="servicio">Servicio:</label>
+            <select class="form-control mt-10">
+                <option selected>Selecione el servicio afectado</option>
+                {{#each servicios}}
+                    <option value="{{this.id}}">{{this.nombre}}</option>
+                {{/each}}
+            </select>
         </div>
         <div class="form-group">
-            <label for="comunidad">Comunidad:</label>
-            <input type="text" class="form-control" id="comunidad" placeholder="Ingrese la comunidad">
+           <div class="bd-callout bd-callout-info">
+           <strong>Se abrira un incidente por cada comunidad que pertenezca.</strong>
+           </div>
         </div>
         <div class="form-group">
           <label for="observaciones">Observaciones:</label>

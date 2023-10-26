@@ -1,7 +1,9 @@
 package ar.edu.utn.frba.dds.controllers;
 
+import ar.edu.utn.frba.dds.models.entidades.Empresa;
 import ar.edu.utn.frba.dds.models.entidades.Entidad;
 import ar.edu.utn.frba.dds.models.entidades.Establecimiento;
+import ar.edu.utn.frba.dds.models.repositorios.RepositorioDeEmpresas;
 import ar.edu.utn.frba.dds.models.repositorios.RepositorioDeEntidades;
 import ar.edu.utn.frba.dds.models.repositorios.RepositorioDeEstablecimientos;
 import ar.edu.utn.frba.dds.models.repositorios.RepositorioDeServicios;
@@ -10,15 +12,14 @@ import ar.edu.utn.frba.dds.server.utils.ICrudViewsHandler;
 import io.javalin.http.Context;
 import io.javalin.http.HttpStatus;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 
 public class ServiciosController extends Controller implements ICrudViewsHandler {
 
     private RepositorioDeServicios repositorioDeServicios;
+
+    private RepositorioDeEmpresas repositorioDeEmpresas = new RepositorioDeEmpresas();;
 
     private RepositorioDeEstablecimientos repositorioDeEstablecimientos = new RepositorioDeEstablecimientos();
     public ServiciosController(RepositorioDeServicios repositorioDeServicios){
@@ -52,8 +53,10 @@ public class ServiciosController extends Controller implements ICrudViewsHandler
         Establecimiento establecimiento = (Establecimiento) this.repositorioDeEstablecimientos.buscar(Long.parseLong(context.pathParam("idEstablecimiento")));
         Servicio servicio = null;
         Map<String, Object> model = new HashMap<>();
+        List<Empresa> empresas =  this.repositorioDeEmpresas.buscarTodos();
         model.put("establecimiento", establecimiento);
         model.put("servicio", servicio);
+        model.put("empresas", empresas);
         context.render("servicios/servicio.hbs", model);
     }
 
@@ -73,10 +76,12 @@ public class ServiciosController extends Controller implements ICrudViewsHandler
     @Override
     public void edit(Context context) {
 
-        Servicio servicio = (Servicio) this.repositorioDeServicios.buscar(Long.parseLong("1"));
+        Servicio servicio = (Servicio) this.repositorioDeServicios.buscar(Long.parseLong(context.pathParam("id")));
         Map<String, Object> model = new HashMap<>();
+        List<Empresa> empresas = this.repositorioDeEmpresas.buscarTodos();
         model.put("servicio", servicio);
         model.put("establecimiento", servicio.getEstablecimiento());
+        model.put("empresas",empresas);
         context.render("servicios/servicio.hbs", model);
     }
 
@@ -86,8 +91,9 @@ public class ServiciosController extends Controller implements ICrudViewsHandler
         this.asignarParametros(servicio, context);
         this.repositorioDeServicios.actualizar(servicio);
         Map<String, Object> model = new HashMap<>();
+
         model.put("establecimiento", servicio.getEstablecimiento());
-        model.put("servicio", servicio);
+        model.put("servicios", servicio.getEstablecimiento().getServicios());
         context.render("servicios/servicios.hbs", model);
     }
 
@@ -99,8 +105,13 @@ public class ServiciosController extends Controller implements ICrudViewsHandler
     private void asignarParametros(Servicio servicio, Context context) {
         if(!Objects.equals(context.formParam("nombre"), "")) {
             servicio.setNombre(context.formParam("nombre"));
+            servicio.setCodigoServicio(Integer.parseInt(context.formParam("codigoServicio")));
             Establecimiento establecimiento = (Establecimiento) this.repositorioDeEstablecimientos.buscar(Long.parseLong(context.formParam("idEstablecimiento")));
             servicio.setEstablecimiento(establecimiento);
+            servicio.setEstaActivo(Boolean.parseBoolean(context.formParam("estaActivo")));
+            servicio.setEsDeElevacion(Boolean.parseBoolean(context.formParam("esDeElevacion")));
+            Empresa empresa = (Empresa) this.repositorioDeEmpresas.buscar(Long.parseLong(context.formParam("idEmpresa")));
+            servicio.setEmpresa(empresa);
         }
     }
 
