@@ -14,7 +14,7 @@ public class ServicioExterno {
     private static ServicioExterno instancia = null;
 
 
-    private ServicioExterno(){
+    public ServicioExterno(){
         this.retrofit = new Retrofit.Builder().baseUrl(urlAPI).
                 addConverterFactory(GsonConverterFactory.create()).build();
     }
