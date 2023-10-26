@@ -12,7 +12,7 @@ import java.util.List;
 @Setter
 @Entity
 @Table(name = "establecimiento")
-public abstract class Establecimiento {
+public class Establecimiento {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
@@ -21,7 +21,7 @@ public abstract class Establecimiento {
 
     @ManyToOne
     @JoinColumn(name = "entidad_id", referencedColumnName = "id")
-    protected Entidad entidad;
+    private Entidad entidad;
 
 
     @OneToOne(cascade = CascadeType.ALL)

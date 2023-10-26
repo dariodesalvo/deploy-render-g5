@@ -1,0 +1,14 @@
+{{#partial "contenido" }}
+    <h3>Agregando Establecimiento a {{entidad.leyenda}}</h3>
+    <form method="POST" {{#if establecimiento}} action="/establecimientos/{{establecimiento.id}}" {{else}} action="/establecimientos" {{/if}}>
+        <div class="form-group mb-10">
+            <label>Leyenda: </label>
+            <input name="leyenda" {{#if establecimiento}} value="{{establecimiento.leyenda}}" {{/if}} placeholder="Leyenda">
+            <input name="idEntidad" value="{{entidad.id}}"  type="hidden" >
+        </div>
+        <div class="mt-4">
+            <button type="submit" class="btn btn-primary">Guardar</button>
+        </div>
+    </form>
+{{/partial}}
+{{> templates/base }}

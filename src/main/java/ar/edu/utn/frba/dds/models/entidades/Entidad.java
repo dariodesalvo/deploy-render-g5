@@ -25,7 +25,7 @@ public class Entidad  {
 
     @ManyToOne
     @JoinColumn(name = "prestador_id", referencedColumnName = "id")
-    protected Prestador prestador;
+    private Prestador prestador;
 
     public Entidad(){
 
@@ -39,5 +39,7 @@ public class Entidad  {
     public int cantEstablecimientos() {
         return this.establecimientos.size();
     }
+
+    public List<Establecimiento> misEstablecimientos() {return this.establecimientos; }
 
 }

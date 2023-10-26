@@ -35,6 +35,9 @@ public class Router {
             get("entidades/{id}/editar", ((EntidadesController) FactoryController.controller("Entidades"))::edit);
             post("entidades/{id}", ((EntidadesController) FactoryController.controller("Entidades"))::update);
             post("entidades", ((EntidadesController) FactoryController.controller("Entidades"))::save);
+            get("entidades/{id}/establecimientos", ((EntidadesController) FactoryController.controller("Entidades"))::showEstablecimientos);
+            get("establecimientos/{idEntidad}/crear", ((EstablecimientosController) FactoryController.controller("Establecimientos"))::create);
+            post("establecimientos", ((EstablecimientosController) FactoryController.controller("Establecimientos"))::save);
         });
     }
 }

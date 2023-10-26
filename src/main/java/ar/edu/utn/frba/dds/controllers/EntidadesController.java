@@ -6,6 +6,7 @@ import ar.edu.utn.frba.dds.models.servicios.Servicio;
 import ar.edu.utn.frba.dds.server.utils.ICrudViewsHandler;
 import io.javalin.http.Context;
 import io.javalin.http.HttpStatus;
+import org.hibernate.hql.internal.ast.tree.ExpectedTypeAwareNode;
 
 import java.util.HashMap;
 import java.util.List;
@@ -66,6 +67,11 @@ public class EntidadesController extends Controller implements ICrudViewsHandler
         context.render("entidades/entidad.hbs", model);
     }
 
+    public Entidad encontrar(Long id){
+        Entidad entidad = (Entidad) this.repositorioDeEntidades.buscar(id);
+        return entidad;
+    }
+
     @Override
     public void update(Context context) {
         Entidad entidad = (Entidad) this.repositorioDeEntidades.buscar(Long.parseLong(context.pathParam("id")));
@@ -76,6 +82,15 @@ public class EntidadesController extends Controller implements ICrudViewsHandler
 
     @Override
     public void delete(Context context) {
+
+    }
+
+    public void showEstablecimientos(Context context){
+        Entidad entidad = (Entidad) this.repositorioDeEntidades.buscar(Long.parseLong(context.pathParam("id")));
+        Map<String, Object> model = new HashMap<>();
+        model.put("entidad", entidad);
+        model.put("establecimientos", entidad.misEstablecimientos());
+        context.render("establecimientos/establecimientos.hbs", model);
 
     }
 
