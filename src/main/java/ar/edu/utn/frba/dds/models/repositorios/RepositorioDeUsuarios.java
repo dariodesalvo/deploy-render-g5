@@ -24,10 +24,9 @@ public class RepositorioDeUsuarios implements WithSimplePersistenceUnit, ICrudRe
         query.setParameter("email", usuario);
         query.setParameter("password", password);
 */
-        List<Usuario> usuarios = query.getResultList();
+        return query.getResultList();
 
-        return this.buscar(usuarios.get(0).getId());
-    }
+   }
 
 
     @Override

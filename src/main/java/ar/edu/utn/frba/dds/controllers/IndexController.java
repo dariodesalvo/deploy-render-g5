@@ -38,10 +38,13 @@ public class IndexController extends Controller implements ICrudViewsHandler {
 
     public void login(Context context){
 
-        Usuario usuario = (Usuario) repositorioDeUsuarios.login(context.formParam("email"), context.formParam("password"));
+        List<Usuario> usuarios = (List<Usuario>) repositorioDeUsuarios.login(context.formParam("email"), context.formParam("password"));
+
         Map<String, Object> model = new HashMap<>();
 
-        if(usuario.getId()>0) {
+        if(usuarios.get(0) != null) {
+
+            Usuario usuario = (Usuario) repositorioDeUsuarios.buscar(usuarios.get(0).getId());
 
             model.put("usuario", usuario);
             //x ahora redirecciona aca
