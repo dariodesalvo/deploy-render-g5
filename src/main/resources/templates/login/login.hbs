@@ -10,12 +10,16 @@
     <div class="card-body inicio-sesion">
       <h5 class="card-title bienvenido">Bienvenido</h5>
       <p class="card-text iniciar-sesion">Iniciar sesión</p>
+        <form method="POST"  action="/login">
       <label class="input-label">Email</label>
-      <input class="input-style" type="email" placeholder="Ingrese Email"> </input>
+      <input class="input-style" name="email" type="email" placeholder="Ingrese Email"> </input>
       <label class="input-label">Contraseña</label>
-      <input class="input-style" type="password" placeholder="Ingrese Contraseña"> </input>
-      <button class="btn btn-primary" type="button">Iniciar sesión</button>
+      <input class="input-style" name="password" type="password" placeholder="Ingrese Contraseña"> </input>
+      <button class="btn btn-primary" type="submit">Iniciar sesión</button>
+      <a href="/registro" class="btn btn-secondary" type="button">Registrame </a>
+
     </div>
+      <div class="alert">{{if error }} {{error}}</div>
   </div>
 </div>
 </html>

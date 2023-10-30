@@ -26,7 +26,14 @@ public class Router {
         ));
 
         Server.app().routes(() -> {
+
+            /* loginController */
             get("login", ((IndexController) FactoryController.controller("Login"))::index);
+            post("login", ((IndexController) FactoryController.controller("Login"))::login);
+            get("registro", ((IndexController) FactoryController.controller("Login"))::register);
+            post("registro", ((IndexController) FactoryController.controller("Login"))::registrar);
+
+
             get("apertura-incidente", ((IncidenteController) FactoryController.controller("Incidentes"))::index);
             get("administrar-usuarios", ((UsuarioController) FactoryController.controller("Usuarios"))::index);
             get("cargar-organizaciones", ((ArchivoController) FactoryController.controller("Archivos"))::index);

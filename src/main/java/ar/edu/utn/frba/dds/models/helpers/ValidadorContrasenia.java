@@ -14,6 +14,7 @@ public class ValidadorContrasenia implements IValidable {
   public void validarPassword(String nombreUsuario, String contrasenia) throws MalformedURLException {
 
   }
+  
 
   public static boolean laContraseniaEsValida(String contrasenia) throws Exception {
     try {
