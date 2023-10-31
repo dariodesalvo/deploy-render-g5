@@ -15,15 +15,15 @@ public class RepositorioDeUsuarios implements WithSimplePersistenceUnit, ICrudRe
         return entityManager().createQuery("from " + Usuario.class.getName()).getResultList();
     }
 
-    public Object login(String usuario, String password) {
+    public List login(String email, String password) {
 
-        String hql = "FROM "+Usuario.class.getName()+" WHERE email = "+usuario+" AND password = "+password;
+        System.out.println("usando login");
 
-        Query query = entityManager().createQuery(hql); /*
-        query.setParameter("table", Usuario.class.getName());
-        query.setParameter("email", usuario);
+        String hql = "FROM " + Usuario.class.getName() + " WHERE email = :email AND contrasenia = :password";
+        Query query = entityManager().createQuery(hql);
+        query.setParameter("email", email);
         query.setParameter("password", password);
-*/
+
         return query.getResultList();
 
    }
@@ -34,6 +34,9 @@ public class RepositorioDeUsuarios implements WithSimplePersistenceUnit, ICrudRe
         return entityManager().find(Usuario.class, id);
     }
 
+    public Object buscarXEmail(String email) {
+        return entityManager().find(Usuario.class, email);
+    }
     @Override
     public void guardar(Object o) {
         EntityTransaction tx = entityManager().getTransaction();

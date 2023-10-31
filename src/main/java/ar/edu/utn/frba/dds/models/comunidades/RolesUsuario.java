@@ -10,8 +10,8 @@ import java.util.Set;
 
 @Entity
 @Table(name = "RolesUsuario")
-@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
-public abstract class RolesUsuario implements RouteRole {
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+public abstract class RolesUsuario {
 
   @Id
   @GeneratedValue(strategy= GenerationType.IDENTITY)

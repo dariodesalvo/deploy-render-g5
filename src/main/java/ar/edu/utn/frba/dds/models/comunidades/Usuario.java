@@ -34,6 +34,9 @@ public class Usuario extends Persistente {
   @JoinColumn(name = "municipio_id")
   private Municipio municipio;
 
+  public Usuario(){
+
+  }
 
   public Usuario(String email, String contrasenia)
         throws Exception

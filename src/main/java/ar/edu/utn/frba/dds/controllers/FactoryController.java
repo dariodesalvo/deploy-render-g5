@@ -10,7 +10,7 @@ public class FactoryController {
     public static Object controller(String nombre) {
         Object controller = null;
         switch (nombre) {
-            case "Login": controller = new IndexController(new RepositorioDeUsuarios()); break;
+            case "Login": controller = new LoginController(new RepositorioDeUsuarios()); break;
             case "Incidentes": controller = new IncidenteController(); break;
             case "Usuarios" : controller = new UsuarioController(); break;
             case "Archivos" : controller = new ArchivoController() ; break;

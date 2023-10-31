@@ -11,7 +11,7 @@ public class Router {
             ctx.result("Hola mundo");
         });*/
 
-        Server.app().get("/", ((IndexController) FactoryController.controller("Login"))::index);
+        Server.app().get("/", ((LoginController) FactoryController.controller("Login"))::index);
 
         /*
         Server.app().get("/saluda", ctx -> {
@@ -28,10 +28,10 @@ public class Router {
         Server.app().routes(() -> {
 
             /* loginController */
-            get("login", ((IndexController) FactoryController.controller("Login"))::index);
-            post("login", ((IndexController) FactoryController.controller("Login"))::login);
-            get("registro", ((IndexController) FactoryController.controller("Login"))::register);
-            post("registro", ((IndexController) FactoryController.controller("Login"))::registrar);
+            get("login", ((LoginController) FactoryController.controller("Login"))::index);
+            post("login", ((LoginController) FactoryController.controller("Login"))::login);
+            get("registro", ((LoginController) FactoryController.controller("Login"))::register);
+            post("registro", ((LoginController) FactoryController.controller("Login"))::registrar);
 
 
             get("apertura-incidente", ((IncidenteController) FactoryController.controller("Incidentes"))::index);

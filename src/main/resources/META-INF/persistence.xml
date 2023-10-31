@@ -12,7 +12,7 @@
     <properties>
       <property name="hibernate.archive.autodetection" value="class"/>
 
-      <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" />
+      <property name="hibernate.connection.driver_class" value="com.mysql.cj.jdbc.Driver" />
       <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/grupo5" />
       <property name="hibernate.connection.username" value="grupo5" />
       <property name="hibernate.connection.password" value="elgrupo5!" />
@@ -27,6 +27,7 @@
       <property name="hibernate.format_sql" value="true"/>
       <property name="use_sql_comments" value="true"/>
       <property name="hibernate.hbm2ddl.auto" value="update"/>
+      <property name="hibernate.connection.autocommit" value="true" />
     </properties>
 
   </persistence-unit>

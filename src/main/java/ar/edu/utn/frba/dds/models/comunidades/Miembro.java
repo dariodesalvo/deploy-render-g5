@@ -15,7 +15,7 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-@Table(name = "Miembro")
+//@Table(name = "Miembro")
 public class Miembro extends RolesUsuario {
 
     @Column(name = "nombre")

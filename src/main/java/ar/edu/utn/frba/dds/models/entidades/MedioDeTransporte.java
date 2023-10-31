@@ -16,6 +16,9 @@ public class MedioDeTransporte {
   private Long id;
   @Column(name = "tipo")
   String tipo;
+
+  public MedioDeTransporte(){
+  }
   public MedioDeTransporte(String tipo){
     this.tipo=tipo;
   }

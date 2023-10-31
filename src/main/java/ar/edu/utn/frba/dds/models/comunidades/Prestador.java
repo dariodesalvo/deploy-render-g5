@@ -14,7 +14,7 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-@Table(name = "Prestador")
+//@Table(name = "Prestador")
 public class Prestador extends RolesUsuario {
 
     @OneToMany(mappedBy = "prestador")
