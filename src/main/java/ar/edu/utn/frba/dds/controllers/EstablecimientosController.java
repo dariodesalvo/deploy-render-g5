@@ -65,17 +65,18 @@ public class EstablecimientosController extends Controller implements ICrudViews
         this.asignarParametros(establecimiento, context);
         this.repositorioDeEstablecimientos.guardar(establecimiento);
         context.status(HttpStatus.CREATED);
-        Map<String, Object> model = new HashMap<>();
+        /*Map<String, Object> model = new HashMap<>();
         model.put("entidad", establecimiento.getEntidad());
-        model.put("establecimientos", establecimiento.getEntidad().misEstablecimientos());
-        context.render("establecimientos/establecimientos.hbs", model);
-
+        model.put("establecimientos", establecimiento.getEntidad().misEstablecimientos());*/
+        //context.render("establecimientos/establecimientos.hbs", model);
+        context.redirect("entidades/"+establecimiento.getEntidad().getId()+"/establecimientos");
 
     }
 
     @Override
     public void edit(Context context) {
         Establecimiento establecimiento = (Establecimiento) this.repositorioDeEstablecimientos.buscar(Long.parseLong(context.pathParam("id")));
+        context.status(HttpStatus.OK);
         Map<String, Object> model = new HashMap<>();
         model.put("establecimiento", establecimiento);
         model.put("entidad", establecimiento.getEntidad());
@@ -87,11 +88,17 @@ public class EstablecimientosController extends Controller implements ICrudViews
         Establecimiento establecimiento = (Establecimiento) this.repositorioDeEstablecimientos.buscar(Long.parseLong(context.pathParam("id")));
         this.asignarParametros(establecimiento, context);
         this.repositorioDeEstablecimientos.actualizar(establecimiento);
-        Map<String, Object> model = new HashMap<>();
+        context.status(HttpStatus.OK);
+        /* Map<String, Object> model = new HashMap<>();
         model.put("entidad", establecimiento.getEntidad());
         model.put("establecimientos", establecimiento.getEntidad().misEstablecimientos());
         context.render("establecimientos/establecimientos.hbs", model);
+        */
+        context.redirect("/entidades/"+establecimiento.getEntidad().getId()+"/establecimientos");
+
+
     }
+
 
     @Override
     public void delete(Context context) {

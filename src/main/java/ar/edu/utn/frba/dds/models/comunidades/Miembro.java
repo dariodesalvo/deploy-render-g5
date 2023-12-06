@@ -15,7 +15,6 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-//@Table(name = "Miembro")
 public class Miembro extends RolesUsuario {
 
     @Column(name = "nombre")
@@ -24,14 +23,15 @@ public class Miembro extends RolesUsuario {
     private String apellido;
     @Column(name = "celular")
     private String celular;
-
+    //Todo converter para el medio de notificacionPreferido
     @Transient
     private MedioDeNotificacion medioNotificacionPreferido;
 
+    //Todo converter para el tipo de notificacion
     @Transient
     private TipoNotificacion tipoNotificacion;
 
-    //se hace la tabla intermedia en comunidad y esto se resuelve via query
+    //Todo persistir
     @Transient
     private List<Comunidad> comunidades = new ArrayList<>();
 

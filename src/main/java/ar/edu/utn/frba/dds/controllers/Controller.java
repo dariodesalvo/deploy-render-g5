@@ -12,4 +12,5 @@ public abstract class Controller implements WithSimplePersistenceUnit {
         return entityManager()
                 .find(Usuario.class, Long.parseLong(ctx.sessionAttribute("usuario_id")));
     }
+
 }

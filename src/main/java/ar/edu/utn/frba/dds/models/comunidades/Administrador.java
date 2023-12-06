@@ -23,7 +23,6 @@ import javax.persistence.Table;
 @Getter
 @Setter
 @Entity
-//@Table(name = "Administrador")
 public class Administrador extends RolesUsuario {
 
   public void altaServicio(Estacion estacion, Servicio servicio) throws Exception {

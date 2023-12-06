@@ -1,7 +1,6 @@
 package ar.edu.utn.frba.dds.models.comunidades;
 
 import ar.edu.utn.frba.dds.models.helpers.Permiso;
-import io.javalin.security.RouteRole;
 
 import javax.persistence.*;
 import java.util.Collections;

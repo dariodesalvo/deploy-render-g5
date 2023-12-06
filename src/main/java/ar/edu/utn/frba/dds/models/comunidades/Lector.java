@@ -10,7 +10,6 @@ import javax.persistence.Table;
 @Getter
 @Setter
 @Entity
-//@Table(name = "Lector")
 public class Lector extends RolesUsuario {
     private void enviarComentario(String comentario){
         System.out.print(comentario);

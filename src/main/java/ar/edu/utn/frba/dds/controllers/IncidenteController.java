@@ -23,7 +23,8 @@ public class IncidenteController extends Controller implements ICrudViewsHandler
         if(usuarioLogueado == null || !usuarioLogueado.getRol().tenesPermiso("crear_servicios")) {
             throw new AccessDeniedException();
         }
-*/      List<Servicio> servicios= this.repositorioServicios.buscarTodos();
+*/
+        List<Servicio> servicios= this.repositorioServicios.buscarTodos();
         Map<String, Object> model = new HashMap<>();
         model.put("servicios", servicios);
         context.render("apertura_incidentes/apertura-incidentes.hbs", model);
@@ -33,11 +34,6 @@ public class IncidenteController extends Controller implements ICrudViewsHandler
     @Override
     public void show(Context context) {
 
-        //context vas a tener el id
-
-        //query usando el id
-
-        //retornas la vista hidratada con el query
 
     }
 
@@ -48,12 +44,12 @@ public class IncidenteController extends Controller implements ICrudViewsHandler
 
     @Override
     public void save(Context context) {
-        // entity manager
+
     }
 
     @Override
     public void edit(Context context) {
-        // podes llamar a save
+
     }
 
     @Override

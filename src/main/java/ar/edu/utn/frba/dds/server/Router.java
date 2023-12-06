@@ -38,6 +38,8 @@ public class Router {
             get("administrar-usuarios", ((UsuarioController) FactoryController.controller("Usuarios"))::index);
             get("cargar-organizaciones", ((ArchivoController) FactoryController.controller("Archivos"))::index);
 
+            /* Miembros Controller */
+            
             /* Entidades Controller */
 
             get("entidades", ((EntidadesController) FactoryController.controller("Entidades"))::index);
@@ -46,6 +48,7 @@ public class Router {
             post("entidades/{id}", ((EntidadesController) FactoryController.controller("Entidades"))::update);
             post("entidades", ((EntidadesController) FactoryController.controller("Entidades"))::save);
             get("entidades/{id}/establecimientos", ((EntidadesController) FactoryController.controller("Entidades"))::showEstablecimientos);
+
             /* Establecimientos Controller */
 
             get("establecimientos/{idEntidad}/crear", ((EstablecimientosController) FactoryController.controller("Establecimientos"))::create);

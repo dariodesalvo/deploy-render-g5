@@ -15,6 +15,7 @@ import java.util.List;
 
 @Getter
 @Setter
+//TODO persistir
 public class Incidente {
 
     private Servicio servicio;
@@ -68,7 +69,7 @@ Además, cabe destacar que el incidente puede ser asignado a un servicio base (�
 ejemplo) o a un servicio compuesto (“baños”, por ejemplo).
 Cuando un miembro informe sobre un incidente, el Sistema deberá informar a todos los miembros de la
 comunidad sobre este hecho.
-Todo miembro de una comunidad podrá observar en el Sistema el listado de incidentes reportados. Además,
+los miembro de una comunidad podrá observar en el Sistema el listado de incidentes reportados. Además,
 la notificación de “Nuevo incidente” se realizará vía correo electrónico o vía WhatsApp, según configure una
 persona como medio de comunicación preferido (a fines de optimizar el uso de recursos técnicos sólo se
 permitirá la configuración de uno de esos medios).
@@ -79,6 +80,6 @@ observaciones relativas al mismo; además de la fecha y hora.
 Trabajo Práctico Anual 2023 – Monitoreo de Estado de Servicios
 Página 11 de 19
 Cierre de incidentes
-Los miembros podrán indicar como “resuelto” todo incidente que otro miembro de la comunidad (o ellos
+Los miembros podrán indicar como “resuelto” el incidente que otro miembro de la comunidad (o ellos
 mimos) haya abierto. Ante este suceso el Sistema deberá, nuevamente, notificar a todos los miembros de
 la comunidad por los mismos medios de notificación antes mencionados.*/

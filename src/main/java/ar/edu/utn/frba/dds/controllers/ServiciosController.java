@@ -66,11 +66,12 @@ public class ServiciosController extends Controller implements ICrudViewsHandler
         Servicio servicio = new Servicio();
         this.asignarParametros(servicio, context);
         this.repositorioDeServicios.guardar(servicio);
-        context.status(HttpStatus.CREATED);
+        context.status(HttpStatus.CREATED); /*
         Map<String, Object> model = new HashMap<>();
         model.put("establecimiento", servicio.getEstablecimiento());
         model.put("servicios", servicio.getEstablecimiento().getServicios());
-        context.render("servicios/servicios.hbs", model);
+        context.render("servicios/servicios.hbs", model); */
+        context.redirect("/establecimientos/"+servicio.getEstablecimiento().getId()+"/servicios");
     }
 
     @Override
@@ -90,11 +91,13 @@ public class ServiciosController extends Controller implements ICrudViewsHandler
         Servicio servicio = (Servicio) this.repositorioDeServicios.buscar(Long.parseLong(context.pathParam("id")));
         this.asignarParametros(servicio, context);
         this.repositorioDeServicios.actualizar(servicio);
+        /*
         Map<String, Object> model = new HashMap<>();
 
         model.put("establecimiento", servicio.getEstablecimiento());
         model.put("servicios", servicio.getEstablecimiento().getServicios());
-        context.render("servicios/servicios.hbs", model);
+        context.render("servicios/servicios.hbs", model); */
+        context.redirect("/establecimientos/"+servicio.getEstablecimiento().getId()+"/servicios");
     }
 
     @Override
