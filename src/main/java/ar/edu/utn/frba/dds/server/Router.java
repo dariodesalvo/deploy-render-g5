@@ -1,6 +1,8 @@
 package ar.edu.utn.frba.dds.server;
 
 import ar.edu.utn.frba.dds.controllers.*;
+import ar.edu.utn.frba.dds.models.comunidades.RolesUsuario;
+import ar.edu.utn.frba.dds.models.comunidades.TipoRol;
 
 import static io.javalin.apibuilder.ApiBuilder.*;
 public class Router {
@@ -32,14 +34,17 @@ public class Router {
             post("login", ((LoginController) FactoryController.controller("Login"))::login);
             get("registro", ((LoginController) FactoryController.controller("Login"))::register);
             post("registro", ((LoginController) FactoryController.controller("Login"))::registrar);
+            get("bienvenida", ((LoginController) FactoryController.controller("Login"))::bienvenida);
 
-
-            get("apertura-incidente", ((IncidenteController) FactoryController.controller("Incidentes"))::index);
+            get("apertura-incidente", ((IncidenteController) FactoryController.controller("Incidentes"))::index, TipoRol.Miembro);
             get("administrar-usuarios", ((UsuarioController) FactoryController.controller("Usuarios"))::index);
             get("cargar-organizaciones", ((ArchivoController) FactoryController.controller("Archivos"))::index);
 
             /* Miembros Controller */
-            
+            get("comunidades", ((ComunidadesController) FactoryController.controller("Comunidades"))::index, TipoRol.Lector);
+            get("/comunidades/{comunidad_id}/unirme/{usuario_id}", ((ComunidadesController) FactoryController.controller("Comunidades"))::crearSolicitud);
+            get("/administrar-comunidad", ((ComunidadesController) FactoryController.controller("Comunidades"))::adminComunidad);
+
             /* Entidades Controller */
 
             get("entidades", ((EntidadesController) FactoryController.controller("Entidades"))::index);

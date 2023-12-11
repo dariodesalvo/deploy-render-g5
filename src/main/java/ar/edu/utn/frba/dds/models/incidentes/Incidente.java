@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.models.incidentes;
 
+import ar.edu.utn.frba.dds.models.Persistente;
 import ar.edu.utn.frba.dds.models.comunidades.Comunidad;
 import ar.edu.utn.frba.dds.models.comunidades.Miembro;
 import ar.edu.utn.frba.dds.models.incidentes.mensajes.AperturaIncidente;
@@ -10,23 +11,38 @@ import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.mail.EmailException;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
 @Setter
-//TODO persistir
-public class Incidente {
+@Entity
+@Table(name = "incidente")
+public class Incidente extends Persistente {
 
+    @ManyToOne
+    @JoinColumn(name = "servicio_id", referencedColumnName = "id")
     private Servicio servicio;
-    //private Establecimiento establecimiento; -> no deberia ir en servicio?
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "miembro_id", insertable = false, updatable = false, referencedColumnName = "id")
     private Miembro abiertoPor;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "miembro_id", insertable = false, updatable = false, referencedColumnName = "id")
     private Miembro cerradoPor;
+    @ManyToOne
+    @JoinColumn(name = "comunidad_id", referencedColumnName = "id")
     private Comunidad comunidad;
+    @Column(name = "estado")
     private Boolean estado;
+    @Column(name = "observaciones")
     private String observaciones;
+    @Transient
     private LocalDateTime fechaApertura;
+    @Transient
     private LocalDateTime fechaCierre;
+    @Transient
     private Notificador notificador;
 
     public Incidente(Servicio servicio, Miembro abiertoPor, Comunidad comunidad, String observaciones) throws EmailException {

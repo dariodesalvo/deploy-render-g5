@@ -2,6 +2,7 @@ package ar.edu.utn.frba.dds.server;
 
 import ar.edu.utn.frba.dds.server.handlers.AppHandlers;
 import ar.edu.utn.frba.dds.server.init.Initializer;
+import ar.edu.utn.frba.dds.server.middlewares.AuthMiddleware;
 import ar.edu.utn.frba.dds.server.utils.PrettyProperties;
 import com.github.jknack.handlebars.Handlebars;
 import com.github.jknack.handlebars.Template;
@@ -29,7 +30,7 @@ public class Server {
             Integer port = Integer.parseInt(System.getProperty("port", "8080"));
             app = Javalin.create(config()).start(port);
             initTemplateEngine();
-            //AppHandlers.applyHandlers(app);
+            AppHandlers.applyHandlers(app);
             Router.init();
 
             if(Boolean.parseBoolean(PrettyProperties.getInstance().propertyFromName("dev_mode"))) {
@@ -44,7 +45,7 @@ public class Server {
                 staticFiles.hostedPath = "/";
                 staticFiles.directory = "/public";
             });
-            //AuthMiddleware.apply(config);
+            AuthMiddleware.apply(config);
         };
     }
 

@@ -17,16 +17,21 @@ public class IncidenteController extends Controller implements ICrudViewsHandler
     @Override
     public void index(Context context) {
 
-/*
-        Usuario usuarioLogueado = super.usuarioLogueado(context);
+        /*
+        System.out.println("buscando usuario");
 
-        if(usuarioLogueado == null || !usuarioLogueado.getRol().tenesPermiso("crear_servicios")) {
+        Usuario usuarioLogueado = super.usuarioLogueado(context);
+        //|| !usuarioLogueado.getRol().tenesPermiso("crear_servicios")
+        if(usuarioLogueado == null ) {
+            System.out.println("no hay login");
             throw new AccessDeniedException();
-        }
-*/
+        }*/
+
         List<Servicio> servicios= this.repositorioServicios.buscarTodos();
         Map<String, Object> model = new HashMap<>();
         model.put("servicios", servicios);
+        model.put("email", context.sessionAttribute("email"));
+        model.put("tipo_rol", context.sessionAttribute("tipo_rol"));
         context.render("apertura_incidentes/apertura-incidentes.hbs", model);
 
     }

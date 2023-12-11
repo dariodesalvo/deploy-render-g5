@@ -1,7 +1,11 @@
 package ar.edu.utn.frba.dds.models.comunidades;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
+import ar.edu.utn.frba.dds.models.Persistente;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,10 +15,8 @@ import javax.persistence.*;
 @Setter
 @Entity
 @Table(name = "Comunidad")
-public class Comunidad {
-  @Id
-  @GeneratedValue(strategy= GenerationType.IDENTITY)
-  private Long id;
+public class Comunidad extends Persistente {
+
   @Column(name = "nombre")
   private String nombre;
   @ManyToMany
@@ -31,6 +33,11 @@ public class Comunidad {
           inverseJoinColumns = @JoinColumn(name = "miembro_id")
   )
   private List<Usuario> administradores;
+
+  @ElementCollection
+  @CollectionTable(name = "solicitud_comunidad", joinColumns = @JoinColumn(name = "comunidad_id"))
+  @Column(name = "usuario_id")
+  private Set<Long> solicitudes;
 
   @Column(name = "confiabilidad")
   private Double confiabilidad;
@@ -61,4 +68,14 @@ public class Comunidad {
   public void darAdministradorA(Usuario usuario) {
     administradores.add(usuario);
   }
+
+  public int cantMiembros() {
+    return this.miembros.size();
+  }
+
+  public void agregarSolicitud(Long id){
+    this.solicitudes.add(id);
+  }
+
 }
+

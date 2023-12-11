@@ -10,12 +10,39 @@
 </head>
 <header>
     <div class="header">
-        <a href="#default" class="logo">Entidades DDS</a>
-        <img src="/img/logos/logo.png" alt="icono-usuario" class="app-logo" />
-        <div class="header-right">
-            <p>Hola! {{usuario.email}}</p>
-            <img src="/img/logos/usuario.svg" alt="icono-usuario" class="icono-usuario" />
-        </div>
+        <nav class="navbar navbar-expand-lg bg-light">
+            <div class="container-fluid">
+                <a href="#default" class="logo">Entidades DDS</a>
+                <img src="/img/logos/logo.png" alt="icono-usuario" class="app-logo" />
+                <div class="collapse navbar-collapse" id="navbarText">
+                    <ul class="navbar-nav me-auto mx-2 mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/bienvenida">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/comunidades">Comunidades</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/entidades">Entidades</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="/apertura-incidente">Incidentes</a>
+                        </li>
+                        {{#if administrador}}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/administrar-comunidad">Administrar comunidad</a>
+                        </li>
+                        {{/if}}
+                    </ul>
+                    <div class="header-right">
+                        <p>Hola! {{email}}</p>
+                        <p>Tu rol es : {{tipo_rol}} {{prueba}}</p>
+                        <img src="/img/logos/usuario.svg" alt="icono-usuario" class="icono-usuario" />
+                    </div>
+                </div>
+            </div>
+        </nav>
     </div>
 </header>
 

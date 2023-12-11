@@ -1,6 +1,8 @@
 package ar.edu.utn.frba.dds.models.comunidades;
 
+import ar.edu.utn.frba.dds.models.Persistente;
 import ar.edu.utn.frba.dds.models.helpers.Permiso;
+import io.javalin.security.RouteRole;
 
 import javax.persistence.*;
 import java.util.Collections;
@@ -10,11 +12,8 @@ import java.util.Set;
 @Entity
 @Table(name = "RolesUsuario")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-public abstract class RolesUsuario {
+public abstract class RolesUsuario extends Persistente implements RouteRole {
 
-  @Id
-  @GeneratedValue(strategy= GenerationType.IDENTITY)
-  private Long id;
 
   @ManyToMany
   private Set<Permiso> permisos;
