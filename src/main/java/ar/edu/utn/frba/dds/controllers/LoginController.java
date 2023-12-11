@@ -56,7 +56,7 @@ public class LoginController extends Controller implements ICrudViewsHandler {
             switch (context.sessionAttribute("tipo_rol").toString()){
                 case "Administrador": context.sessionAttribute("Administrador", true); break;
                 case "Prestador": context.sessionAttribute("Prestador", true); break;
-                case "Miembro": context.sessionAttribute("Miembro", true); break;
+                case "Miembro": context.sessionAttribute("Miembro", "miembro"); break;
                 case "Lector": context.sessionAttribute("Lector", true); break;
             }
 

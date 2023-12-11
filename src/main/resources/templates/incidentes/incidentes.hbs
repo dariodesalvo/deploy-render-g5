@@ -9,20 +9,21 @@
             <tbody>
             {{#each incidentes}}
                 <tr>
+                    <td>{{this.servicio_id}}</td>
                     <td>{{this.observaciones}}</td>
-                    <td>{{this.id}}</td>
                     <td>
-                        <a class="btn btn-secondary" href="/incidentes/{{this.id}}/editar"><i class="fa-solid fa-pen-to-square"></i></a>
-                        <a class="btn btn-secondary" href="/incidentes/{{this.id}}/establecimientos"><i class="fa-solid fa-list-check"></i></a>
-                    </td>
+                        <a class="btn btn-secondary" href="incidente/{{this.id}}/cerrar">Cerrar<i class="fa-window-close"></i></a>
+                     </td>
                 </tr>
             {{/each}}
             </tbody>
         </table>
-        <div class="center">
-            <a class="btn btn-primary" href="/apertura-incidente">Agregar Incidente</a>
-        </div>
 
+        {{#if miembro}}
+            <div class="center">
+            <a class="btn btn-primary" href="/apertura-incidente">Registrar un nuevo Incidente</a>
+        </div>
+        {{/if}}
     </div>
 {{/partial}}
 {{> templates/base }}

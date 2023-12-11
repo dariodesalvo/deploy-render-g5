@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.dds.server;
 
 import ar.edu.utn.frba.dds.controllers.*;
+import ar.edu.utn.frba.dds.models.comunidades.TipoRol;
 
 import static io.javalin.apibuilder.ApiBuilder.*;
 public class Router {
@@ -34,15 +35,21 @@ public class Router {
             post("registro", ((LoginController) FactoryController.controller("Login"))::registrar);
             get("bienvenida", ((LoginController) FactoryController.controller("Login"))::bienvenida);
 
+            /* Archivos Controller */
+            get("cargar-organizaciones", ((ArchivoController) FactoryController.controller("Archivos"))::index);
+
+            /* Administracion de Usuarios */
+            get("administrar-usuarios", ((UsuarioController) FactoryController.controller("Usuarios"))::index);
+
+            /* Incidentes Controller*/
 
             get("incidentes", ((IncidenteController) FactoryController.controller("Incidentes"))::show);
             get("apertura-incidente", ((IncidenteController) FactoryController.controller("Incidentes"))::index);
             post("apertura-incidente", ((IncidenteController) FactoryController.controller("Incidentes"))::save);
-            get("administrar-usuarios", ((UsuarioController) FactoryController.controller("Usuarios"))::index);
-            get("cargar-organizaciones", ((ArchivoController) FactoryController.controller("Archivos"))::index);
+            get("incidente/{id}/cerrar", ((IncidenteController) FactoryController.controller("Incidentes"))::cerrar);
 
             /* Miembros Controller */
-            get("comunidades", ((ComunidadesController) FactoryController.controller("Comunidades"))::index, TipoRol.Lector);
+            get("comunidades", ((ComunidadesController) FactoryController.controller("Comunidades"))::index);
             get("/comunidades/{comunidad_id}/unirme/{usuario_id}", ((ComunidadesController) FactoryController.controller("Comunidades"))::crearSolicitud);
             get("/administrar-comunidad", ((ComunidadesController) FactoryController.controller("Comunidades"))::adminComunidad);
 
