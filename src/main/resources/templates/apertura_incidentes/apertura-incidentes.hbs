@@ -18,7 +18,7 @@
 </header>
 
 <body>
-    <form class="formulario-apertura-incidente">
+    <form method="POST" action="apertura-incidente" class="formulario-apertura-incidente">
         <h1 class="cargar-text">Abrir incidente</h1>
         <div class="form-group">
           <label class="mb-2" for="servicio">Servicio:</label>
@@ -38,7 +38,7 @@
           <label for="observaciones">Observaciones:</label>
           <textarea class="form-control" id="observaciones" rows="3"></textarea>
         </div>
-        <button type="button" class="btn btn-primary guardar-cambios">Crear incidente</button>
+        <button type="submit" class="btn btn-primary guardar-cambios">Crear incidente</button>
       </div>
       </form>
   <footer>

@@ -30,12 +30,12 @@ public class Incidente {
 
     //private Establecimiento establecimiento; -> no deberia ir en servicio?
 
-    @OneToOne
-    @JoinColumn(name = "miembro_id", referencedColumnName = "id")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "miembro_id", insertable = false, updatable = false, referencedColumnName = "id")
     private Miembro abiertoPor;
 
     @OneToOne
-    @JoinColumn(name = "miembro_id", referencedColumnName = "id")
+    @JoinColumn(name = "miembro_id", insertable = false, updatable = false, referencedColumnName = "id")
     private Miembro cerradoPor;
 
     @ManyToOne

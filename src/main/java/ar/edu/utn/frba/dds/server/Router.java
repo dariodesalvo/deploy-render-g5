@@ -34,7 +34,9 @@ public class Router {
             post("registro", ((LoginController) FactoryController.controller("Login"))::registrar);
 
 
+            get("incidentes", ((IncidenteController) FactoryController.controller("Incidentes"))::show);
             get("apertura-incidente", ((IncidenteController) FactoryController.controller("Incidentes"))::index);
+            post("apertura-incidente", ((IncidenteController) FactoryController.controller("Incidentes"))::save);
             get("administrar-usuarios", ((UsuarioController) FactoryController.controller("Usuarios"))::index);
             get("cargar-organizaciones", ((ArchivoController) FactoryController.controller("Archivos"))::index);
 
