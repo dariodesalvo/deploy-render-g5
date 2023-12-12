@@ -28,6 +28,8 @@ public class EntidadesController extends Controller implements ICrudViewsHandler
         model.put("entidades", entidades);
         model.put("email", context.sessionAttribute("email"));
         model.put("tipo_rol", context.sessionAttribute("tipo_rol"));
+        model.put("usuario_id", context.sessionAttribute("usuario_id"));
+        model.put("MiembroAdmin", context.sessionAttribute("MiembroAdmin"));
         context.render("entidades/entidades.hbs", model);
     }
 
@@ -49,6 +51,10 @@ public class EntidadesController extends Controller implements ICrudViewsHandler
         model.put("entidad", entidad);
         model.put("email", context.sessionAttribute("email"));
         model.put("tipo_rol", context.sessionAttribute("tipo_rol"));
+
+        model.put("id", context.sessionAttribute("usuario_id"));
+        model.put("MiembroAdmin", context.sessionAttribute("MiembroAdmin"));
+
         context.render("entidades/entidad.hbs", model);
     }
 
@@ -68,6 +74,8 @@ public class EntidadesController extends Controller implements ICrudViewsHandler
         model.put("entidad", entidad);
         model.put("email", context.sessionAttribute("email"));
         model.put("tipo_rol", context.sessionAttribute("tipo_rol"));
+        model.put("usuario_id", context.sessionAttribute("usuario_id"));
+        model.put("MiembroAdmin", context.sessionAttribute("MiembroAdmin"));
         context.render("entidades/entidad.hbs", model);
     }
 
@@ -96,6 +104,8 @@ public class EntidadesController extends Controller implements ICrudViewsHandler
         model.put("establecimientos", entidad.misEstablecimientos());
         model.put("email", context.sessionAttribute("email"));
         model.put("tipo_rol", context.sessionAttribute("tipo_rol"));
+        model.put("usuario_id", context.sessionAttribute("usuario_id"));
+        model.put("MiembroAdmin", context.sessionAttribute("MiembroAdmin"));
         context.render("establecimientos/establecimientos.hbs", model);
 
     }

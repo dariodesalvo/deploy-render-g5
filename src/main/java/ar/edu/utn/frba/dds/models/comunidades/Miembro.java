@@ -11,6 +11,8 @@ import org.apache.commons.mail.EmailException;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+
 
 @Getter
 @Setter
@@ -41,6 +43,7 @@ public class Miembro extends RolesUsuario {
 
     @OneToMany(mappedBy = "miembro")
     private List<ServicioDeInteres> serviciosDeInteres;
+
 
     @Column(name = "numero")
     private Integer numero;
@@ -84,6 +87,24 @@ public class Miembro extends RolesUsuario {
 
     public void sosParte(Comunidad comunidad){
         comunidades.add(comunidad);
+    }
+
+    public boolean esAdmin(){
+        Miembro miembro = this;
+        Boolean es;
+        for (Comunidad comunidad : comunidades) {
+            if(comunidad.getAdministradores().contains(miembro)){
+                return true;
+            }
+        };
+
+        return false;
+    }
+
+    public List<Comunidad> comunidadesAdministradas(){
+         return comunidades.stream()
+                .filter(comunidad -> comunidad.getAdministradores().contains(this))
+                .collect(Collectors.toList());
     }
 
 }

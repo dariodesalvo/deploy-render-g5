@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.controllers;
 
+import ar.edu.utn.frba.dds.models.comunidades.Miembro;
 import ar.edu.utn.frba.dds.models.comunidades.Usuario;
 import ar.edu.utn.frba.dds.models.entidades.Entidad;
 import ar.edu.utn.frba.dds.models.helpers.ValidadorContrasenia;
@@ -49,14 +50,25 @@ public class LoginController extends Controller implements ICrudViewsHandler {
         if(!usuarios.isEmpty())
         {
             Usuario usuario = usuarios.get(0);
-            context.sessionAttribute("id", usuario.getId().toString());
+            context.sessionAttribute("usuario_id", usuario.getId().toString());
             context.sessionAttribute("email", usuario.getEmail());
             context.sessionAttribute("tipo_rol", usuario.getRol().getClass().getSimpleName());
+
 
             switch (context.sessionAttribute("tipo_rol").toString()){
                 case "Administrador": context.sessionAttribute("Administrador", true); break;
                 case "Prestador": context.sessionAttribute("Prestador", true); break;
-                case "Miembro": context.sessionAttribute("Miembro", "miembro"); break;
+                case "Miembro": context.sessionAttribute("Miembro", true);
+
+                Miembro miembro = (Miembro) usuario.getRol();
+               System.out.println(miembro.getComunidades().get(0).getNombre());
+
+                    if(miembro.esAdmin())
+                {
+                    context.sessionAttribute("MiembroAdmin", true);
+
+                }
+                break;
                 case "Lector": context.sessionAttribute("Lector", true); break;
             }
 
@@ -109,6 +121,8 @@ public class LoginController extends Controller implements ICrudViewsHandler {
         Map<String, Object> model = new HashMap<>();
         model.put("email", context.sessionAttribute("email"));
         model.put("tipo_rol", context.sessionAttribute("tipo_rol"));
+        model.put("usuario_id",context.sessionAttribute("usuario_id"));
+        model.put("MiembroAdmin", context.sessionAttribute("MiembroAdmin"));
         context.render("login/bienvenida.hbs", model);
 
     }

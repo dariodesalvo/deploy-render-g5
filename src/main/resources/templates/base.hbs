@@ -29,7 +29,7 @@
                         <li class="nav-item">
                             <a class="nav-link" href="/incidentes">Incidentes</a>
                         </li>
-                        {{#if administrador}}
+                        {{#if MiembroAdmin}}
                         <li class="nav-item">
                             <a class="nav-link" href="/administrar-comunidad">Administrar comunidad</a>
                         </li>
@@ -37,8 +37,8 @@
                     </ul>
                     <div class="header-right">
                         <p>Hola! {{email}}</p>
-                        <p>Tu rol es : {{tipo_rol}} {{prueba}}</p>
-                        <img src="/img/logos/usuario.svg" alt="icono-usuario" class="icono-usuario" />
+                        <p>Tu rol es : {{tipo_rol}} </p>
+                        <p><a class="nav-link" href="/perfil">Editar Perfil</a><img src="/img/logos/usuario.svg" alt="icono-usuario" class="icono-usuario" /></p>
                     </div>
                 </div>
             </div>

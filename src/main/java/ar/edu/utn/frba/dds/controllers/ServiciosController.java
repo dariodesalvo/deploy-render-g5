@@ -57,6 +57,10 @@ public class ServiciosController extends Controller implements ICrudViewsHandler
         model.put("establecimiento", establecimiento);
         model.put("servicio", servicio);
         model.put("empresas", empresas);
+        model.put("email", context.sessionAttribute("email"));
+        model.put("tipo_rol", context.sessionAttribute("tipo_rol"));
+        model.put("usuario_id", context.sessionAttribute("usuario_id"));
+        model.put("MiembroAdmin", context.sessionAttribute("MiembroAdmin"));
         context.render("servicios/servicio.hbs", model);
     }
 
@@ -83,6 +87,10 @@ public class ServiciosController extends Controller implements ICrudViewsHandler
         model.put("servicio", servicio);
         model.put("establecimiento", servicio.getEstablecimiento());
         model.put("empresas",empresas);
+        model.put("email", context.sessionAttribute("email"));
+        model.put("tipo_rol", context.sessionAttribute("tipo_rol"));
+        model.put("usuario_id", context.sessionAttribute("usuario_id"));
+        model.put("MiembroAdmin", context.sessionAttribute("MiembroAdmin"));
         context.render("servicios/servicio.hbs", model);
     }
 

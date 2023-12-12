@@ -44,8 +44,9 @@ public class IncidenteController extends Controller implements ICrudViewsHandler
         model.put("servicios", servicios);
         model.put("email", context.sessionAttribute("email"));
         model.put("tipo_rol", context.sessionAttribute("tipo_rol"));
-        model.put("id", context.sessionAttribute("id"));
+        model.put("usuario_id", context.sessionAttribute("usuario_id"));
         model.put("miembro", context.sessionAttribute("Miembro"));
+        model.put("MiembroAdmin", context.sessionAttribute("MiembroAdmin"));
         context.render("apertura_incidentes/apertura-incidentes.hbs", model);
 
     }
@@ -58,8 +59,9 @@ public class IncidenteController extends Controller implements ICrudViewsHandler
         model.put("incidentes", incidentes);
         model.put("email", context.sessionAttribute("email"));
         model.put("tipo_rol", context.sessionAttribute("tipo_rol"));
-        model.put("id", context.sessionAttribute("id"));
+        model.put("usuario_id", context.sessionAttribute("usuario_id"));
         model.put("miembro", context.sessionAttribute("Miembro"));
+        model.put("MiembroAdmin", context.sessionAttribute("MiembroAdmin"));
         context.render("incidentes/incidentes.hbs", model);
 
 
@@ -80,7 +82,7 @@ public class IncidenteController extends Controller implements ICrudViewsHandler
     public void save(Context context) {
         //GUARDAR EL RECURSO
 
-        Usuario usuario = (Usuario) repositorioDeUsuarios.buscar(Long.parseLong(context.sessionAttribute("id")));
+        Usuario usuario = (Usuario) repositorioDeUsuarios.buscar(Long.parseLong(context.sessionAttribute("usuario_id")));
 
         Miembro miembro = (Miembro)  usuario.getRol();
 
@@ -125,7 +127,8 @@ public class IncidenteController extends Controller implements ICrudViewsHandler
         model.put("incidente", incidente);
         model.put("email", context.sessionAttribute("email"));
         model.put("tipo_rol", context.sessionAttribute("tipo_rol"));
-        model.put("id", context.sessionAttribute("id"));
+        model.put("usuario_id", context.sessionAttribute("usuario_id"));
+        model.put("MiembroAdmin", context.sessionAttribute("MiembroAdmin"));
         context.render("cierre-incidentes/cierre-incidentes.hbs", model);
 
     }

@@ -35,12 +35,14 @@ public class Router {
             post("registro", ((LoginController) FactoryController.controller("Login"))::registrar);
             get("bienvenida", ((LoginController) FactoryController.controller("Login"))::bienvenida);
 
+
             /* Archivos Controller */
             get("cargar-organizaciones", ((ArchivoController) FactoryController.controller("Archivos"))::index);
 
             /* Administracion de Usuarios */
             get("administrar-usuarios", ((UsuarioController) FactoryController.controller("Usuarios"))::index);
-
+            get("perfil",  ((UsuarioController) FactoryController.controller("Usuarios"))::perfil);
+            post("perfil/editar", ((UsuarioController) FactoryController.controller("Usuarios"))::edit);
             /* Incidentes Controller*/
 
             get("incidentes", ((IncidenteController) FactoryController.controller("Incidentes"))::show);
@@ -49,9 +51,13 @@ public class Router {
             get("incidente/{id}/cerrar", ((IncidenteController) FactoryController.controller("Incidentes"))::cerrar);
 
             /* Miembros Controller */
+
             get("comunidades", ((ComunidadesController) FactoryController.controller("Comunidades"))::index);
             get("/comunidades/{comunidad_id}/unirme/{usuario_id}", ((ComunidadesController) FactoryController.controller("Comunidades"))::crearSolicitud);
             get("/administrar-comunidad", ((ComunidadesController) FactoryController.controller("Comunidades"))::adminComunidad);
+            get("comunidades/{comunidad_id}/gestionar",((ComunidadesController) FactoryController.controller("Comunidades"))::gestionar);
+            get("comunidades/{comunidad_id}/aceptar/{usuario_id}", ((ComunidadesController) FactoryController.controller("Comunidades"))::aceptarSolicitud);
+
 
             /* Entidades Controller */
 

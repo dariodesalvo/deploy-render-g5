@@ -29,6 +29,7 @@ public class Server {
             PrettyProperties.getInstance();
             Integer port = Integer.parseInt(System.getProperty("port", "8080"));
             app = Javalin.create(config()).start(port);
+            app.before(ctx -> ctx.header("Access-Control-Allow-Credentials", "true"));
             initTemplateEngine();
             AppHandlers.applyHandlers(app);
             Router.init();

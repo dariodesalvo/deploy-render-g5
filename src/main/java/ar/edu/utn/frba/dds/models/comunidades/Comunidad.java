@@ -32,12 +32,15 @@ public class Comunidad extends Persistente {
           joinColumns = @JoinColumn(name = "comunidad_id"),
           inverseJoinColumns = @JoinColumn(name = "miembro_id")
   )
-  private List<Usuario> administradores;
+  private List<Miembro> administradores;
 
-  @ElementCollection
-  @CollectionTable(name = "solicitud_comunidad", joinColumns = @JoinColumn(name = "comunidad_id"))
-  @Column(name = "usuario_id")
-  private Set<Long> solicitudes;
+  @ManyToMany
+  @JoinTable(
+          name = "solicitud_comunidad",
+          joinColumns = @JoinColumn(name = "comunidad_id"),
+          inverseJoinColumns = @JoinColumn(name = "usuario_id")
+  )
+  private List<Usuario> solicitudes;
 
   @Column(name = "confiabilidad")
   private Double confiabilidad;
@@ -65,17 +68,20 @@ public class Comunidad extends Persistente {
       administradores.remove(usuario);
     }
 
-  public void darAdministradorA(Usuario usuario) {
-    administradores.add(usuario);
+  public void darAdministradorA(Miembro miembro) {
+    administradores.add(miembro);
   }
 
   public int cantMiembros() {
     return this.miembros.size();
   }
 
-  public void agregarSolicitud(Long id){
-    this.solicitudes.add(id);
+  public void agregarSolicitud(Usuario usuario){
+    this.solicitudes.add(usuario);
   }
 
+  public void eliminarSolicitud(Usuario usuario){
+    this.solicitudes.remove(usuario);
+  }
 }
 
