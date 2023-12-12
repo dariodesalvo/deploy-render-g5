@@ -1,4 +1,5 @@
 package ar.edu.utn.frba.dds.models.comunidades;
+import ar.edu.utn.frba.dds.models.converters.MedioDeNotificacionAttributeConverter;
 import ar.edu.utn.frba.dds.models.incidentes.Incidente;
 import ar.edu.utn.frba.dds.models.incidentes.TipoNotificacion;
 import ar.edu.utn.frba.dds.models.incidentes.mediosNotificacion.MedioDeNotificacion;
@@ -23,8 +24,9 @@ public class Miembro extends RolesUsuario {
     private String apellido;
     @Column(name = "celular")
     private String celular;
-    //Todo converter para el medio de notificacionPreferido
-    @Transient
+
+    @Convert(converter = MedioDeNotificacionAttributeConverter.class)
+    @Column(name = "medioNotificacionPreferido")
     private MedioDeNotificacion medioNotificacionPreferido;
 
     //Todo converter para el tipo de notificacion
