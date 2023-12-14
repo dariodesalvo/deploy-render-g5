@@ -12,20 +12,14 @@ import java.util.List;
 @Setter
 public class RepositorioEmpresas{
         public static List<Empresa> empresas = new ArrayList<Empresa>();
-        public static void agregarEmpresa(Empresa empresa){
-            empresas.add(empresa);
-        }
 
-        public static void crearEmpresa (List<CSVRecord> lectura, List<Servicio> nuevosServicios){
-            for(int i = 0;i<lectura.size();i++){
-                int codigoEmpresa = Integer.parseInt(lectura.get(i).get("Codigo Empresa"));
-                String nombreEmpresa = lectura.get(i).get("Nombre Empresa");
-                String usuarioResponsable = lectura.get(i).get("Usuario Responsable");
+        public static void crearEmpresa (List<String> lecturaCsv, List<Servicio> nuevosServicios){
+            for(int i = 0;i < lecturaCsv.size();i++){
+                String [] val = lecturaCsv.get(i).split(";");
+                Empresa nuevaEmpresa = new Empresa(Integer.parseInt(val[0]),val[1],val[2]);
+                System.out.println(nuevaEmpresa);
 
-                Empresa nuevaEmpresa = new Empresa(codigoEmpresa,nombreEmpresa,usuarioResponsable);
-                Servicio servicioDeLaEmpresa = nuevosServicios.get(i);
-                nuevaEmpresa.darServicioDeAlta(servicioDeLaEmpresa);
-                agregarEmpresa(nuevaEmpresa);
+
             }
         }
 }

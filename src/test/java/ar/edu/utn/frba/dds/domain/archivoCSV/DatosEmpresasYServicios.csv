@@ -1,6 +1,21 @@
-Codigo Empresa;Nombre Empresa;Usuario Responsable;Codigo Servicio;Nombre Servicio;Municipio;Es de elevacion;Esta Activo
-54720;BaniosDDS;carolina;49052;Banio;Tigre;No;Si
-68888;AscensoresDDS;dario;46728;Ascensor;Villa Urquiza;No;No
-93939;EscalerasDDS;mauro;70857;Escalera Mecanica;Salta;No;Si
-16087;MolientesDDS;agus;46388;Molinete;Cordoba;Si;Si
-98624;BarrerasDDS;mica;74711;Barrera;Palermo;No;No
+Codigo Empresa;Nombre Empresa;Usuario Responsable;Codigo Servicio;Nombre Servicio;Municipio;Es de elevacion;Esta Activo;Latitud;Longitud;Leyenda
+54720;BaniosDDS;carolina;49052;Banio;Tigre;No;Si;-34.613;-58.377;Banio-Tigre
+68888;AscensoresDDS;dario;46728;Ascensor;Villa Urquiza;No;No;-34.612;-58.376;Ascensor-Villa Urquiza
+93939;EscalerasDDS;mauro;70857;Escalera Mecanica;Salta;No;Si;-34.611;-58.375;Escalera Mecanica-Salta
+16087;MolientesDDS;agus;46388;Molinete;Cordoba;Si;Si;-34.610;-58.374;Molinete-Cordoba
+98624;BarrerasDDS;mica;74711;Barrera;Palermo;No;No;-34.609;-58.373;Barrera-Palermo
+66655;BaniosDDS;carolina;94722;Banio;San Martin;Si;No;-34.608;-58.372;Banio-San Martin
+17848;AscensoresDDS;carolina;23961;Ascensor;Constitucion;Si;Si;-34.607;-58.371;Ascensor-Constitucion
+44277;EscalerasDDS;carolina;10786;Escalera Mecanica;Lomas de Zamora;Si;No;-34.606;-58.370;Escalera Mecanica-Lomas de Zamora
+80325;MolientesDDS;dario;10229;Molinete;Ramos Mejia;No;Si;-34.605;-58.369;Molinete-Ramos Mejia
+52600;BarrerasDDS;dario;49142;Barrera;San Isidro;No;No;-34.604;-58.368;Barrera-San Isidro
+59759;BaniosDDS;agus;35352;Banio;Viedma;No;Si;-34.603;-58.367;Banio-Viedma
+74431;AscensoresDDS;agus;14955;Ascensor;Bariloche;Si;No;-34.602;-58.366;Ascensor-Bariloche
+76250;EscalerasDDS;agus;33410;Escalera Mecanica;Calafate;No;Si;-34.601;-58.365;Escalera Mecanica-Calafate
+89267;MolientesDDS;mauro;74131;Molinete;Almagro;Si;No;-34.600;-58.364;Molinete-Almagro
+15446;BarrerasDDS;mauro;36634;Barrera;Retiro;Si;Si;-34.599;-58.363;Barrera-Retiro
+54747;BaniosDDS;mauro;57599;Banio;Mar del Plata;No;Si;-34.598;-58.362;Banio-Mar del Plata
+15840;AscensoresDDS;dario;72452;Barrera;La Falda;No;No;-34.597;-58.361;Barrera-La Falda
+18487;EscalerasDDS;mica;81038;Escalera;Lanus;Si;Si;-34.596;-58.360;Escalera-Lanus
+71581;MolientesDDS;carolina;52813;Molinete;Rosario;Si;No;-34.595;-58.359;Molinete-Rosario
+33767;BarrerasDDS;dario;98519;Molinete;Parana;No;Si;-34.594;-58.358;Molinete-Parana

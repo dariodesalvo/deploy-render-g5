@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.dds.models.repositorios;
 
 import ar.edu.utn.frba.dds.models.comunidades.Usuario;
+import ar.edu.utn.frba.dds.models.servicios.Servicio;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 
 

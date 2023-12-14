@@ -1,28 +1,28 @@
 package ar.edu.utn.frba.dds.models.archivoCSV;
 
+import io.javalin.http.UploadedFile;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
 public class LectorCSV implements AdapterCSVFileReader {
   @Override
-  public List<CSVRecord> leerArchivoCSV(String archivoCSV) throws IOException {
-    List<CSVRecord> lecturasDeArchivo = new ArrayList<CSVRecord>();
-    try {
-      Reader archivo = new FileReader(archivoCSV);
-      Iterable<CSVRecord> atributosArchivo = CSVFormat.DEFAULT.withDelimiter(';').withHeader().parse(archivo);
+  public List<String> leerArchivoCSV(UploadedFile archivoCSV) throws IOException {
+    BufferedInputStream buff = new BufferedInputStream(archivoCSV.content());
+    BufferedReader bfr = new BufferedReader(new InputStreamReader(buff,StandardCharsets.UTF_8));
 
-      for (CSVRecord atributoArchivo : atributosArchivo) {
+    List<String> lecturas = new ArrayList<>();
+    String line;
+    line = bfr.readLine();
+    while ((line = bfr.readLine()) != null) {
 
-        lecturasDeArchivo.add(atributoArchivo);
-      }
-      archivo.close();
-    } catch (IOException e) {
-      throw new IOException("No se ha encontrado el archivo");
+      lecturas.add(line);
+
     }
-    return lecturasDeArchivo;
+    return lecturas;
   }
 }

@@ -34,7 +34,8 @@
       </thead>
       <tbody>
         <tr>
-          <th scope="row">Caro</th>
+        {{#each usuarios}}
+          <th scope="row">{{this.email}}</th>
           <td>
             <select class="form-select" aria-label="Default select example">
               <option selected value="1">Administrador</option>
@@ -43,6 +44,7 @@
               <option value="4">Miembro</option>
             </select>
           </td>
+          {{/each}}
         </tr>
         <tr>
           <th scope="row">Dari</th>

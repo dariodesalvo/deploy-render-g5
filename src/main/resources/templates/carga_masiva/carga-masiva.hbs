@@ -21,8 +21,9 @@
   <div class="cargar-prestadores">
     <h1 class="cargar-text">Cargar prestadores y oranizaciones de control</h1>
     <div class="input-group mb-3 carga-archivo">
-      <input type="file" class="form-control">
-      <label class="input-group-text" for="inputGroupFile02">Cargar</label>
+        <form method="post" action="/cargar-organizaciones-exitosa" class="form-control" enctype="multipart/form-data">
+            <input type="file" name="files" multiple>
+            <button>Cargar Archivo</button>
     </div>
   </div>
   <footer>

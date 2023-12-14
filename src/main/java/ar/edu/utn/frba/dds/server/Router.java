@@ -37,7 +37,7 @@ public class Router {
             get("apertura-incidente", ((IncidenteController) FactoryController.controller("Incidentes"))::index);
             get("administrar-usuarios", ((UsuarioController) FactoryController.controller("Usuarios"))::index);
             get("cargar-organizaciones", ((ArchivoController) FactoryController.controller("Archivos"))::index);
-
+            post("cargar-organizaciones-exitosa", ((ArchivoController) FactoryController.controller("Archivos"))::upload);
             /* Miembros Controller */
             
             /* Entidades Controller */
