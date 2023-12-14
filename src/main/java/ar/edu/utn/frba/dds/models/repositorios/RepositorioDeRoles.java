@@ -1,45 +1,24 @@
 package ar.edu.utn.frba.dds.models.repositorios;
 
-import ar.edu.utn.frba.dds.models.comunidades.Usuario;
-import ar.edu.utn.frba.dds.models.servicios.Servicio;
+import ar.edu.utn.frba.dds.models.comunidades.RolesUsuario;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 
 
 import javax.persistence.EntityTransaction;
-import javax.persistence.Query;
 import java.util.List;
 
-public class RepositorioDeUsuarios implements WithSimplePersistenceUnit, ICrudRepository {
+public class RepositorioDeRoles implements WithSimplePersistenceUnit, ICrudRepository {
 
     @Override
     public List buscarTodos() {
-        return entityManager().createQuery("from " + Usuario.class.getName()).getResultList();
+        return entityManager().createQuery("from " + RolesUsuario.class.getName()).getResultList();
     }
-
-    public List login(String email, String password) {
-
-        System.out.println("usando login");
-
-        String hql = "FROM " + Usuario.class.getName() + " WHERE email = :email AND contrasenia = :password";
-        Query query = entityManager().createQuery(hql);
-        query.setParameter("email", email);
-        query.setParameter("password", password);
-
-        System.out.println("usando login");
-
-        return query.getResultList();
-
-   }
-
 
     @Override
     public Object buscar(Long id) {
-        return entityManager().find(Usuario.class, id);
+        return entityManager().find(RolesUsuario.class, id);
     }
 
-    public Object buscarXEmail(String email) {
-        return entityManager().find(Usuario.class, email);
-    }
     @Override
     public void guardar(Object o) {
         EntityTransaction tx = entityManager().getTransaction();

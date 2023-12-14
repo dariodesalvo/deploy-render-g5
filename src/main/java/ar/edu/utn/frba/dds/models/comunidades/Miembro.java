@@ -11,6 +11,8 @@ import org.apache.commons.mail.EmailException;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+
 
 @Getter
 @Setter
@@ -31,12 +33,17 @@ public class Miembro extends RolesUsuario {
     @Transient
     private TipoNotificacion tipoNotificacion;
 
-    //Todo persistir
-    @Transient
+    @ManyToMany()
+    @JoinTable(
+            name = "miembros_comunidad",
+            joinColumns = @JoinColumn(name = "miembro_id"),
+            inverseJoinColumns = @JoinColumn(name = "comunidad_id")
+    )
     private List<Comunidad> comunidades = new ArrayList<>();
 
     @OneToMany(mappedBy = "miembro")
     private List<ServicioDeInteres> serviciosDeInteres;
+
 
     @Column(name = "numero")
     private Integer numero;
@@ -60,12 +67,13 @@ public class Miembro extends RolesUsuario {
         this.apellido=apellido;
     }
 
-    public List<Incidente> abrirIncidente(Servicio servicio){
+    public List<Incidente> abrirIncidente(Servicio servicio, String observaciones){
         List<Incidente> incidentes = new ArrayList<>();
+        Miembro yo = this;
         numero=0;
         comunidades.forEach(comunidad -> { numero++;
             try {
-                incidentes.add(new Incidente(servicio,this,comunidad,""));
+                incidentes.add(new Incidente(servicio,yo,comunidad,observaciones));
             } catch (EmailException e) {
                 throw new RuntimeException(e);
             }
@@ -79,6 +87,24 @@ public class Miembro extends RolesUsuario {
 
     public void sosParte(Comunidad comunidad){
         comunidades.add(comunidad);
+    }
+
+    public boolean esAdmin(){
+        Miembro miembro = this;
+        Boolean es;
+        for (Comunidad comunidad : comunidades) {
+            if(comunidad.getAdministradores().contains(miembro)){
+                return true;
+            }
+        };
+
+        return false;
+    }
+
+    public List<Comunidad> comunidadesAdministradas(){
+         return comunidades.stream()
+                .filter(comunidad -> comunidad.getAdministradores().contains(this))
+                .collect(Collectors.toList());
     }
 
 }

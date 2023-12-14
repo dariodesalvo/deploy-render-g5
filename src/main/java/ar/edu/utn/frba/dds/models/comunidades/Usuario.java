@@ -29,7 +29,8 @@ public class Usuario extends Persistente {
 
   @OneToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = "rol_id")
-  private RolesUsuario rol = new Lector();
+  private RolesUsuario rol;
+
   @OneToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = "municipio_id")
   private Municipio municipio;

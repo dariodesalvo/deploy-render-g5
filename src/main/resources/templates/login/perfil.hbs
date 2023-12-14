@@ -1,0 +1,38 @@
+{{#partial "contenido" }}
+    <p><h3>Editando perfil: </h3> <h6 class="color:red">{{actualizado}}</h6></p>
+    <form  method="POST"  action="/perfil/editar">
+
+        <div class="form-group mb-3">
+            <label for="nombre">Nombre:</label>
+            <input  name="nombre"  value="{{miembro.nombre}}"  class="form-control" placeholder="Nombre">
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="apellido">Apellido:</label>
+            <input  name="apellido"  value="{{miembro.apellido}}" class="form-control" placeholder="apellido">
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="celular">Celular:</label>
+            <input  name="celular"  value="{{miembro.celular}}" class="form-control" placeholder="celular">
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="medio">Medio de notificación preferido:</label>
+            <select  name="medio" class="form-control">
+                <option value="Email"  select >Email</option>
+                <option value="Whatsapp"  >Whatsapp</option>
+            </select>
+        </div>
+        <div class="form-group mb-3">
+            <label for="ubicacion">Ubicación:</label>
+            <input  name="ubicacion"  value="{{municipio}}" class="form-control" placeholder="Ubicacion">
+        </div>
+
+        <div class="mb-5">
+            <button type="submit" class="btn btn-primary">Guardar</button>
+        </div>
+
+    </form>
+{{/partial}}
+{{> templates/base }}

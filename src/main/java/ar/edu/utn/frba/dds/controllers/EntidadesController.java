@@ -26,8 +26,11 @@ public class EntidadesController extends Controller implements ICrudViewsHandler
         Map<String, Object> model = new HashMap<>();
         List<Entidad> entidades = this.repositorioDeEntidades.buscarTodos();
         model.put("entidades", entidades);
+        model.put("email", context.sessionAttribute("email"));
+        model.put("tipo_rol", context.sessionAttribute("tipo_rol"));
+        model.put("usuario_id", context.sessionAttribute("usuario_id"));
+        model.put("MiembroAdmin", context.sessionAttribute("MiembroAdmin"));
         context.render("entidades/entidades.hbs", model);
-
     }
 
     @Override
@@ -46,6 +49,12 @@ public class EntidadesController extends Controller implements ICrudViewsHandler
         Entidad entidad = null;
         Map<String, Object> model = new HashMap<>();
         model.put("entidad", entidad);
+        model.put("email", context.sessionAttribute("email"));
+        model.put("tipo_rol", context.sessionAttribute("tipo_rol"));
+
+        model.put("id", context.sessionAttribute("usuario_id"));
+        model.put("MiembroAdmin", context.sessionAttribute("MiembroAdmin"));
+
         context.render("entidades/entidad.hbs", model);
     }
 
@@ -63,6 +72,10 @@ public class EntidadesController extends Controller implements ICrudViewsHandler
         Entidad entidad = (Entidad) this.repositorioDeEntidades.buscar(Long.parseLong(context.pathParam("id")));
         Map<String, Object> model = new HashMap<>();
         model.put("entidad", entidad);
+        model.put("email", context.sessionAttribute("email"));
+        model.put("tipo_rol", context.sessionAttribute("tipo_rol"));
+        model.put("usuario_id", context.sessionAttribute("usuario_id"));
+        model.put("MiembroAdmin", context.sessionAttribute("MiembroAdmin"));
         context.render("entidades/entidad.hbs", model);
     }
 
@@ -89,6 +102,10 @@ public class EntidadesController extends Controller implements ICrudViewsHandler
         Map<String, Object> model = new HashMap<>();
         model.put("entidad", entidad);
         model.put("establecimientos", entidad.misEstablecimientos());
+        model.put("email", context.sessionAttribute("email"));
+        model.put("tipo_rol", context.sessionAttribute("tipo_rol"));
+        model.put("usuario_id", context.sessionAttribute("usuario_id"));
+        model.put("MiembroAdmin", context.sessionAttribute("MiembroAdmin"));
         context.render("establecimientos/establecimientos.hbs", model);
 
     }

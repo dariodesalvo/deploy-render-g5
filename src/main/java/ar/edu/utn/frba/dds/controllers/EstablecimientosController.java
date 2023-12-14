@@ -32,6 +32,10 @@ public class EstablecimientosController extends Controller implements ICrudViews
         Map<String, Object> model = new HashMap<>();
         List<Entidad> establecimientos = this.repositorioDeEstablecimientos.buscarTodos();
         model.put("establecimientos", establecimientos);
+        model.put("email", context.sessionAttribute("email"));
+        model.put("tipo_rol", context.sessionAttribute("tipo_rol"));
+        model.put("usuario_id", context.sessionAttribute("usuario_id"));
+        model.put("MiembroAdmin", context.sessionAttribute("MiembroAdmin"));
         context.render("establecimientos/establecientos.hbs", model);
 
     }
@@ -55,6 +59,10 @@ public class EstablecimientosController extends Controller implements ICrudViews
         Map<String, Object> model = new HashMap<>();
         model.put("establecimiento", establecimiento);
         model.put("entidad", entidad);
+        model.put("email", context.sessionAttribute("email"));
+        model.put("tipo_rol", context.sessionAttribute("tipo_rol"));
+        model.put("usuario_id", context.sessionAttribute("usuario_id"));
+        model.put("MiembroAdmin", context.sessionAttribute("MiembroAdmin"));
         context.render("establecimientos/establecimiento.hbs", model);
     }
 
@@ -80,6 +88,10 @@ public class EstablecimientosController extends Controller implements ICrudViews
         Map<String, Object> model = new HashMap<>();
         model.put("establecimiento", establecimiento);
         model.put("entidad", establecimiento.getEntidad());
+        model.put("email", context.sessionAttribute("email"));
+        model.put("tipo_rol", context.sessionAttribute("tipo_rol"));
+        model.put("usuario_id", context.sessionAttribute("usuario_id"));
+        model.put("MiembroAdmin", context.sessionAttribute("MiembroAdmin"));
         context.render("establecimientos/establecimiento.hbs", model);
     }
 
@@ -118,6 +130,10 @@ public class EstablecimientosController extends Controller implements ICrudViews
         Map<String, Object> model = new HashMap<>();
         model.put("establecimiento", establecimiento);
         model.put("servicios", establecimiento.getServicios());
+        model.put("email", context.sessionAttribute("email"));
+        model.put("tipo_rol", context.sessionAttribute("tipo_rol"));
+        model.put("usuario_id", context.sessionAttribute("usuario_id"));
+        model.put("MiembroAdmin", context.sessionAttribute("MiembroAdmin"));
         context.render("servicios/servicios.hbs", model);
 
     }

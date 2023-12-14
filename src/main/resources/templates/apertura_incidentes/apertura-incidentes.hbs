@@ -1,28 +1,9 @@
-<html lang="es">
-<head>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-  <link rel="stylesheet" href="/css/apertura-incidentes.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-  <title>Apertura incidente</title>
-  <meta charset="utf-8">
-</head>
-<header>
-  <div class="header">
-    <a href="#default" class="logo">Servicios DDS</a>
-    <img src="/img/logos/logo.png" alt="icono-usuario" class="app-logo" />
-    <div class="header-right">
-      <img src="/img/logos/usuario.svg" alt="icono-usuario" class="icono-usuario" />
-    </div>
-  </div>
-</header>
-
-<body>
-    <form class="formulario-apertura-incidente">
+{{#partial "contenido" }}
+    <form method="POST" action="apertura-incidente" class="formulario-apertura-incidente">
         <h1 class="cargar-text">Abrir incidente</h1>
         <div class="form-group">
           <label class="mb-2" for="servicio">Servicio:</label>
-            <select class="form-control mt-10">
+            <select name="servicio_id" class="form-control mt-10">
                 <option selected>Selecione el servicio afectado</option>
                 {{#each servicios}}
                     <option value="{{this.id}}">{{this.nombre}}</option>
@@ -36,23 +17,10 @@
         </div>
         <div class="form-group">
           <label for="observaciones">Observaciones:</label>
-          <textarea class="form-control" id="observaciones" rows="3"></textarea>
+          <textarea class="form-control" name="observaciones" rows="3"></textarea>
         </div>
-        <button type="button" class="btn btn-primary guardar-cambios">Crear incidente</button>
-      </div>
+        <button type="submit" class="btn btn-primary guardar-cambios">Crear incidente</button>
+        </div>
       </form>
-  <footer>
-    <div class="footer">
-      <a href="#default" class="logo">Servicios DDS</a>
-      <img src="/img/logos/logo.png" alt="icono-usuario" class="app-logo-footer" />
-      <p class="text-dark">Servicios DDS&copy; 2023</p>
-      <div class="header-right-footer">
-        <a class="active" href="#home">Home</a>
-        <a href="#contact">Contact</a>
-        <a href="#about">About</a>
-      </div>
-    </div>
-  </footer>
-</body>
-
-</html>
+{{/partial}}
+{{> templates/base }}
