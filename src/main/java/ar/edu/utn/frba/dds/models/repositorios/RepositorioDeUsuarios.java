@@ -36,6 +36,15 @@ public class RepositorioDeUsuarios implements WithSimplePersistenceUnit, ICrudRe
         return entityManager().find(Usuario.class, id);
     }
 
+    public Object buscarXRol(Long rol_id) {
+        String hql = "FROM " + Usuario.class.getName() + " WHERE rol_id = :rol_id";
+        Query query = entityManager().createQuery(hql);
+        query.setParameter("rol_id", rol_id);
+        return query.getResultList();
+
+    }
+
+
     public Object buscarXEmail(String email) {
         return entityManager().find(Usuario.class, email);
     }

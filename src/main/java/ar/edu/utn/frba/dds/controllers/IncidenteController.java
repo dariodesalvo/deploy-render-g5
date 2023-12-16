@@ -47,6 +47,7 @@ public class IncidenteController extends Controller implements ICrudViewsHandler
         model.put("usuario_id", context.sessionAttribute("usuario_id"));
         model.put("miembro", context.sessionAttribute("Miembro"));
         model.put("MiembroAdmin", context.sessionAttribute("MiembroAdmin"));
+        model.put("Miembro", context.sessionAttribute("Miembro"));
         context.render("apertura_incidentes/apertura-incidentes.hbs", model);
 
     }
@@ -61,6 +62,7 @@ public class IncidenteController extends Controller implements ICrudViewsHandler
         model.put("tipo_rol", context.sessionAttribute("tipo_rol"));
         model.put("usuario_id", context.sessionAttribute("usuario_id"));
         model.put("miembro", context.sessionAttribute("Miembro"));
+        model.put("Miembro", context.sessionAttribute("Miembro"));
         model.put("MiembroAdmin", context.sessionAttribute("MiembroAdmin"));
         context.render("incidentes/incidentes.hbs", model);
 
@@ -129,6 +131,7 @@ public class IncidenteController extends Controller implements ICrudViewsHandler
         model.put("tipo_rol", context.sessionAttribute("tipo_rol"));
         model.put("usuario_id", context.sessionAttribute("usuario_id"));
         model.put("MiembroAdmin", context.sessionAttribute("MiembroAdmin"));
+        model.put("Miembro", context.sessionAttribute("Miembro"));
         context.render("cierre-incidentes/cierre-incidentes.hbs", model);
 
     }

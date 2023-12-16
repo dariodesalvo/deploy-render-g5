@@ -67,6 +67,10 @@ public class Miembro extends RolesUsuario {
         this.apellido=apellido;
     }
 
+    public void miembroAceptado(Comunidad comunidad){
+        this.comunidades.add(comunidad);
+    }
+
     public List<Incidente> abrirIncidente(Servicio servicio, String observaciones){
         List<Incidente> incidentes = new ArrayList<>();
         Miembro yo = this;
@@ -101,10 +105,16 @@ public class Miembro extends RolesUsuario {
         return false;
     }
 
+    public  boolean esAdminDe(Comunidad comunidad){
+        return comunidad.getAdministradores().contains(this);
+    }
+
     public List<Comunidad> comunidadesAdministradas(){
          return comunidades.stream()
                 .filter(comunidad -> comunidad.getAdministradores().contains(this))
                 .collect(Collectors.toList());
     }
+
+
 
 }

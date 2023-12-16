@@ -36,6 +36,7 @@ public class EstablecimientosController extends Controller implements ICrudViews
         model.put("tipo_rol", context.sessionAttribute("tipo_rol"));
         model.put("usuario_id", context.sessionAttribute("usuario_id"));
         model.put("MiembroAdmin", context.sessionAttribute("MiembroAdmin"));
+        model.put("Miembro", context.sessionAttribute("Miembro"));
         context.render("establecimientos/establecientos.hbs", model);
 
     }
@@ -63,6 +64,7 @@ public class EstablecimientosController extends Controller implements ICrudViews
         model.put("tipo_rol", context.sessionAttribute("tipo_rol"));
         model.put("usuario_id", context.sessionAttribute("usuario_id"));
         model.put("MiembroAdmin", context.sessionAttribute("MiembroAdmin"));
+        model.put("Miembro", context.sessionAttribute("Miembro"));
         context.render("establecimientos/establecimiento.hbs", model);
     }
 
@@ -92,6 +94,7 @@ public class EstablecimientosController extends Controller implements ICrudViews
         model.put("tipo_rol", context.sessionAttribute("tipo_rol"));
         model.put("usuario_id", context.sessionAttribute("usuario_id"));
         model.put("MiembroAdmin", context.sessionAttribute("MiembroAdmin"));
+        model.put("Miembro", context.sessionAttribute("Miembro"));
         context.render("establecimientos/establecimiento.hbs", model);
     }
 
@@ -134,6 +137,7 @@ public class EstablecimientosController extends Controller implements ICrudViews
         model.put("tipo_rol", context.sessionAttribute("tipo_rol"));
         model.put("usuario_id", context.sessionAttribute("usuario_id"));
         model.put("MiembroAdmin", context.sessionAttribute("MiembroAdmin"));
+        model.put("Miembro", context.sessionAttribute("Miembro"));
         context.render("servicios/servicios.hbs", model);
 
     }

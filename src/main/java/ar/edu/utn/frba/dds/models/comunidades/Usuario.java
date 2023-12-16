@@ -48,7 +48,7 @@ public class Usuario extends Persistente {
       {
         this.contrasenia=contrasenia;
         this.email=email;
-        // this.registrarUsuario(this);
+        this.rol=new Lector();
       }
       else{
         System.out.println("El password no cumple con los requerimientos de seguridad.");

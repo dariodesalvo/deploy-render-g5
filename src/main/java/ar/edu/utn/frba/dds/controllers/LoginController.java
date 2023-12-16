@@ -102,8 +102,13 @@ public class LoginController extends Controller implements ICrudViewsHandler {
             Map<String, Object> model = new HashMap<>();
             model.put("usuario", nuevoUsuario);
 
+            context.sessionAttribute("usuario_id", nuevoUsuario.getId().toString());
+            context.sessionAttribute("email", nuevoUsuario.getEmail());
+            context.sessionAttribute("tipo_rol", nuevoUsuario.getRol().getClass().getSimpleName());
+            context.sessionAttribute("Lector", true);
+
             //x ahora redirecciona aca
-            context.render("/entidades/entidades.hbs", model);
+            context.redirect("bienvenida");
 
         }else{
 
@@ -123,6 +128,7 @@ public class LoginController extends Controller implements ICrudViewsHandler {
         model.put("tipo_rol", context.sessionAttribute("tipo_rol"));
         model.put("usuario_id",context.sessionAttribute("usuario_id"));
         model.put("MiembroAdmin", context.sessionAttribute("MiembroAdmin"));
+        model.put("Miembro", context.sessionAttribute("Miembro"));
         context.render("login/bienvenida.hbs", model);
 
     }

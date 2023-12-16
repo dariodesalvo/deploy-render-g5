@@ -5,6 +5,7 @@ import ar.edu.utn.frba.dds.models.helpers.Permiso;
 import io.javalin.security.RouteRole;
 
 import javax.persistence.*;
+import javax.transaction.Transactional;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;

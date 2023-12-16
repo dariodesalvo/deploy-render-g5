@@ -19,9 +19,15 @@ public class Comunidad extends Persistente {
 
   @Column(name = "nombre")
   private String nombre;
-  @ManyToMany
+  /*@ManyToMany
   @JoinTable(
           name = "comunidad_miembros",
+          joinColumns = @JoinColumn(name = "comunidad_id"),
+          inverseJoinColumns = @JoinColumn(name = "miembro_id")
+  )*/
+  @ManyToMany
+  @JoinTable(
+          name = "miembros_comunidad",
           joinColumns = @JoinColumn(name = "comunidad_id"),
           inverseJoinColumns = @JoinColumn(name = "miembro_id")
   )
@@ -53,23 +59,24 @@ public class Comunidad extends Persistente {
     this.nombre = nombre ;
     this.miembros = new ArrayList<>();
     this.administradores = new ArrayList<>();
+    this.solicitudes= new ArrayList<>();
   }
 
   public void agregarMiembro(Miembro miembro) {
     this.miembros.add(miembro);
-    miembro.sosParte(this);
   }
 
   public void eliminarMiembro(Miembro miembro) {
     this.miembros.remove(miembro);
   }
 
-  public void sacarAdministrador(Usuario usuario){
-      administradores.remove(usuario);
+  public void sacarAdministrador(Miembro miembro){
+      this.administradores.remove(miembro);
     }
 
   public void darAdministradorA(Miembro miembro) {
-    administradores.add(miembro);
+
+    this.administradores.add(miembro);
   }
 
   public int cantMiembros() {
@@ -83,5 +90,18 @@ public class Comunidad extends Persistente {
   public void eliminarSolicitud(Usuario usuario){
     this.solicitudes.remove(usuario);
   }
+
+  public boolean esMiembro(Miembro miembro) {
+    return getMiembros().contains(miembro);
+  }
+
+  public boolean envioSolicitud(Usuario usuario){
+    return  getSolicitudes().contains(usuario);
+  }
+
+  public boolean esAdmin(Miembro miembro){
+    return getAdministradores().contains(miembro);
+  }
+
 }
 

@@ -32,6 +32,11 @@ public class ServiciosController extends Controller implements ICrudViewsHandler
         Map<String, Object> model = new HashMap<>(); /*
         List<Entidad> establecimientos = this.repositorioDeEstablecimientos.buscarTodos();
         model.put("establecimientos", establecimientos); */
+        model.put("email", context.sessionAttribute("email"));
+        model.put("tipo_rol", context.sessionAttribute("tipo_rol"));
+        model.put("usuario_id", context.sessionAttribute("usuario_id"));
+        model.put("MiembroAdmin", context.sessionAttribute("MiembroAdmin"));
+        model.put("Miembro", context.sessionAttribute("Miembro"));
         context.render("servicios/servicios.hbs", model);
 
     }
@@ -61,6 +66,7 @@ public class ServiciosController extends Controller implements ICrudViewsHandler
         model.put("tipo_rol", context.sessionAttribute("tipo_rol"));
         model.put("usuario_id", context.sessionAttribute("usuario_id"));
         model.put("MiembroAdmin", context.sessionAttribute("MiembroAdmin"));
+        model.put("Miembro", context.sessionAttribute("Miembro"));
         context.render("servicios/servicio.hbs", model);
     }
 
@@ -91,6 +97,7 @@ public class ServiciosController extends Controller implements ICrudViewsHandler
         model.put("tipo_rol", context.sessionAttribute("tipo_rol"));
         model.put("usuario_id", context.sessionAttribute("usuario_id"));
         model.put("MiembroAdmin", context.sessionAttribute("MiembroAdmin"));
+        model.put("Miembro", context.sessionAttribute("Miembro"));
         context.render("servicios/servicio.hbs", model);
     }
 

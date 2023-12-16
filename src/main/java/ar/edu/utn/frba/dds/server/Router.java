@@ -57,6 +57,10 @@ public class Router {
             get("/administrar-comunidad", ((ComunidadesController) FactoryController.controller("Comunidades"))::adminComunidad);
             get("comunidades/{comunidad_id}/gestionar",((ComunidadesController) FactoryController.controller("Comunidades"))::gestionar);
             get("comunidades/{comunidad_id}/aceptar/{usuario_id}", ((ComunidadesController) FactoryController.controller("Comunidades"))::aceptarSolicitud);
+            get("comunidades/{comunidad_id}/eliminar/{miembro_id}", ((ComunidadesController) FactoryController.controller("Comunidades"))::eliminar);
+            get("comunidades/{comunidad_id}/hacer-administrador/{miembro_id}", ((ComunidadesController) FactoryController.controller("Comunidades"))::hacerAdmin);
+            get("comunidades/{comunidad_id}/quitar-administrador/{miembro_id}", ((ComunidadesController) FactoryController.controller("Comunidades"))::quitarAdmin);
+
 
 
             /* Entidades Controller */

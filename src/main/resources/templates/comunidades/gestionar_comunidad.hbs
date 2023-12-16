@@ -1,8 +1,11 @@
 {{#partial "contenido" }}
     <div class="table-responsive">
         <h3>Comunidad: {{comunidad.nombre}}</h3>
+        {{#if mensaje}}
+        <h5>{{mensaje}}</h5>
+        {{/if}}
         <h4>Datos generales</h4>
-        <table class="table table-striped table-hover">
+        <table class="table table-striped table-hover mt-3">
             <tr>
                 <th>Nombre</th>
                 <th>Cant. Miembros</th>
@@ -16,8 +19,29 @@
                 </tr>
             </tbody>
         </table>
+
+        <h4>Miembros administradores</h4>
+        <table class="table table-striped table-hover mt-3">
+            <tr>
+                <th>Nombre</th>
+                <th>Confiabilidad</th>
+                <th>Acciones</th>
+            </tr>
+            <tbody>
+            {{#each comunidad.administradores}}
+                <tr>
+                    <td>{{this.nombre}}</td>
+                    <td>{{this.confiabilidad}}</td>
+                    <td>
+                        <a class="btn btn-secondary" href="/comunidades/{{comunidad.id}}/quitar-administrador/{{this.id}}">Quitar Admin</a>
+                    </td>
+                </tr>
+            {{/each}}
+            </tbody>
+        </table>
+
         <h4>Administrar miembros</h4>
-        <table class="table table-striped table-hover">
+        <table class="table mt-3">
             <tr>
                 <th>Nombre</th>
                 <th>Confiabilidad</th>
@@ -29,8 +53,12 @@
                     <td>{{this.nombre}}</td>
                     <td>{{this.confiabilidad}}</td>
                     <td>
-                        <a class="btn btn-secondary" href="/comunidades/{{comunidad.id}}/eliminar/{{this.id}}">Eliminar</a>
-                        <a class="btn btn-secondary" href="/comunidades/{{comunidad.id}}/hacer-administrador/{{this.id}}">Hacer administrador</a>
+                          <a class="btn btn-secondary" href="/comunidades/{{comunidad.id}}/eliminar/{{this.id}}">Eliminar</a>
+                        {{#if this.esAdminDe comunidad}}
+                         <p>Es admin</p>
+                        {{else}}
+                          <a class="btn btn-secondary" href="/comunidades/{{comunidad.id}}/hacer-administrador/{{this.id}}">Hacer administrador</a>
+                        {{/if}}
                     </td>
                 </tr>
             {{/each}}
