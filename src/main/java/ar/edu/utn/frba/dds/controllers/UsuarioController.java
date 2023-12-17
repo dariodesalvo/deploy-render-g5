@@ -23,7 +23,7 @@ public class UsuarioController extends Controller implements ICrudViewsHandler {
     @Override
     public void index(Context context) {
 
-        context.render("administracion_tipos_usuarios/administrar-usuarios.hbs");
+       // context.render("administracion_tipos_usuarios/administrar-usuarios.hbs");
     }
 
     public void perfil(Context context){
@@ -39,6 +39,7 @@ public class UsuarioController extends Controller implements ICrudViewsHandler {
         model.put("MiembroAdmin", context.sessionAttribute("MiembroAdmin"));
         model.put("municipio", usuario.getMunicipio());
         model.put("miembro", usuario.getRol());
+        model.put("Miembro", context.sessionAttribute("Miembro"));
         context.render("/login/perfil.hbs", model);
     }
 
@@ -80,6 +81,7 @@ public class UsuarioController extends Controller implements ICrudViewsHandler {
         model.put("municipio", usuario.getMunicipio());
         model.put("miembro", usuario.getRol());
         model.put("actualizado", "Actualizado correctamente");
+        model.put("Miembro", context.sessionAttribute("Miembro"));
         context.render("/login/perfil.hbs", model);
     }
 

@@ -15,6 +15,8 @@ import io.javalin.rendering.JavalinRenderer;
 import java.io.IOException;
 import java.util.function.Consumer;
 
+
+
 public class Server {
     private static Javalin app = null;
 
@@ -55,6 +57,7 @@ public class Server {
         JavalinRenderer.register(
                 (path, model, context) -> { // Función que renderiza el template
                     Handlebars handlebars = new Handlebars();
+
                     Template template = null;
                     try {
                         template = handlebars.compile(

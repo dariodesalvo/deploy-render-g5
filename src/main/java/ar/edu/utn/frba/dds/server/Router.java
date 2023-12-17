@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.dds.server;
 
 import ar.edu.utn.frba.dds.controllers.*;
+import ar.edu.utn.frba.dds.models.comunidades.TipoRol;
 
 import static io.javalin.apibuilder.ApiBuilder.*;
 public class Router {
@@ -32,14 +33,37 @@ public class Router {
             post("login", ((LoginController) FactoryController.controller("Login"))::login);
             get("registro", ((LoginController) FactoryController.controller("Login"))::register);
             post("registro", ((LoginController) FactoryController.controller("Login"))::registrar);
+            get("bienvenida", ((LoginController) FactoryController.controller("Login"))::bienvenida);
 
 
-            get("apertura-incidente", ((IncidenteController) FactoryController.controller("Incidentes"))::index);
-            get("administrar-usuarios", ((UsuarioController) FactoryController.controller("Usuarios"))::index);
+            /* Archivos Controller */
             get("cargar-organizaciones", ((ArchivoController) FactoryController.controller("Archivos"))::index);
             post("cargar-organizaciones-exitosa", ((ArchivoController) FactoryController.controller("Archivos"))::upload);
+
+            /* Administracion de Usuarios */
+            get("administrar-usuarios", ((UsuarioController) FactoryController.controller("Usuarios"))::index);
+            get("perfil",  ((UsuarioController) FactoryController.controller("Usuarios"))::perfil);
+            post("perfil/editar", ((UsuarioController) FactoryController.controller("Usuarios"))::edit);
+            /* Incidentes Controller*/
+
+            get("incidentes", ((IncidenteController) FactoryController.controller("Incidentes"))::show);
+            get("apertura-incidente", ((IncidenteController) FactoryController.controller("Incidentes"))::index);
+            post("apertura-incidente", ((IncidenteController) FactoryController.controller("Incidentes"))::save);
+            get("incidente/{id}/cerrar", ((IncidenteController) FactoryController.controller("Incidentes"))::cerrar);
+
             /* Miembros Controller */
-            
+
+            get("comunidades", ((ComunidadesController) FactoryController.controller("Comunidades"))::index);
+            get("/comunidades/{comunidad_id}/unirme/{usuario_id}", ((ComunidadesController) FactoryController.controller("Comunidades"))::crearSolicitud);
+            get("/administrar-comunidad", ((ComunidadesController) FactoryController.controller("Comunidades"))::adminComunidad);
+            get("comunidades/{comunidad_id}/gestionar",((ComunidadesController) FactoryController.controller("Comunidades"))::gestionar);
+            get("comunidades/{comunidad_id}/aceptar/{usuario_id}", ((ComunidadesController) FactoryController.controller("Comunidades"))::aceptarSolicitud);
+            get("comunidades/{comunidad_id}/eliminar/{miembro_id}", ((ComunidadesController) FactoryController.controller("Comunidades"))::eliminar);
+            get("comunidades/{comunidad_id}/hacer-administrador/{miembro_id}", ((ComunidadesController) FactoryController.controller("Comunidades"))::hacerAdmin);
+            get("comunidades/{comunidad_id}/quitar-administrador/{miembro_id}", ((ComunidadesController) FactoryController.controller("Comunidades"))::quitarAdmin);
+
+
+
             /* Entidades Controller */
 
             get("entidades", ((EntidadesController) FactoryController.controller("Entidades"))::index);
