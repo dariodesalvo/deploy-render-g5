@@ -51,7 +51,7 @@ public class MiembroCierraIncidente{
         comunidadA.agregarMiembro(miembroQueCierraA);
         comunidadB.agregarMiembro(miembroQueCierraB);
 
-        incidentes = miembro.abrirIncidente(servicio);
+        incidentes = miembro.abrirIncidente(servicio, "No funciona");
 
         /* se crean dos instancias de incidentes */
         /* se puede filtrar asi */
@@ -97,7 +97,7 @@ public class MiembroCierraIncidente{
     @DisplayName("Miembro 'Sabado Agosto' es el que abrio los incidentes")
     public void miembroAbrioIncidente() throws Exception {
 
-        incidentes = miembro.abrirIncidente(servicio);
+        incidentes = miembro.abrirIncidente(servicio, "Inundado");
         incidentes.forEach( incidente -> {Assertions.assertEquals(incidente.getAbiertoPor(), miembro);}
         );
     }

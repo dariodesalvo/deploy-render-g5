@@ -2,6 +2,7 @@ package ar.edu.utn.frba.dds.controllers;
 
 import ar.edu.utn.frba.dds.models.comunidades.Miembro;
 import ar.edu.utn.frba.dds.models.comunidades.RolesUsuario;
+import ar.edu.utn.frba.dds.models.comunidades.TipoRol;
 import ar.edu.utn.frba.dds.models.comunidades.Usuario;
 import ar.edu.utn.frba.dds.models.repositorios.RepositorioDeComunidades;
 import ar.edu.utn.frba.dds.models.repositorios.RepositorioDeRoles;
@@ -9,7 +10,9 @@ import ar.edu.utn.frba.dds.models.repositorios.RepositorioDeUsuarios;
 import ar.edu.utn.frba.dds.server.utils.ICrudViewsHandler;
 import io.javalin.http.Context;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class UsuarioController extends Controller implements ICrudViewsHandler {
@@ -40,11 +43,38 @@ public class UsuarioController extends Controller implements ICrudViewsHandler {
         model.put("municipio", usuario.getMunicipio());
         model.put("miembro", usuario.getRol());
         model.put("Miembro", context.sessionAttribute("Miembro"));
-        context.render("/login/perfil.hbs", model);
+        context.render("administracion_tipos_usuarios/administrar-usuarios.hbs", model);
     }
 
     @Override
     public void show(Context context) {
+        List<Usuario> usuarios = repositorioDeUsuarios.buscarTodos();
+
+        Map<String, Object> model = new HashMap<>();
+
+        Map<String,Object> usuariosMappeados = new HashMap<>();
+        List<String> rolesUsuarios = new ArrayList<>();
+
+        rolesUsuarios.add((TipoRol.Administrador.name()));
+        rolesUsuarios.add((TipoRol.Lector.name()));
+        rolesUsuarios.add((TipoRol.Prestador.name()));
+        rolesUsuarios.add((TipoRol.Miembro.name()));
+
+        for(Usuario usuario: usuarios){
+            String email = usuario.getEmail();
+            String rolUsuario = usuario.getRol().getClass().getSimpleName();
+            List<String> roles = rolesUsuarios.stream().filter((rol)->!rol.equals(rolUsuario)).toList();
+
+            usuariosMappeados.put("email",email);
+            usuariosMappeados.put("rol",rolUsuario);
+            usuariosMappeados.put("roles",roles);
+        }
+
+
+        model.put("usuarios",usuariosMappeados);
+
+        System.out.println(model);
+        context.render("administracion_tipos_usuarios/administrar-usuarios.hbs", model);
 
     }
 

@@ -41,7 +41,7 @@ public class Router {
             post("cargar-organizaciones-exitosa", ((ArchivoController) FactoryController.controller("Archivos"))::upload);
 
             /* Administracion de Usuarios */
-            get("administrar-usuarios", ((UsuarioController) FactoryController.controller("Usuarios"))::index);
+            get("administrar-usuarios", ((UsuarioController) FactoryController.controller("Usuarios"))::show);
             get("perfil",  ((UsuarioController) FactoryController.controller("Usuarios"))::perfil);
             post("perfil/editar", ((UsuarioController) FactoryController.controller("Usuarios"))::edit);
             /* Incidentes Controller*/
