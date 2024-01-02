@@ -31,7 +31,7 @@ public class EnvioNotificacionTest {
         caro.setRol(miembro2);
 
         miembro.setCelular("+5491121754632");
-        miembro2.setEmail("maurodemarco909@gmail.com");
+        miembro2.setEmail("rinaldiicarolina@gmail.com");
         miembro.setMedioNotificacionPreferido(new WhatsappSender(new Twilio()));
         miembro2.setMedioNotificacionPreferido(new EmailSender(new NotificarPorEmail()));
         comunidad.agregarMiembro(miembro);
@@ -41,19 +41,19 @@ public class EnvioNotificacionTest {
     @Test
     @DisplayName("Se envia notificacion por whatsapp a miembro")
     public void enviarWhatsapp() throws EmailException {
-        AdapterCelular medio = mock(AdapterCelular.class);
-        //doNothing().when(medio).enviarNotificacion(miembro, notificacion);
-        medio.enviarNotificacion(miembro, notificacion);
-        verify(medio, Mockito.times(1)).enviarNotificacion(miembro, notificacion);
+        Twilio medioTwilio = mock(Twilio.class);
+        miembro.setMedioNotificacionPreferido(new WhatsappSender(medioTwilio));
+        miembro.getMedioNotificacionPreferido().enviarNotificacion(miembro, notificacion);
+        verify(medioTwilio, Mockito.times(1)).enviarNotificacion(miembro, notificacion);
     }
 
     @Test
     @DisplayName("Se envia notificacion por email a miembro")
     public void enviarCorreo() throws EmailException {
-        AdapterEmail medio = mock(AdapterEmail.class);
-        //miembro2.getMedioNotificacionPreferido().enviarNotificacion(miembro2, notificacion);
-        medio.enviarNotificacion(miembro, notificacion);
-        verify(medio, Mockito.times(1)).enviarNotificacion(miembro, notificacion);
+        NotificarPorEmail medioEmail = mock(NotificarPorEmail.class);
+        miembro2.setMedioNotificacionPreferido(new EmailSender(medioEmail));
+        miembro2.getMedioNotificacionPreferido().enviarNotificacion(miembro, notificacion);
+        verify(medioEmail, Mockito.times(1)).enviarNotificacion(miembro, notificacion);
     }
 
     @Test

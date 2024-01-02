@@ -32,6 +32,8 @@ public class MiembroCierraIncidente{
     private List<Incidente> incidenteB = new ArrayList<>();
     private Incidente incidente;
 
+    private String observaciones = "unas observaciones para test";
+
     @BeforeEach
     public void inicializar() throws Exception {
         usuario = new Usuario("correoValido@gmail.com", "S4b4d012$");
@@ -51,7 +53,7 @@ public class MiembroCierraIncidente{
         comunidadA.agregarMiembro(miembroQueCierraA);
         comunidadB.agregarMiembro(miembroQueCierraB);
 
-        incidentes = miembro.abrirIncidente(servicio);
+        incidentes = miembro.abrirIncidente(servicio, observaciones);
 
         /* se crean dos instancias de incidentes */
         /* se puede filtrar asi */
@@ -97,7 +99,7 @@ public class MiembroCierraIncidente{
     @DisplayName("Miembro 'Sabado Agosto' es el que abrio los incidentes")
     public void miembroAbrioIncidente() throws Exception {
 
-        incidentes = miembro.abrirIncidente(servicio);
+        incidentes = miembro.abrirIncidente(servicio,observaciones);
         incidentes.forEach( incidente -> {Assertions.assertEquals(incidente.getAbiertoPor(), miembro);}
         );
     }

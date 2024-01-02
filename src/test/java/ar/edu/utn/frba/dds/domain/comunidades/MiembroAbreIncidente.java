@@ -24,6 +24,7 @@ public class MiembroAbreIncidente{
     private Servicio servicio;
 
     private List<Incidente> incidentes;
+    private String observaciones;
 
     @BeforeEach
     public void inicializar() throws Exception {
@@ -38,13 +39,14 @@ public class MiembroAbreIncidente{
 
         // ini nuevo servicio que se abrira y cerrara un incidente por cada comunidad
         servicio = new Servicio();
+        observaciones = "unas observaciones para test";
     }
 
     @Test
     @DisplayName("Un miembro que se encuentra en dos comunidades abre un incidente")
     public void abrirIndicente() throws Exception {
 
-        incidentes = miembro.abrirIncidente(servicio);
+        incidentes = miembro.abrirIncidente(servicio, observaciones);
         Assertions.assertEquals(incidentes.size(), 2);
         /* se crean dos instancias de incidentes */
     }

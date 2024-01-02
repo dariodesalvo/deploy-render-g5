@@ -1,4 +1,4 @@
-package ar.edu.utn.frba.dds.models.externo;
+package ar.edu.utn.frba.dds.server.serviceIntegration.servicio3.entities;
 
 import lombok.Getter;
 import lombok.Setter;
