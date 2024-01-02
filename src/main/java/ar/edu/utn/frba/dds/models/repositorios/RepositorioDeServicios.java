@@ -23,7 +23,7 @@ public class RepositorioDeServicios implements WithSimplePersistenceUnit, ICrudR
     @Override
     public void guardar(Object o) {
         EntityTransaction tx = entityManager().getTransaction();
-        if(!tx.isActive())
+        if (!tx.isActive())
             tx.begin();
 
         entityManager().persist(o);
@@ -38,7 +38,7 @@ public class RepositorioDeServicios implements WithSimplePersistenceUnit, ICrudR
 
         entityManager().merge(o);
         tx.commit();
-    }
+      }
 
     @Override
     public void eliminar(Object o) {
@@ -48,5 +48,10 @@ public class RepositorioDeServicios implements WithSimplePersistenceUnit, ICrudR
 
         entityManager().remove(o);
         tx.commit();
+      }
+
+    @Override
+    public void limpiarCache(){
+        entityManager().clear();
     }
 }

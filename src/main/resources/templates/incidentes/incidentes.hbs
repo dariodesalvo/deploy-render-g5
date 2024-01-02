@@ -14,7 +14,7 @@
                     <td>{{this.fechaApertura}}</td>
                     <td>{{this.observaciones}}</td>
                     <td>
-                {{#if miembro}}
+                {{#if Miembro}}
                         <a class="btn btn-secondary" href="incidente/{{this.id}}/cerrar"> Cerrar </a>
                 {{/if}}
                     </td>
@@ -23,7 +23,7 @@
             </tbody>
         </table>
 
-        {{#if miembro}}
+        {{#if Miembro}}
             <div class="center">
             <a class="btn btn-primary" href="/apertura-incidente">Registrar un nuevo Incidente</a>
         </div>

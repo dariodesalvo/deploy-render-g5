@@ -12,6 +12,7 @@ public class RepositorioDeUsuarios implements WithSimplePersistenceUnit, ICrudRe
 
     @Override
     public List buscarTodos() {
+
         return entityManager().createQuery("from " + Usuario.class.getName()).getResultList();
     }
 
@@ -33,10 +34,12 @@ public class RepositorioDeUsuarios implements WithSimplePersistenceUnit, ICrudRe
 
     @Override
     public Object buscar(Long id) {
+
         return entityManager().find(Usuario.class, id);
     }
 
     public Object buscarXRol(Long rol_id) {
+
         String hql = "FROM " + Usuario.class.getName() + " WHERE rol_id = :rol_id";
         Query query = entityManager().createQuery(hql);
         query.setParameter("rol_id", rol_id);
@@ -76,5 +79,11 @@ public class RepositorioDeUsuarios implements WithSimplePersistenceUnit, ICrudRe
 
         entityManager().remove(o);
         tx.commit();
+    }
+
+    @Override
+    public void limpiarCache(){
+
+        entityManager().clear();
     }
 }

@@ -14,9 +14,10 @@ public class MedioDeNotificacionAttributeConverter implements AttributeConverter
     public String convertToDatabaseColumn(MedioDeNotificacion medioDeNotificacion) {
         String nombreDelMedio = "";
 
-        switch (medioDeNotificacion.getClass().getName()) {
-        case "NotificacionViaWpp": nombreDelMedio = "wpp"; break;
-        case "NotificacionViaEmail": nombreDelMedio = "email"; break;
+        switch (medioDeNotificacion.getClass().getSimpleName()) {
+        case "WhatsappSender": nombreDelMedio = "wpp"; break;
+        case "EmailSender": nombreDelMedio = "email"; break;
+        default: nombreDelMedio = "desconocido"; break;
         }
         return nombreDelMedio;
         }

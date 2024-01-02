@@ -11,11 +11,13 @@ public class RepositorioDeRoles implements WithSimplePersistenceUnit, ICrudRepos
 
     @Override
     public List buscarTodos() {
+
         return entityManager().createQuery("from " + RolesUsuario.class.getName()).getResultList();
     }
 
     @Override
     public Object buscar(Long id) {
+
         return entityManager().find(RolesUsuario.class, id);
     }
 
@@ -27,7 +29,7 @@ public class RepositorioDeRoles implements WithSimplePersistenceUnit, ICrudRepos
 
         entityManager().persist(o);
         tx.commit();
-    }
+      }
 
     @Override
     public void actualizar(Object o) {
@@ -47,5 +49,10 @@ public class RepositorioDeRoles implements WithSimplePersistenceUnit, ICrudRepos
 
         entityManager().remove(o);
         tx.commit();
+    }
+
+    @Override
+    public void limpiarCache(){
+        entityManager().clear();
     }
 }

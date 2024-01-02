@@ -9,5 +9,5 @@ public interface ICrudRepository {
     void guardar(Object o);
     void actualizar(Object o);
     void eliminar(Object o);
-
+    void limpiarCache();
 }

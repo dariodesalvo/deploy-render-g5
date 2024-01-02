@@ -34,7 +34,7 @@ public class Router {
             get("registro", ((LoginController) FactoryController.controller("Login"))::register);
             post("registro", ((LoginController) FactoryController.controller("Login"))::registrar);
             get("bienvenida", ((LoginController) FactoryController.controller("Login"))::bienvenida);
-
+            get("logout", ((LoginController) FactoryController.controller("Login"))::logout);
 
             /* Archivos Controller */
             get("cargar-organizaciones", ((ArchivoController) FactoryController.controller("Archivos"))::index);

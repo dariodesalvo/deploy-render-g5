@@ -11,11 +11,13 @@ public class RepositorioDeEmpresas  implements WithSimplePersistenceUnit, ICrudR
 
     @Override
     public List buscarTodos() {
+
         return entityManager().createQuery("from " + Empresa.class.getName()).getResultList();
     }
 
     @Override
-    public Object buscar(Long id) {
+    public Object buscar(Long id)
+    {
         return entityManager().find(Empresa.class, id);
     }
 
@@ -47,6 +49,11 @@ public class RepositorioDeEmpresas  implements WithSimplePersistenceUnit, ICrudR
 
         entityManager().remove(o);
         tx.commit();
+    }
+
+    @Override
+    public void limpiarCache(){
+        entityManager().clear();
     }
 
 }

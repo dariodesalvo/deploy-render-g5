@@ -10,11 +10,13 @@ public class RepositorioDeIncidentes implements WithSimplePersistenceUnit, ICrud
 
     @Override
     public List buscarTodos() {
+
         return entityManager().createQuery("from " + Incidente.class.getName()).getResultList();
     }
 
     @Override
     public Object buscar(Long id) {
+
         return entityManager().find(Incidente.class, id);
     }
 
@@ -26,6 +28,7 @@ public class RepositorioDeIncidentes implements WithSimplePersistenceUnit, ICrud
 
         entityManager().persist(o);
         tx.commit();
+
     }
 
     @Override
@@ -46,5 +49,10 @@ public class RepositorioDeIncidentes implements WithSimplePersistenceUnit, ICrud
 
         entityManager().remove(o);
         tx.commit();
+    }
+
+    @Override
+    public void limpiarCache(){
+        entityManager().clear();
     }
 }

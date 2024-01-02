@@ -7,14 +7,10 @@ import org.apache.commons.mail.EmailException;
 
 import javax.persistence.*;
 
-@Entity
-@Table(name = "EmailSender")
+//@Entity
+//@Table(name = "EmailSender")
 public class EmailSender implements MedioDeNotificacion {
-    @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private Long id;
 
-    @Transient
     AdapterEmail emailAdapater;
 
     public EmailSender(){

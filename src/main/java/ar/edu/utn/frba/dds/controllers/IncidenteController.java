@@ -1,16 +1,12 @@
 package ar.edu.utn.frba.dds.controllers;
 
 import ar.edu.utn.frba.dds.models.comunidades.Miembro;
-import ar.edu.utn.frba.dds.models.comunidades.RolesUsuario;
 import ar.edu.utn.frba.dds.models.comunidades.Usuario;
-import ar.edu.utn.frba.dds.models.entidades.Empresa;
-import ar.edu.utn.frba.dds.models.entidades.Establecimiento;
 import ar.edu.utn.frba.dds.models.incidentes.Incidente;
 import ar.edu.utn.frba.dds.models.repositorios.RepositorioDeIncidentes;
 import ar.edu.utn.frba.dds.models.repositorios.RepositorioDeServicios;
 import ar.edu.utn.frba.dds.models.repositorios.RepositorioDeUsuarios;
 import ar.edu.utn.frba.dds.models.servicios.Servicio;
-import ar.edu.utn.frba.dds.server.exceptions.AccessDeniedException;
 import ar.edu.utn.frba.dds.server.utils.ICrudViewsHandler;
 import io.javalin.http.Context;
 import io.javalin.http.HttpStatus;
@@ -21,7 +17,6 @@ import java.util.Map;
 import java.util.Objects;
 
 public class IncidenteController extends Controller implements ICrudViewsHandler {
-
 
     private RepositorioDeIncidentes repositorioDeIncidentes;
     private RepositorioDeServicios repositorioServicios = new RepositorioDeServicios();
@@ -35,19 +30,11 @@ public class IncidenteController extends Controller implements ICrudViewsHandler
     @Override
     public void index(Context context) {
 
-        if (context.sessionAttribute("id")==null){
-            context.redirect("/login");
-        }
 
         List<Servicio> servicios= this.repositorioServicios.buscarTodos();
         Map<String, Object> model = new HashMap<>();
         model.put("servicios", servicios);
-        model.put("email", context.sessionAttribute("email"));
-        model.put("tipo_rol", context.sessionAttribute("tipo_rol"));
-        model.put("usuario_id", context.sessionAttribute("usuario_id"));
-        model.put("miembro", context.sessionAttribute("Miembro"));
-        model.put("MiembroAdmin", context.sessionAttribute("MiembroAdmin"));
-        model.put("Miembro", context.sessionAttribute("Miembro"));
+        this.cargarVariablesSesion(context,model);
         context.render("apertura_incidentes/apertura-incidentes.hbs", model);
 
     }
@@ -58,15 +45,8 @@ public class IncidenteController extends Controller implements ICrudViewsHandler
         List<Incidente> incidentes= this.repositorioDeIncidentes.buscarTodos();
         Map<String, Object> model = new HashMap<>();
         model.put("incidentes", incidentes);
-        model.put("email", context.sessionAttribute("email"));
-        model.put("tipo_rol", context.sessionAttribute("tipo_rol"));
-        model.put("usuario_id", context.sessionAttribute("usuario_id"));
-        model.put("miembro", context.sessionAttribute("Miembro"));
-        model.put("Miembro", context.sessionAttribute("Miembro"));
-        model.put("MiembroAdmin", context.sessionAttribute("MiembroAdmin"));
+        this.cargarVariablesSesion(context,model);
         context.render("incidentes/incidentes.hbs", model);
-
-
 
     }
 
@@ -102,7 +82,6 @@ public class IncidenteController extends Controller implements ICrudViewsHandler
         context.status(HttpStatus.CREATED);
         context.redirect("/incidentes");
 
-
     }
 
     @Override
@@ -123,15 +102,9 @@ public class IncidenteController extends Controller implements ICrudViewsHandler
     public void cerrar(Context context){
 
         Incidente incidente= (Incidente) this.repositorioDeIncidentes.buscar(Long.parseLong(context.formParam("incidentes_id")));
-
         Map<String, Object> model = new HashMap<>();
-
         model.put("incidente", incidente);
-        model.put("email", context.sessionAttribute("email"));
-        model.put("tipo_rol", context.sessionAttribute("tipo_rol"));
-        model.put("usuario_id", context.sessionAttribute("usuario_id"));
-        model.put("MiembroAdmin", context.sessionAttribute("MiembroAdmin"));
-        model.put("Miembro", context.sessionAttribute("Miembro"));
+        this.cargarVariablesSesion(context,model);
         context.render("cierre-incidentes/cierre-incidentes.hbs", model);
 
     }

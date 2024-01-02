@@ -29,6 +29,7 @@ public class RepositorioDeComunidades implements WithSimplePersistenceUnit, ICru
 
         entityManager().persist(o);
         tx.commit();
+
     }
 
     @Override
@@ -39,7 +40,7 @@ public class RepositorioDeComunidades implements WithSimplePersistenceUnit, ICru
 
         entityManager().merge(o);
         tx.commit();
-    }
+      }
 
     @Override
     public void eliminar(Object o) {
@@ -49,6 +50,13 @@ public class RepositorioDeComunidades implements WithSimplePersistenceUnit, ICru
 
         entityManager().remove(o);
         tx.commit();
+
+    }
+
+    @Override
+    public void limpiarCache(){
+
+        entityManager().clear();
     }
 
 }

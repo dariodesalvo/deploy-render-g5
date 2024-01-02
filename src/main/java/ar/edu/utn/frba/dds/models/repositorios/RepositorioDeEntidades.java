@@ -8,14 +8,15 @@ import java.util.List;
 
 public class RepositorioDeEntidades  implements WithSimplePersistenceUnit, ICrudRepository {
 
-
     @Override
     public List buscarTodos() {
+
         return entityManager().createQuery("from " + Entidad.class.getName()).getResultList();
     }
 
     @Override
     public Object buscar(Long id) {
+
         return entityManager().find(Entidad.class, id);
     }
 
@@ -48,5 +49,11 @@ public class RepositorioDeEntidades  implements WithSimplePersistenceUnit, ICrud
         entityManager().remove(o);
         tx.commit();
     }
+
+    @Override
+    public void limpiarCache(){
+        entityManager().clear();
+    }
+
 
 }

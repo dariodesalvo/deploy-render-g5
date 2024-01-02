@@ -2,18 +2,15 @@ package ar.edu.utn.frba.dds.controllers;
 
 import ar.edu.utn.frba.dds.models.comunidades.Miembro;
 import ar.edu.utn.frba.dds.models.comunidades.Usuario;
-import ar.edu.utn.frba.dds.models.entidades.Entidad;
 import ar.edu.utn.frba.dds.models.helpers.ValidadorContrasenia;
 import ar.edu.utn.frba.dds.models.repositorios.RepositorioDeEntidades;
 import ar.edu.utn.frba.dds.models.repositorios.RepositorioDeUsuarios;
 import ar.edu.utn.frba.dds.server.utils.ICrudViewsHandler;
 import io.javalin.http.Context;
-import io.javalin.http.HttpStatus;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 
 public class LoginController extends Controller implements ICrudViewsHandler {
@@ -27,7 +24,6 @@ public class LoginController extends Controller implements ICrudViewsHandler {
     }
     @Override
     public void index(Context context) {
-
         context.render("login/login.hbs");
     }
 
@@ -50,28 +46,7 @@ public class LoginController extends Controller implements ICrudViewsHandler {
         if(!usuarios.isEmpty())
         {
             Usuario usuario = usuarios.get(0);
-            context.sessionAttribute("usuario_id", usuario.getId().toString());
-            context.sessionAttribute("email", usuario.getEmail());
-            context.sessionAttribute("tipo_rol", usuario.getRol().getClass().getSimpleName());
-
-
-            switch (context.sessionAttribute("tipo_rol").toString()){
-                case "Administrador": context.sessionAttribute("Administrador", true); break;
-                case "Prestador": context.sessionAttribute("Prestador", true); break;
-                case "Miembro": context.sessionAttribute("Miembro", true);
-
-                Miembro miembro = (Miembro) usuario.getRol();
-               System.out.println(miembro.getComunidades().get(0).getNombre());
-
-                    if(miembro.esAdmin())
-                {
-                    context.sessionAttribute("MiembroAdmin", true);
-
-                }
-                break;
-                case "Lector": context.sessionAttribute("Lector", true); break;
-            }
-
+            this.cargarSesion(context, usuario);
             context.redirect("bienvenida");
         }
         else
@@ -82,6 +57,43 @@ public class LoginController extends Controller implements ICrudViewsHandler {
             context.render("login/login.hbs", model);
         }
     }
+
+    public void cargarSesion(Context context, Usuario usuario){
+        context.sessionAttribute("usuario_id", usuario.getId().toString());
+        context.sessionAttribute("email", usuario.getEmail());
+        context.sessionAttribute("tipo_rol", usuario.getRol().getClass().getSimpleName());
+
+
+        switch (context.sessionAttribute("tipo_rol").toString()){
+            case "Administrador": context.sessionAttribute("Administrador", true); break;
+            case "Prestador": context.sessionAttribute("Prestador", true); break;
+            case "Miembro": context.sessionAttribute("Miembro", true);
+
+                Miembro miembro = (Miembro) usuario.getRol();
+                System.out.println(miembro.getComunidades().get(0).getNombre());
+
+                if(miembro.esAdmin())
+                {
+                    context.sessionAttribute("MiembroAdmin", true);
+
+                }
+                break;
+            case "Lector": context.sessionAttribute("Lector", true); break;
+        }
+    }
+
+    public void limpiarSesion(Context context){
+
+        context.sessionAttribute("usuario_id", null);
+        context.sessionAttribute("email", null);
+        context.sessionAttribute("tipo_rol", null);
+        context.sessionAttribute("Administrador", null);
+        context.sessionAttribute("Prestador", null);
+        context.sessionAttribute("Miembro", null);
+        context.sessionAttribute("MiembroAdmin", null);
+        context.sessionAttribute("Lector", null);
+    }
+
     public void registrar(Context context) throws Exception {
 
         //esto hay que hacerlo mejor
@@ -95,9 +107,6 @@ public class LoginController extends Controller implements ICrudViewsHandler {
             Usuario nuevoUsuario = new Usuario(context.formParam("email"),context.formParam("password"));
             //x defecto los usuarios se crean como lectores...
             this.repositorioDeUsuarios.guardar(nuevoUsuario);
-
-            //ver uso de sessiones
-//            context.sessionAttribute("usuario_id");
 
             Map<String, Object> model = new HashMap<>();
             model.put("usuario", nuevoUsuario);
@@ -124,13 +133,15 @@ public class LoginController extends Controller implements ICrudViewsHandler {
 
     public void bienvenida(Context context){
         Map<String, Object> model = new HashMap<>();
-        model.put("email", context.sessionAttribute("email"));
-        model.put("tipo_rol", context.sessionAttribute("tipo_rol"));
-        model.put("usuario_id",context.sessionAttribute("usuario_id"));
-        model.put("MiembroAdmin", context.sessionAttribute("MiembroAdmin"));
-        model.put("Miembro", context.sessionAttribute("Miembro"));
+        this.cargarVariablesSesion(context, model);
         context.render("login/bienvenida.hbs", model);
 
+    }
+
+    public void logout(Context context){
+        /* limpiar las variables de sesion */
+        this.limpiarSesion(context);
+        this.index(context);
     }
 
     @Override

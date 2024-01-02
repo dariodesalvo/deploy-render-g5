@@ -11,11 +11,13 @@ public class RepositorioDeEstablecimientos implements WithSimplePersistenceUnit,
 
     @Override
     public List buscarTodos() {
+
         return entityManager().createQuery("from " + Establecimiento.class.getName()).getResultList();
     }
 
     @Override
     public Object buscar(Long id) {
+
         return entityManager().find(Establecimiento.class, id);
     }
 
@@ -27,6 +29,7 @@ public class RepositorioDeEstablecimientos implements WithSimplePersistenceUnit,
 
         entityManager().persist(o);
         tx.commit();
+
     }
 
     @Override
@@ -37,6 +40,7 @@ public class RepositorioDeEstablecimientos implements WithSimplePersistenceUnit,
 
         entityManager().merge(o);
         tx.commit();
+
     }
 
     @Override
@@ -47,5 +51,10 @@ public class RepositorioDeEstablecimientos implements WithSimplePersistenceUnit,
 
         entityManager().remove(o);
         tx.commit();
+     }
+
+    @Override
+    public void limpiarCache(){
+        entityManager().clear();
     }
 }

@@ -6,15 +6,9 @@ import ar.edu.utn.frba.dds.models.incidentes.mediosNotificacion.adapter.AdapterC
 
 import javax.persistence.*;
 
-@Entity
-@Table(name = "WhatsappSender")
+
 public class WhatsappSender implements MedioDeNotificacion {
 
-    @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private Long id;
-
-    @Transient
     AdapterCelular whatsappAdapter;
 
     public WhatsappSender(){
