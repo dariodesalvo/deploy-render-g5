@@ -1,7 +1,7 @@
-package ar.edu.utn.frba.dds.serviceIntegration.servicio3;
+package ar.edu.utn.frba.dds.server.serviceIntegration.servicio3;
 
-import ar.edu.utn.frba.dds.serviceIntegration.servicio3.entities.ExternoRequest;
-import ar.edu.utn.frba.dds.serviceIntegration.servicio3.entities.ExternoResponse;
+import ar.edu.utn.frba.dds.server.serviceIntegration.servicio3.entities.ExternoRequest;
+import ar.edu.utn.frba.dds.server.serviceIntegration.servicio3.entities.ExternoResponse;
 import retrofit2.Call;
 
 import retrofit2.http.Body;

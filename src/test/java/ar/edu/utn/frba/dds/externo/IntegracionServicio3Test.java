@@ -1,7 +1,7 @@
 package ar.edu.utn.frba.dds.externo;
 
-import ar.edu.utn.frba.dds.serviceIntegration.servicio3.ServicioCalculoRII;
-import ar.edu.utn.frba.dds.serviceIntegration.servicio3.entities.*;
+import ar.edu.utn.frba.dds.server.serviceIntegration.servicio3.ServicioCalculoRII;
+import ar.edu.utn.frba.dds.server.serviceIntegration.servicio3.entities.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
