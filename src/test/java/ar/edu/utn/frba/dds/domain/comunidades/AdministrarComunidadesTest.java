@@ -1,9 +1,6 @@
 package ar.edu.utn.frba.dds.domain.comunidades;
 
-import ar.edu.utn.frba.dds.models.comunidades.Administrador;
-import ar.edu.utn.frba.dds.models.comunidades.Comunidad;
-import ar.edu.utn.frba.dds.models.comunidades.Lector;
-import ar.edu.utn.frba.dds.models.comunidades.Usuario;
+import ar.edu.utn.frba.dds.models.comunidades.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -13,20 +10,21 @@ public class AdministrarComunidadesTest {
     private Comunidad losMurcielagos = new Comunidad("los murcielagos");
     private Administrador rolAdministrador = new Administrador();
     private Lector rolLector = new Lector();
-    private Usuario capitan;
+    private Miembro capitan;
 
     @BeforeEach
     public void inicializar() throws Exception {
-        capitan = new Usuario("capitan", "Arquero2245+");
+        capitan = new Miembro("capitan", "capitan");
         //capitan.solicitarSerMiembro(losMurcielagos);
         losMurcielagos.darAdministradorA(capitan);
-        Assertions.assertTrue(capitan.esAdministrador(losMurcielagos));
+        Assertions.assertTrue(capitan.esAdmin());
     }
 
     @Test
     @DisplayName("Se setea un administrador y una comunidad agrega un nuevo miembro")
     public void adminAgregaMiembro() throws Exception {
-        Usuario juan = new Usuario("juan", "Delantero6576*");
+       // Usuario juan = new Usuario("juan", "Delantero6576*");
+        Miembro juan = new Miembro("juan","perez");
         losMurcielagos.darAdministradorA(juan);
         //losMurcielagos.agregarMiembro(juan);
         Assertions.assertTrue(losMurcielagos.getMiembros().contains(juan));

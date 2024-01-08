@@ -21,4 +21,12 @@ public class Ubicacion {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="centroide_id", nullable=false)
     private Centroide centroide;
+
+    public Ubicacion(float lat, float lon) {
+        this.lat = lat;
+        this.lon = lon;
+    }
+
+    public Ubicacion() {
+    }
 }

@@ -28,11 +28,11 @@ public class Incidente extends Persistente {
     private Servicio servicio;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "miembro_id", insertable = false, updatable = false, referencedColumnName = "id")
+    @JoinColumn(name = "abierto_por", referencedColumnName = "id")
     private Miembro abiertoPor;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "miembro_id", insertable = false, updatable = false, referencedColumnName = "id")
+    @JoinColumn(name = "cerrado_por", referencedColumnName = "id")
     private Miembro cerradoPor;
 
     @ManyToOne
@@ -40,8 +40,10 @@ public class Incidente extends Persistente {
     private Comunidad comunidad;
     @Column(name = "estado")
     private Boolean estado;
-    @Column(name = "observaciones")
-    private String observaciones;
+    @Column(name = "observacionesApertura")
+    private String observacionesApertura;
+    @Column(name = "observacionesCierre")
+    private String observacionesCierre;
     @Convert(converter = LocalDateTimeAttributeConverter.class)
     @Column(name = "fechaApertura")
     private LocalDateTime fechaApertura;
@@ -55,8 +57,9 @@ public class Incidente extends Persistente {
         this.servicio = servicio;
         this.abiertoPor = abiertoPor;
         this.comunidad = comunidad;
-        this.observaciones = observaciones;
+        this.observacionesApertura = observaciones;
         this.fechaApertura = LocalDateTime.now();
+        this.estado=Boolean.TRUE;
 
         //llamar a notificador pasarle la comunidad y el incidente
 
@@ -72,11 +75,13 @@ public class Incidente extends Persistente {
 
     public void notificarCercania(String mensaje,List<Comunidad> comunidades){}
 
-    public void cerrar(Miembro miembro) throws EmailException {
+    public void cerrar(Miembro miembro, String observaciones) throws EmailException {
         this.setCerradoPor(miembro);
+        this.observacionesCierre = observaciones;
         this.fechaCierre= LocalDateTime.now();
+        this.estado=Boolean.FALSE;
         Mensaje mensaje = new CierreIncidente();
-        this.notificador.notificar(comunidad, this, mensaje);
+        //this.notificador.notificar(comunidad, this, mensaje);
 
     }
 

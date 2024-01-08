@@ -38,9 +38,10 @@ public class Router {
 
             /* Archivos Controller */
             get("cargar-organizaciones", ((ArchivoController) FactoryController.controller("Archivos"))::index);
+            post("cargar-organizaciones-exitosa", ((ArchivoController) FactoryController.controller("Archivos"))::upload);
 
             /* Administracion de Usuarios */
-            get("administrar-usuarios", ((UsuarioController) FactoryController.controller("Usuarios"))::index);
+            get("administrar-usuarios", ((UsuarioController) FactoryController.controller("Usuarios"))::show);
             get("perfil",  ((UsuarioController) FactoryController.controller("Usuarios"))::perfil);
             post("perfil/editar", ((UsuarioController) FactoryController.controller("Usuarios"))::edit);
             /* Incidentes Controller*/
@@ -48,7 +49,8 @@ public class Router {
             get("incidentes", ((IncidenteController) FactoryController.controller("Incidentes"))::show);
             get("apertura-incidente", ((IncidenteController) FactoryController.controller("Incidentes"))::index);
             post("apertura-incidente", ((IncidenteController) FactoryController.controller("Incidentes"))::save);
-            get("incidente/{id}/cerrar", ((IncidenteController) FactoryController.controller("Incidentes"))::cerrar);
+            get("incidente/{incidente_id}/cerrar", ((IncidenteController) FactoryController.controller("Incidentes"))::cerrar);
+            post("incidente/cierre-incidente", ((IncidenteController) FactoryController.controller("Incidentes"))::cerrando);
 
             /* Miembros Controller */
 
@@ -71,6 +73,7 @@ public class Router {
             post("entidades/{id}", ((EntidadesController) FactoryController.controller("Entidades"))::update);
             post("entidades", ((EntidadesController) FactoryController.controller("Entidades"))::save);
             get("entidades/{id}/establecimientos", ((EntidadesController) FactoryController.controller("Entidades"))::showEstablecimientos);
+            get("entidades/carga-masiva", ((EntidadesController) FactoryController.controller("Entidades"))::cargaMasiva);
 
             /* Establecimientos Controller */
 

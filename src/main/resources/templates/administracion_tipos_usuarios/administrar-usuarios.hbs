@@ -33,50 +33,19 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <th scope="row">Caro</th>
+      {{#each usuarios}}
+      <tr>
+          <th scope="row">{{usuarios.email}}</th>
           <td>
             <select class="form-select" aria-label="Default select example">
-              <option selected value="1">Administrador</option>
-              <option value="2">Prestador</option>
-              <option value="3">Lector</option>
-              <option value="4">Miembro</option>
+             <option selected value="1">{{usuarios.rol}}</option>
+             {{#each usuarios.roles}}
+             <option selected value="1">{{this}}</option>
+             {{/each}}
             </select>
           </td>
-        </tr>
-        <tr>
-          <th scope="row">Dari</th>
-          <td>
-            <select class="form-select" aria-label="Default select example">
-              <option value="1">Administrador</option>
-              <option selected value="2">Prestador</option>
-              <option value="3">Lector</option>
-              <option value="4">Miembro</option>
-            </select>
-          </td>
-        </tr>
-        <tr>
-          <th scope="row">Maurito</th>
-          <td>
-            <select class="form-select" aria-label="Default select example">
-              <option value="1">Administrador</option>
-              <option value="2">Prestador</option>
-              <option selected value="3">Lector</option>
-              <option value="4">Miembro</option>
-            </select>
-          </td>
-        </tr>
-        <tr>
-          <th scope="row">Mica</th>
-          <td>
-            <select class="form-select" aria-label="Default select example">
-              <option value="1">Administrador</option>
-              <option value="2">Prestador</option>
-              <option value="3">Lector</option>
-              <option selected value="4">Miembro</option>
-            </select>
-          </td>
-        </tr>
+          </tr>
+        {{/each}}
       </tbody>
     </table>
     <button type="button" class="btn btn-primary guardar-cambios">Guardar cambios</button>

@@ -45,7 +45,6 @@ public class Servicio {
   @JoinColumn(name="establecimiento_id" , referencedColumnName = "id")
   private Establecimiento establecimiento;
 
-
   public Servicio() {
   }
 
@@ -53,6 +52,13 @@ public class Servicio {
     this.codigoServicio = codigoServicio;
     this.nombre = nombre;
     this.ubicacion = ubicacion;
+    this.esDeElevacion = esDeElevacion;
+    this.estaActivo = estaActivo;
+    this.establecimiento = establecimiento;
+  }
+  public Servicio(int codigoServicio, String nombre, boolean esDeElevacion, boolean estaActivo, Establecimiento establecimiento) {
+    this.codigoServicio = codigoServicio;
+    this.nombre = nombre;
     this.esDeElevacion = esDeElevacion;
     this.estaActivo = estaActivo;
     this.establecimiento = establecimiento;

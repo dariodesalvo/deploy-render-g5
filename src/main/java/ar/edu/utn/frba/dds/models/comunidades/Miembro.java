@@ -86,11 +86,12 @@ public class Miembro extends RolesUsuario {
         });
         return incidentes;
     }
+/* este metodo no tiene que existir
 
     public void cerrarIncidente(Incidente incidente) throws EmailException {
         incidente.cerrar(this);
     }
-
+*/
     public void sosParte(Comunidad comunidad){
         comunidades.add(comunidad);
     }

@@ -32,7 +32,7 @@ public class RepositorioServicios {
             String esServicioDeElvacion = lectura.get(i).get("Es de elevacion").toLowerCase();
             String elServicioEstaActivo = lectura.get(i).get("Esta Activo");
             Boolean esDeElvacion = esServicioDeElvacion.contains("si") ? true : false;
-            Boolean estaActivo = elServicioEstaActivo.contains("si") ? true : false;
+            Boolean estaActivo = elServicioEstaActivo.contains("si");
 
             ListadoDeMunicipios municipios = ServicioGeoref.getInstancia().listadoDeMunicipiosPorNombre(municipio);
             /*

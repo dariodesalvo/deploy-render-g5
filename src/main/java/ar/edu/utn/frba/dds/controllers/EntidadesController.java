@@ -114,6 +114,12 @@ public class EntidadesController extends Controller implements ICrudViewsHandler
 
     }
 
+    public void cargaMasiva(Context context){
+        Map<String, Object> model = new HashMap<>();
+        this.cargarVariablesSesion(context,model);
+        context.render("carga_masiva/carga-masiva.hbs", model);
+    }
+
     private void asignarParametros(Entidad entidad, Context context) {
         if(!Objects.equals(context.formParam("leyenda"), "")) {
             entidad.setLeyenda(context.formParam("leyenda"));
