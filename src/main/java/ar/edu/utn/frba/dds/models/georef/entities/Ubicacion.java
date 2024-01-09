@@ -12,7 +12,7 @@ import javax.persistence.*;
 public class Ubicacion {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    public int id;
+    public Long id;
     @Column(name = "lat")
     public float lat;
     @Column(name = "lon")

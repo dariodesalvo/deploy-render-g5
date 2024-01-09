@@ -18,7 +18,4 @@ public class Centroide {
     @Column(name = "lon")
     public float lon;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="municipio_id", nullable=false)
-    private Municipio municipio;
 }

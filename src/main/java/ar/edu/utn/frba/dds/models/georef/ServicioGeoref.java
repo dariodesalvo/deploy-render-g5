@@ -3,6 +3,7 @@ package ar.edu.utn.frba.dds.models.georef;
 
 
 import ar.edu.utn.frba.dds.models.georef.entities.ListadoDeMunicipios;
+import ar.edu.utn.frba.dds.models.georef.entities.ListadoDeProvincias;
 import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.Retrofit;
@@ -56,5 +57,12 @@ public class ServicioGeoref {
         Call<ListadoDeMunicipios> requestMunicipiosPorID = georefService.municipios(id);
         Response<ListadoDeMunicipios> responseMunicipiosPorID = requestMunicipiosPorID.execute();
         return responseMunicipiosPorID.body();
+    }
+
+    public ListadoDeProvincias listadoDeProvincias() throws IOException {
+        GeorefService georefService = this.retrofit.create(GeorefService.class);
+        Call<ListadoDeProvincias> requestProvinciasArg = georefService.provincias();
+        Response<ListadoDeProvincias> responseProvinciasArg = requestProvinciasArg.execute();
+        return  responseProvinciasArg.body();
     }
 }

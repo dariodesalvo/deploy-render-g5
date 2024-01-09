@@ -2,12 +2,15 @@ package ar.edu.utn.frba.dds.models.georef;
 
 
 import ar.edu.utn.frba.dds.models.georef.entities.ListadoDeMunicipios;
+import ar.edu.utn.frba.dds.models.georef.entities.ListadoDeProvincias;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 
 public interface GeorefService {
     //solamente tenemos q modelar la ruta relativa, la absoluta va en otra parte
+    @GET("provincias")
+    Call<ListadoDeProvincias> provincias();
     @GET("municipios")
     Call<ListadoDeMunicipios> municipios();
 
