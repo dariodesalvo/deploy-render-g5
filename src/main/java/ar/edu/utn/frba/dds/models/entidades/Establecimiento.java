@@ -29,9 +29,8 @@ public class Establecimiento {
     @JoinColumn(name = "ubicacion_id", referencedColumnName = "id")
     protected Ubicacion ubicacion;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "provincia_id", referencedColumnName = "id")
-    protected Provincia provincia;
+    @Column(name = "provincia_id")
+    private Long idProvincia;
 
     @OneToMany(mappedBy = "establecimiento")
     private List<Servicio> servicios;

@@ -134,8 +134,7 @@ public class EstablecimientosController extends Controller implements ICrudViews
     private void asignarParametros(Establecimiento establecimiento, Context context) {
         if(!Objects.equals(context.formParam("leyenda"), "")) {
             establecimiento.setLeyenda(context.formParam("leyenda"));
-        /*    Provincia provincia = (Provincia) this.repositorioDeEstablecimientos.buscar(Long.parseLong(context.formParam("idProvincia")));
-            establecimiento.setProvincia(provincia);*/
+            establecimiento.setIdProvincia(Long.parseLong(context.formParam("idProvincia")));
             Entidad entidad = (Entidad) this.repositorioDeEntidades.buscar(Long.parseLong(context.formParam("idEntidad")));
             establecimiento.setEntidad(entidad);
         }
