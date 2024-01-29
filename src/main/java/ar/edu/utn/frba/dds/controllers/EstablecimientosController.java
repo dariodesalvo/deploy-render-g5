@@ -82,14 +82,32 @@ public class EstablecimientosController extends Controller implements ICrudViews
     }
 
     public void cargarMunicipios(Context context) throws IOException {
-        ListadoDeMunicipios listadoDeMunicipios = new ListadoDeMunicipios();
-        if(!Objects.equals(context.pathParam("idProvincia"), "0")) {
-            listadoDeMunicipios = servicioGeoref.listadoDeMunicipiosDeProvincia(Integer.parseInt(context.pathParam("idProvincia")));
-        }
-        Map<String, Object> model = new HashMap<>();
-        model.put("municipios", listadoDeMunicipios.municipios);
 
-        context.render("municipios/municipios.hbs",model);
+        Entidad entidad = (Entidad) this.repositorioDeEntidades.buscar(Long.parseLong(context.pathParam("idEntidad")));
+     //   Establecimiento establecimiento = null;
+
+
+        ListadoDeMunicipios listadoDeMunicipios = servicioGeoref.listadoDeMunicipiosDeProvincia(Integer.parseInt(context.pathParam("idProvincia")));
+        ListadoDeProvincias listadoDeProvinciasPorID = servicioGeoref.listadoDeProvinciasPorID(Integer.parseInt(context.pathParam("idProvincia")));
+        ListadoDeProvincias listadoDeProvincias = servicioGeoref.listadoDeProvincias();
+
+        Map<String, Object> model = new HashMap<>();
+
+        model.put("leyenda", context.pathParam("leyenda"));
+        model.put("provincia", listadoDeProvinciasPorID.provincias);
+
+
+        model.put("municipios", listadoDeMunicipios.municipios);
+       // model.put("establecimiento", establecimiento);
+        model.put("provincias", listadoDeProvincias.provincias);
+        model.put("municipios", listadoDeMunicipios.municipios);
+        model.put("entidad", entidad);
+        model.put("email", context.sessionAttribute("email"));
+        model.put("tipo_rol", context.sessionAttribute("tipo_rol"));
+        model.put("usuario_id", context.sessionAttribute("usuario_id"));
+        model.put("MiembroAdmin", context.sessionAttribute("MiembroAdmin"));
+        model.put("Miembro", context.sessionAttribute("Miembro"));
+        context.render("establecimientos/establecimiento.hbs", model);
     }
 
     @Override

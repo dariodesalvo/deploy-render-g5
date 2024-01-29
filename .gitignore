@@ -25,6 +25,10 @@ hs_err_pid*
 # maven build
 target/**
 
+#conexionBD
+src/main/resources/META-INF/**
+
+
 # IJ files
 *.iml
 .idea/**

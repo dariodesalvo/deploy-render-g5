@@ -65,4 +65,11 @@ public class ServicioGeoref {
         Response<ListadoDeProvincias> responseProvinciasArg = requestProvinciasArg.execute();
         return  responseProvinciasArg.body();
     }
+
+    public ListadoDeProvincias listadoDeProvinciasPorID(int id) throws IOException {
+        GeorefService georefService = this.retrofit.create(GeorefService.class);
+        Call<ListadoDeProvincias> requestProvinciasArgPorID = georefService.provincias(id);
+        Response<ListadoDeProvincias> responseProvinciasArgporID = requestProvinciasArgPorID.execute();
+        return  responseProvinciasArgporID.body();
+    }
 }
