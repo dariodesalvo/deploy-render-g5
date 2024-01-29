@@ -22,6 +22,8 @@ public class Municipio {
     @JoinColumn(name = "centroide_id")
     public Centroide centroide;
 
+   // public Provincia provincia;
+
     public Municipio() {
     }
 

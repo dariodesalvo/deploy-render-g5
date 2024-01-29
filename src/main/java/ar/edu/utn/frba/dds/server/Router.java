@@ -75,6 +75,8 @@ public class Router {
             /* Establecimientos Controller */
 
             get("establecimientos/{idEntidad}/crear", ((EstablecimientosController) FactoryController.controller("Establecimientos"))::create);
+            get("establecimientos/{idEntidad}/crear/{idProvincia}", ((EstablecimientosController) FactoryController.controller("Establecimientos"))::cargarMunicipios);
+
             post("establecimientos", ((EstablecimientosController) FactoryController.controller("Establecimientos"))::save);
             get("establecimientos/{id}/editar", ((EstablecimientosController) FactoryController.controller("Establecimientos"))::edit);
             post("establecimientos/{id}", ((EstablecimientosController) FactoryController.controller("Establecimientos"))::update);

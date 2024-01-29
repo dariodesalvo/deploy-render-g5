@@ -32,6 +32,9 @@ public class Establecimiento {
     @Column(name = "provincia_id")
     private Long idProvincia;
 
+    @Column(name = "municipio_id")
+    private int idMunicipio;
+
     @OneToMany(mappedBy = "establecimiento")
     private List<Servicio> servicios;
 

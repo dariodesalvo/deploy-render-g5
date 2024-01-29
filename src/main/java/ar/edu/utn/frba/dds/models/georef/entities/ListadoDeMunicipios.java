@@ -15,4 +15,7 @@ public class ListadoDeMunicipios {
         public List<String> provincia;
 
     }
+
+    public ListadoDeMunicipios() {
+    }
 }
