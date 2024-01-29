@@ -94,7 +94,7 @@ public class EstablecimientosController extends Controller implements ICrudViews
         Map<String, Object> model = new HashMap<>();
 
         model.put("leyenda", context.pathParam("leyenda"));
-        model.put("provincia", listadoDeProvinciasPorID.provincias);
+        model.put("provincia", listadoDeProvinciasPorID.provincias.get(0));
 
 
         model.put("municipios", listadoDeMunicipios.municipios);
