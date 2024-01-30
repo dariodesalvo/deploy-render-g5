@@ -358,6 +358,12 @@ public class ComunidadesController extends Controller implements ICrudViewsHandl
     @Override
     public void edit(Context context) {
 
+        Comunidad comunidad = (Comunidad) repositorioDeComunidades.buscar(Long.parseLong(context.pathParam("comunidad_id")));
+        Map<String, Object> model = new HashMap<>();
+        this.cargarVariablesSesion(context, model);
+        model.put("comunidad", comunidad);
+        context.render("comunidades/comunidad.hbs", model);
+
     }
 
     @Override
