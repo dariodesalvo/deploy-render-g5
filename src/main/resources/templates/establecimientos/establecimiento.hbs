@@ -1,10 +1,38 @@
 {{#partial "contenido" }}
+<script>
+function cargarMunicipios(idProvincia){
+    leyenda = document.getElementById("leyenda").value;
+    window.location.href = '/establecimientos/{{entidad.id}}/crear/'+idProvincia+'/'+leyenda+'%20';
+
+}
+</script>
     <h3>Establecimiento perteneciente a {{entidad.leyenda}}</h3>
     <form method="POST" {{#if establecimiento}} action="/establecimientos/{{establecimiento.id}}" {{else}} action="/establecimientos" {{/if}}>
         <div class="form-group mb-10">
             <label>Leyenda: </label>
-            <input name="leyenda" {{#if establecimiento}} value="{{establecimiento.leyenda}}" {{/if}} placeholder="Leyenda">
+            <input id="leyenda" name="leyenda" {{#if leyenda}} value="{{leyenda}}" {{/if}} placeholder="Leyenda">
             <input name="idEntidad" value="{{entidad.id}}"  type="hidden" >
+
+            <div class="form-group">
+                <label class="mb-2" for="provincias">Provincia:</label>
+                <select name="idProvincia" onchange="cargarMunicipios(this.options[this.selectedIndex].value);" class="form-control mt-10">
+                    {{#if provincia }}<option  selected value="{{provincia.id}}">{{provincia.nombre}}</option> {{/if}}
+                    <option>Selecione la provincia</option>
+                    {{#each provincias}}
+                        <option value="{{this.id}}">{{this.nombre}}</option>
+                    {{/each}}
+                </select>
+                <div >
+                    <label class="mb-2" for="municipios">Municipio:</label>
+                    <select name="idMunicipio" class="form-control mt-10">
+                        <option selected>Selecione el Municipio</option>
+                        {{#each municipios}}
+                            <option value="{{this.id}}">{{this.nombre}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
         </div>
         <div class="mt-4">
             <button type="submit" class="btn btn-primary">Guardar</button>

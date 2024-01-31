@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.models.entidades;
 
+import ar.edu.utn.frba.dds.models.georef.entities.Provincia;
 import ar.edu.utn.frba.dds.models.georef.entities.Ubicacion;
 import ar.edu.utn.frba.dds.models.servicios.Servicio;
 import lombok.Getter;
@@ -25,8 +26,14 @@ public class Establecimiento {
 
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "ubicacion_id")
-    protected Ubicacion ubicacion_id;
+    @JoinColumn(name = "ubicacion_id", referencedColumnName = "id")
+    protected Ubicacion ubicacion;
+
+    @Column(name = "provincia_id")
+    private Long idProvincia;
+
+    @Column(name = "municipio_id")
+    private int idMunicipio;
 
     @OneToMany(mappedBy = "establecimiento")
     private List<Servicio> servicios;

@@ -12,12 +12,14 @@ import ar.edu.utn.frba.dds.models.incidentes.mediosNotificacion.sender.EmailSend
 import ar.edu.utn.frba.dds.models.repositorios.*;
 import ar.edu.utn.frba.dds.server.utils.ICrudViewsHandler;
 import io.javalin.http.Context;
+import io.javalin.http.HttpStatus;
 import org.apache.commons.mail.EmailException;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.concurrent.Callable;
 import java.util.stream.Collectors;
 
 public class ComunidadesController extends Controller implements ICrudViewsHandler {
@@ -38,7 +40,7 @@ public class ComunidadesController extends Controller implements ICrudViewsHandl
 
         Map<String, Object> model = new HashMap<>();
         List<Comunidad> comunidades = this.repositorioDeComunidades.buscarTodos();
-        List<Comunidad> otrasComunidades;
+        List<Comunidad> otrasComunidades = null;
 
         this.cargarVariablesSesion(context, model);
 
@@ -49,7 +51,7 @@ public class ComunidadesController extends Controller implements ICrudViewsHandl
                 .filter(comunidad -> comunidad.getSolicitudes().contains(usuario))
                 .collect(Collectors.toList());
 
-        if (context.sessionAttribute("Miembro") != null) {
+        if (Objects.equals(usuario.getRol().getClass().getSimpleName(), "Miembro")) {
             Miembro miembro = (Miembro) usuario.getRol();
             List<Comunidad> misComunidades = miembro.getComunidades();
             model.put("misComunidades", misComunidades);
@@ -284,15 +286,83 @@ public class ComunidadesController extends Controller implements ICrudViewsHandl
     @Override
     public void create(Context context) {
 
+        Comunidad comunidad = new Comunidad();
+       // revisar numero de confiabilidad
+        comunidad.setConfiabilidad(5.0);
+        repositorioDeComunidades.guardar(comunidad);
+
+        /* el usuario es administrador */
+        Usuario usuario = (Usuario) repositorioDeUsuarios.buscar(Long.parseLong(context.sessionAttribute("usuario_id")));
+        Miembro miembro=null;
+        if(Objects.equals(usuario.getRol().getClass().getSimpleName(), "Miembro")){
+            miembro = (Miembro) usuario.getRol();
+          }else{
+            try {
+                RolesUsuario rol = usuario.getRol();
+                miembro = new Miembro();
+                miembro.setNombre(usuario.getEmail());
+                miembro.setConfiabilidad(4.5);
+                MedioDeNotificacion medio = new EmailSender(new NotificarPorEmail());
+                miembro.setMedioNotificacionPreferido(medio);
+                repositorioDeRoles.guardar(miembro);
+                Thread.sleep(1000);
+                usuario.setRol(miembro);
+                repositorioDeUsuarios.actualizar(usuario);
+                Thread.sleep(1000);
+                repositorioDeRoles.eliminar(rol);
+                Thread.sleep(1000);
+
+                context.sessionAttribute("MiembroAdmin", true);
+                context.sessionAttribute("Miembro", true);
+                context.sessionAttribute("tipo_rol", "Miembro");
+                context.sessionAttribute("Lector", null);
+
+            }catch (Exception e){
+                System.out.println("Fallo al crear nuevo miembro");
+            }
+        }
+
+        try {
+
+            comunidad.agregarMiembro(miembro);
+            comunidad.darAdministradorA(miembro);
+            repositorioDeComunidades.actualizar(comunidad);
+            repositorioDeRoles.actualizar(miembro);
+            Thread.sleep(1000);
+            repositorioDeComunidades.limpiarCache();
+            repositorioDeRoles.limpiarCache();
+
+        }catch (Exception e){
+            System.out.println("Creando comunidad");
+        }
+
+
+        Map<String, Object> model = new HashMap<>();
+        this.cargarVariablesSesion(context, model);
+        model.put("comunidad", comunidad);
+        context.render("comunidades/comunidad.hbs", model);
+
     }
 
     @Override
     public void save(Context context) {
 
+       Comunidad comunidad = (Comunidad) repositorioDeComunidades.buscar(Long.parseLong(context.pathParam("comunidad_id")));
+       comunidad.setNombre(context.formParam("nombre"));
+       repositorioDeComunidades.actualizar(comunidad);
+       repositorioDeComunidades.limpiarCache();
+
+       context.redirect("/comunidades");
     }
 
     @Override
     public void edit(Context context) {
+
+        Comunidad comunidad = (Comunidad) repositorioDeComunidades.buscar(Long.parseLong(context.pathParam("comunidad_id")));
+        Map<String, Object> model = new HashMap<>();
+        this.cargarVariablesSesion(context, model);
+        model.put("comunidad", comunidad);
+        context.render("comunidades/comunidad.hbs", model);
 
     }
 

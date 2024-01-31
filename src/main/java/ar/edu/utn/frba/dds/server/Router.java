@@ -62,7 +62,9 @@ public class Router {
             get("comunidades/{comunidad_id}/eliminar/{miembro_id}", ((ComunidadesController) FactoryController.controller("Comunidades"))::eliminar);
             get("comunidades/{comunidad_id}/hacer-administrador/{miembro_id}", ((ComunidadesController) FactoryController.controller("Comunidades"))::hacerAdmin);
             get("comunidades/{comunidad_id}/quitar-administrador/{miembro_id}", ((ComunidadesController) FactoryController.controller("Comunidades"))::quitarAdmin);
-
+            get("/comunidades/crear",  ((ComunidadesController) FactoryController.controller("Comunidades"))::create);
+            post("/comunidades/editar/{comunidad_id}" , ((ComunidadesController) FactoryController.controller("Comunidades"))::save);
+            get("/comunidades/editar/{comunidad_id}" , ((ComunidadesController) FactoryController.controller("Comunidades"))::edit);
 
 
             /* Entidades Controller */
@@ -78,6 +80,8 @@ public class Router {
             /* Establecimientos Controller */
 
             get("establecimientos/{idEntidad}/crear", ((EstablecimientosController) FactoryController.controller("Establecimientos"))::create);
+            get("establecimientos/{idEntidad}/crear/{idProvincia}/{leyenda}", ((EstablecimientosController) FactoryController.controller("Establecimientos"))::cargarMunicipios);
+
             post("establecimientos", ((EstablecimientosController) FactoryController.controller("Establecimientos"))::save);
             get("establecimientos/{id}/editar", ((EstablecimientosController) FactoryController.controller("Establecimientos"))::edit);
             post("establecimientos/{id}", ((EstablecimientosController) FactoryController.controller("Establecimientos"))::update);

@@ -3,6 +3,7 @@ package ar.edu.utn.frba.dds.models.georef;
 
 
 import ar.edu.utn.frba.dds.models.georef.entities.ListadoDeMunicipios;
+import ar.edu.utn.frba.dds.models.georef.entities.ListadoDeProvincias;
 import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.Retrofit;
@@ -37,9 +38,9 @@ public class ServicioGeoref {
         return  responseMunicipiosArg.body();
     }
 
-    public ListadoDeMunicipios listadoDeMunicipiosDeProvincia(int id) throws IOException {
+    public ListadoDeMunicipios listadoDeMunicipiosDeProvincia(int idProvincia) throws IOException {
         GeorefService georefService = this.retrofit.create(GeorefService.class);
-        Call<ListadoDeMunicipios> requestMunicipiosDeProvincia = georefService.municipios(id,"id, nombre, centroide", 200);
+        Call<ListadoDeMunicipios> requestMunicipiosDeProvincia = georefService.municipios(idProvincia,200);
         Response<ListadoDeMunicipios> responseMunicipiosDeProvincia = requestMunicipiosDeProvincia.execute();
         return responseMunicipiosDeProvincia.body();
     }
@@ -56,5 +57,19 @@ public class ServicioGeoref {
         Call<ListadoDeMunicipios> requestMunicipiosPorID = georefService.municipios(id);
         Response<ListadoDeMunicipios> responseMunicipiosPorID = requestMunicipiosPorID.execute();
         return responseMunicipiosPorID.body();
+    }
+
+    public ListadoDeProvincias listadoDeProvincias() throws IOException {
+        GeorefService georefService = this.retrofit.create(GeorefService.class);
+        Call<ListadoDeProvincias> requestProvinciasArg = georefService.provincias();
+        Response<ListadoDeProvincias> responseProvinciasArg = requestProvinciasArg.execute();
+        return  responseProvinciasArg.body();
+    }
+
+    public ListadoDeProvincias listadoDeProvinciasPorID(int id) throws IOException {
+        GeorefService georefService = this.retrofit.create(GeorefService.class);
+        Call<ListadoDeProvincias> requestProvinciasArgPorID = georefService.provincias(id);
+        Response<ListadoDeProvincias> responseProvinciasArgporID = requestProvinciasArgPorID.execute();
+        return  responseProvinciasArgporID.body();
     }
 }

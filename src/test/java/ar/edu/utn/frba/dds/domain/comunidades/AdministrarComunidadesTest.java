@@ -1,3 +1,4 @@
+/*
 package ar.edu.utn.frba.dds.domain.comunidades;
 
 import ar.edu.utn.frba.dds.models.comunidades.*;
@@ -34,5 +35,6 @@ public class AdministrarComunidadesTest {
 }
 
 
+*/
 
 

@@ -51,8 +51,11 @@ public class Comunidad extends Persistente {
   @Column(name = "confiabilidad")
   private Double confiabilidad;
 
-  public Comunidad(){
 
+  public Comunidad(){
+    this.miembros = new ArrayList<>();
+    this.administradores = new ArrayList<>();
+    this.solicitudes= new ArrayList<>();
   }
 
   public Comunidad(String nombre){
@@ -61,6 +64,7 @@ public class Comunidad extends Persistente {
     this.administradores = new ArrayList<>();
     this.solicitudes= new ArrayList<>();
   }
+
 
   public void agregarMiembro(Miembro miembro) {
     this.miembros.add(miembro);
