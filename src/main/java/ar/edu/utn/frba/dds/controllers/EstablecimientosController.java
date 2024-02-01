@@ -150,6 +150,10 @@ public class EstablecimientosController extends Controller implements ICrudViews
             listadoDeMunicipios = servicioGeoref.listadoDeMunicipiosDeProvincia(Integer.parseInt(context.pathParam("idProvincia")));
         }
 
+        if(!Objects.equals(context.formParam("idMunicipio"), null)) {
+            establecimiento.setIdMunicipio(Integer.parseInt(context.formParam("idMunicipio")));
+        }
+
         //carga el selected de municipio
         if(!Objects.equals(establecimiento.getIdMunicipio(), 0)) {
             ListadoDeMunicipios listadoDeMunicipiosPorID = servicioGeoref.listadoDeMunicipiosPorID(establecimiento.getIdMunicipio());
