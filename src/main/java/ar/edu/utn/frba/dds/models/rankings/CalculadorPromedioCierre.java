@@ -19,7 +19,9 @@ public class CalculadorPromedioCierre {
          for (Incidente incidente : incidentes
         ) {
             // x cada incidente se calcula el cierre
-            segundosAcumulados += this.segundosEntreFechas(incidente.getFechaApertura(), incidente.getFechaCierre());
+
+            //repensar linea 24 x los cambios hechos
+            segundosAcumulados += this.segundosEntreFechas(incidente.getFechaApertura(), incidente.getFechaApertura());
             cantidadIncidentes += 1;
         }
 

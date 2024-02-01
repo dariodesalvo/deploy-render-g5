@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.dds.models.incidentes.mensajes;
 
 import ar.edu.utn.frba.dds.models.incidentes.Incidente;
+import ar.edu.utn.frba.dds.models.incidentes.IncidenteXComunidad;
 
 public class CierreIncidente implements Mensaje {
 
@@ -8,10 +9,10 @@ public class CierreIncidente implements Mensaje {
 
     }
 
-    public String contenido(Incidente incidente){
+    public String contenido(IncidenteXComunidad incidenteXComunidad){
 
-        return "Se cerró el incidente en el servicio"+incidente.getServicio()+"a las "
-                +incidente.getFechaCierre()+" con las siguientes observaciones: "+incidente.getObservacionesCierre();
+        return "Se cerró el incidente en el servicio"+incidenteXComunidad.getIncidente().getServicio()+"a las "
+                +incidenteXComunidad.getFechaCierre()+" con las siguientes observaciones: "+incidenteXComunidad.getObservacionesCierre();
 
     }
 }

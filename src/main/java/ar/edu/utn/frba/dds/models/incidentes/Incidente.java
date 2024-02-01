@@ -23,6 +23,7 @@ import java.util.List;
 @Table(name = "incidente")
 public class Incidente extends Persistente {
 
+
     @ManyToOne
     @JoinColumn(name = "servicio_id", referencedColumnName = "id")
     private Servicio servicio;
@@ -31,41 +32,23 @@ public class Incidente extends Persistente {
     @JoinColumn(name = "abierto_por", referencedColumnName = "id")
     private Miembro abiertoPor;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "cerrado_por", referencedColumnName = "id")
-    private Miembro cerradoPor;
-
-    @ManyToOne
-    @JoinColumn(name = "comunidad_id", referencedColumnName = "id")
-    private Comunidad comunidad;
     @Column(name = "estado")
     private Boolean estado;
+
     @Column(name = "observacionesApertura")
     private String observacionesApertura;
-    @Column(name = "observacionesCierre")
-    private String observacionesCierre;
+
     @Convert(converter = LocalDateTimeAttributeConverter.class)
     @Column(name = "fechaApertura")
     private LocalDateTime fechaApertura;
-    @Convert(converter = LocalDateTimeAttributeConverter.class)
-    @Column(name = "fechaCierre")
-    private LocalDateTime fechaCierre;
-    @Transient
-    private Notificador notificador;
 
-    public Incidente(Servicio servicio, Miembro abiertoPor, Comunidad comunidad, String observaciones) throws EmailException {
+
+    public Incidente(Servicio servicio, Miembro abiertoPor, String observaciones) throws EmailException {
         this.servicio = servicio;
         this.abiertoPor = abiertoPor;
-        this.comunidad = comunidad;
         this.observacionesApertura = observaciones;
         this.fechaApertura = LocalDateTime.now();
         this.estado=Boolean.TRUE;
-
-        //llamar a notificador pasarle la comunidad y el incidente
-
-        Mensaje mensaje = new AperturaIncidente();
-
-        //this.notificador.notificar(comunidad, this, mensaje);
 
     }
 
@@ -75,13 +58,9 @@ public class Incidente extends Persistente {
 
     public void notificarCercania(String mensaje,List<Comunidad> comunidades){}
 
-    public void cerrar(Miembro miembro, String observaciones) throws EmailException {
-        this.setCerradoPor(miembro);
-        this.observacionesCierre = observaciones;
-        this.fechaCierre= LocalDateTime.now();
-        this.estado=Boolean.FALSE;
-        Mensaje mensaje = new CierreIncidente();
-        //this.notificador.notificar(comunidad, this, mensaje);
+    public void cerrar() throws EmailException {
+
+        this.estado = Boolean.FALSE;
 
     }
 

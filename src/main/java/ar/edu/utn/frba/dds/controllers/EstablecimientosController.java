@@ -64,7 +64,11 @@ public class EstablecimientosController extends Controller implements ICrudViews
     public void create(Context context) throws IOException {
 
         Entidad entidad = (Entidad) this.repositorioDeEntidades.buscar(Long.parseLong(context.pathParam("idEntidad")));
-        Establecimiento establecimiento = null;
+        Establecimiento establecimiento = new Establecimiento();
+        establecimiento.setEntidad(entidad);
+        establecimiento.setIdProvincia(2L);
+        repositorioDeEstablecimientos.guardar(establecimiento);
+        /*
         ListadoDeMunicipios listadoDeMunicipios = new ListadoDeMunicipios();
         ListadoDeProvincias listadoDeProvincias = servicioGeoref.listadoDeProvincias();
 
@@ -73,14 +77,14 @@ public class EstablecimientosController extends Controller implements ICrudViews
         model.put("provincias", listadoDeProvincias.provincias);
         model.put("municipios", listadoDeMunicipios.municipios);
         model.put("entidad", entidad);
-        model.put("email", context.sessionAttribute("email"));
-        model.put("tipo_rol", context.sessionAttribute("tipo_rol"));
-        model.put("usuario_id", context.sessionAttribute("usuario_id"));
-        model.put("MiembroAdmin", context.sessionAttribute("MiembroAdmin"));
-        model.put("Miembro", context.sessionAttribute("Miembro"));
-        context.render("establecimientos/establecimiento.hbs", model);
+        this.cargarVariablesSesion(context,model);
+        */
+        //por defecto se crean en BS AS
+        context.redirect("/establecimientos/"+establecimiento.getId().toString()+"/2/editar/%20");
+
     }
 
+    //deprecado
     public void cargarMunicipios(Context context) throws IOException {
 
         Entidad entidad = (Entidad) this.repositorioDeEntidades.buscar(Long.parseLong(context.pathParam("idEntidad")));
@@ -127,18 +131,42 @@ public class EstablecimientosController extends Controller implements ICrudViews
 
     @Override
     public void edit(Context context) throws IOException {
+
         Establecimiento establecimiento = (Establecimiento) this.repositorioDeEstablecimientos.buscar(Long.parseLong(context.pathParam("id")));
         ListadoDeProvincias listadoDeProvincias = servicioGeoref.listadoDeProvincias();
+
         context.status(HttpStatus.OK);
         Map<String, Object> model = new HashMap<>();
+
+        //carga el selected
+        if(!Objects.equals(context.pathParam("idProvincia"), "")) {
+            ListadoDeProvincias listadoDeProvinciasPorID = servicioGeoref.listadoDeProvinciasPorID(Integer.parseInt(context.pathParam("idProvincia")));
+            model.put("provincia", listadoDeProvinciasPorID.provincias.get(0));
+        }
+
+        ListadoDeMunicipios listadoDeMunicipios=null;
+        //carga todos los municipios que usa
+        if(!Objects.equals(context.pathParam("idProvincia"), "")) {
+            listadoDeMunicipios = servicioGeoref.listadoDeMunicipiosDeProvincia(Integer.parseInt(context.pathParam("idProvincia")));
+        }
+
+        //carga el selected de municipio
+        if(!Objects.equals(establecimiento.getIdMunicipio(), "")) {
+            /*
+            ListadoDeProvincias listadoDeProvinciasPorID = servicioGeoref.listadoDeProvinciasPorID(Integer.parseInt(establecimiento.getIdProvincia().toString()));
+            model.put("municipio", listadoDeProvinciasPorID.provincias.get(0));
+        */
+        }
+
+        model.put("leyenda", context.pathParam("leyenda"));
+
+        model.put("municipios", listadoDeMunicipios.municipios);
         model.put("provincias", listadoDeProvincias.provincias);
         model.put("establecimiento", establecimiento);
         model.put("entidad", establecimiento.getEntidad());
-        model.put("email", context.sessionAttribute("email"));
-        model.put("tipo_rol", context.sessionAttribute("tipo_rol"));
-        model.put("usuario_id", context.sessionAttribute("usuario_id"));
-        model.put("MiembroAdmin", context.sessionAttribute("MiembroAdmin"));
-        model.put("Miembro", context.sessionAttribute("Miembro"));
+
+        this.cargarVariablesSesion(context, model);
+
         context.render("establecimientos/establecimiento.hbs", model);
     }
 
@@ -148,14 +176,7 @@ public class EstablecimientosController extends Controller implements ICrudViews
         this.asignarParametros(establecimiento, context);
         this.repositorioDeEstablecimientos.actualizar(establecimiento);
         context.status(HttpStatus.OK);
-        /* Map<String, Object> model = new HashMap<>();
-        model.put("entidad", establecimiento.getEntidad());
-        model.put("establecimientos", establecimiento.getEntidad().misEstablecimientos());
-        context.render("establecimientos/establecimientos.hbs", model);
-        */
-        context.redirect("/entidades/"+establecimiento.getEntidad().getId()+"/establecimientos");
-
-
+        context.redirect("/entidades/"+establecimiento.getEntidad().getId().toString()+"/establecimientos");
     }
 
 
@@ -169,9 +190,7 @@ public class EstablecimientosController extends Controller implements ICrudViews
             establecimiento.setLeyenda(context.formParam("leyenda"));
             establecimiento.setIdProvincia(Long.parseLong(context.formParam("idProvincia")));
             establecimiento.setIdMunicipio(Integer.parseInt(context.formParam("idMunicipio")));
-            Entidad entidad = (Entidad) this.repositorioDeEntidades.buscar(Long.parseLong(context.formParam("idEntidad")));
-            establecimiento.setEntidad(entidad);
-        }
+          }
     }
 
     public void showServicios(Context context){
@@ -179,11 +198,7 @@ public class EstablecimientosController extends Controller implements ICrudViews
         Map<String, Object> model = new HashMap<>();
         model.put("establecimiento", establecimiento);
         model.put("servicios", establecimiento.getServicios());
-        model.put("email", context.sessionAttribute("email"));
-        model.put("tipo_rol", context.sessionAttribute("tipo_rol"));
-        model.put("usuario_id", context.sessionAttribute("usuario_id"));
-        model.put("MiembroAdmin", context.sessionAttribute("MiembroAdmin"));
-        model.put("Miembro", context.sessionAttribute("Miembro"));
+        this.cargarVariablesSesion(context, model);
         context.render("servicios/servicios.hbs", model);
 
     }

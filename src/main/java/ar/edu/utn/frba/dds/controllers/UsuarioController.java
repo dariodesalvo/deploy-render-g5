@@ -34,16 +34,9 @@ public class UsuarioController extends Controller implements ICrudViewsHandler {
         Usuario usuario = (Usuario) repositorioDeUsuarios.buscar(Long.parseLong(context.sessionAttribute("usuario_id")));
 
         Map<String, Object> model = new HashMap<>();
-
-        /* desde aca */
-        model.put("email", context.sessionAttribute("email"));
-        model.put("tipo_rol", context.sessionAttribute("tipo_rol"));
-        model.put("usuario_id", context.sessionAttribute("usuario_id"));
-        model.put("MiembroAdmin", context.sessionAttribute("MiembroAdmin"));
-        model.put("municipio", usuario.getMunicipio());
         model.put("miembro", usuario.getRol());
-        model.put("Miembro", context.sessionAttribute("Miembro"));
-        context.render("administracion_tipos_usuarios/administrar-usuarios.hbs", model);
+        this.cargarVariablesSesion(context, model);
+        context.render("/login/perfil.hbs", model);
     }
 
     @Override

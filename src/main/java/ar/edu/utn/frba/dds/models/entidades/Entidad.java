@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.models.entidades;
 
+import ar.edu.utn.frba.dds.models.Persistente;
 import ar.edu.utn.frba.dds.models.comunidades.Prestador;
 import ar.edu.utn.frba.dds.models.incidentes.Incidente;
 import lombok.Getter;
@@ -14,9 +15,8 @@ import java.util.List;
 @Setter
 @Entity
 @Table(name = "Entidad")
-public class Entidad  {
-    @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+public class Entidad extends Persistente {
+
     private Long id;
     @Column(name = "leyenda")
     public String leyenda;

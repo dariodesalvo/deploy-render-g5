@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.dds.models.comunidades;
 import ar.edu.utn.frba.dds.models.converters.MedioDeNotificacionAttributeConverter;
 import ar.edu.utn.frba.dds.models.incidentes.Incidente;
+import ar.edu.utn.frba.dds.models.incidentes.IncidenteXComunidad;
 import ar.edu.utn.frba.dds.models.incidentes.TipoNotificacion;
 import ar.edu.utn.frba.dds.models.incidentes.mediosNotificacion.MedioDeNotificacion;
 import ar.edu.utn.frba.dds.models.servicios.Servicio;
@@ -73,19 +74,33 @@ public class Miembro extends RolesUsuario {
         this.comunidades.add(comunidad);
     }
 
-    public List<Incidente> abrirIncidente(Servicio servicio, String observaciones){
-        List<Incidente> incidentes = new ArrayList<>();
+
+    public Incidente abrirIncidente(Servicio servicio, String observaciones){
+        Incidente incidente=null;
+        Miembro yo = this;
+            try {
+                incidente=new Incidente(servicio,yo,observaciones);
+            } catch (EmailException e) {
+                throw new RuntimeException(e);
+            }
+        ;
+        return incidente;
+    }
+
+    public List<IncidenteXComunidad> incidentesXComunidad(Incidente incidente, List<Comunidad> comunidaes){
+        List<IncidenteXComunidad> incidentesXComunidad = new ArrayList<>();
         Miembro yo = this;
         numero=0;
         comunidades.forEach(comunidad -> { numero++;
             try {
-                incidentes.add(new Incidente(servicio,yo,comunidad,observaciones));
+                incidentesXComunidad.add(new IncidenteXComunidad(comunidad, incidente));
             } catch (EmailException e) {
                 throw new RuntimeException(e);
             }
         });
-        return incidentes;
+        return incidentesXComunidad;
     }
+
 /* este metodo no tiene que existir
 
     public void cerrarIncidente(Incidente incidente) throws EmailException {

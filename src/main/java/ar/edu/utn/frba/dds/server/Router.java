@@ -44,6 +44,7 @@ public class Router {
             get("administrar-usuarios", ((UsuarioController) FactoryController.controller("Usuarios"))::show);
             get("perfil",  ((UsuarioController) FactoryController.controller("Usuarios"))::perfil);
             post("perfil/editar", ((UsuarioController) FactoryController.controller("Usuarios"))::edit);
+
             /* Incidentes Controller*/
 
             get("incidentes", ((IncidenteController) FactoryController.controller("Incidentes"))::show);
@@ -80,10 +81,9 @@ public class Router {
             /* Establecimientos Controller */
 
             get("establecimientos/{idEntidad}/crear", ((EstablecimientosController) FactoryController.controller("Establecimientos"))::create);
-            get("establecimientos/{idEntidad}/crear/{idProvincia}/{leyenda}", ((EstablecimientosController) FactoryController.controller("Establecimientos"))::cargarMunicipios);
-
+            // deprecated get("establecimientos/{idEntidad}/crear/{idProvincia}/{leyenda}", ((EstablecimientosController) FactoryController.controller("Establecimientos"))::cargarMunicipios);
             post("establecimientos", ((EstablecimientosController) FactoryController.controller("Establecimientos"))::save);
-            get("establecimientos/{id}/editar", ((EstablecimientosController) FactoryController.controller("Establecimientos"))::edit);
+            get("establecimientos/{id}/{idProvincia}/editar/{leyenda}", ((EstablecimientosController) FactoryController.controller("Establecimientos"))::edit);
             post("establecimientos/{id}", ((EstablecimientosController) FactoryController.controller("Establecimientos"))::update);
             get("establecimientos/{id}/servicios", ((EstablecimientosController) FactoryController.controller("Establecimientos"))::showServicios);
 

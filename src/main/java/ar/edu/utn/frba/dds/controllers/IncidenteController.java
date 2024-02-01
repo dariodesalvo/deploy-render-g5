@@ -4,10 +4,8 @@ import ar.edu.utn.frba.dds.models.comunidades.Comunidad;
 import ar.edu.utn.frba.dds.models.comunidades.Miembro;
 import ar.edu.utn.frba.dds.models.comunidades.Usuario;
 import ar.edu.utn.frba.dds.models.incidentes.Incidente;
-import ar.edu.utn.frba.dds.models.repositorios.RepositorioDeIncidentes;
-import ar.edu.utn.frba.dds.models.repositorios.RepositorioDeRoles;
-import ar.edu.utn.frba.dds.models.repositorios.RepositorioDeServicios;
-import ar.edu.utn.frba.dds.models.repositorios.RepositorioDeUsuarios;
+import ar.edu.utn.frba.dds.models.incidentes.IncidenteXComunidad;
+import ar.edu.utn.frba.dds.models.repositorios.*;
 import ar.edu.utn.frba.dds.models.servicios.Servicio;
 import ar.edu.utn.frba.dds.server.utils.ICrudViewsHandler;
 import io.javalin.http.Context;
@@ -28,6 +26,8 @@ public class IncidenteController extends Controller implements ICrudViewsHandler
     private RepositorioDeUsuarios repositorioDeUsuarios = new RepositorioDeUsuarios();
 
     private RepositorioDeRoles repositorioDeRoles = new RepositorioDeRoles();
+
+    private RepositorioDeIncidentesXComunidad repositorioDeIncidentesXComunidad = new RepositorioDeIncidentesXComunidad();
 
     public IncidenteController(RepositorioDeIncidentes repositorioDeIncidentes){
         this.repositorioDeIncidentes = new RepositorioDeIncidentes();
@@ -89,10 +89,14 @@ public class IncidenteController extends Controller implements ICrudViewsHandler
 
         String observaciones = context.formParam("observaciones");
 
-        List<Incidente> incidentes = miembro.abrirIncidente(servicio, observaciones);
+        Incidente incidente = miembro.abrirIncidente(servicio, observaciones);
+        this.repositorioDeIncidentes.guardar(incidente);
 
-        incidentes.forEach( incidente -> {
-                    this.repositorioDeIncidentes.guardar(incidente);
+        List<IncidenteXComunidad> incidentes = miembro.incidentesXComunidad(incidente, miembro.getComunidades());
+
+        incidentes.forEach( incidenteXComunidad -> {
+
+                    this.repositorioDeIncidentesXComunidad.guardar(incidenteXComunidad);
                 }
         );
 
@@ -131,7 +135,8 @@ public class IncidenteController extends Controller implements ICrudViewsHandler
         Incidente incidente= (Incidente) this.repositorioDeIncidentes.buscar(Long.parseLong(context.formParam("incidente")));
         Miembro miembro = (Miembro) this.repositorioDeRoles.buscar(Long.parseLong(context.formParam("miembro")));
 
-        incidente.cerrar(miembro, context.formParam("observaciones"));
+      //  incidente.cerrar(miembro, context.formParam("observaciones"));
+        incidente.cerrar();
 
         this.repositorioDeIncidentes.actualizar(incidente);
 

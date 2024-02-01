@@ -9,7 +9,7 @@ import org.apache.commons.mail.EmailException;
 public final class Notificador {
 
 
-    public void notificar(Comunidad comunidad, Incidente incidente, Mensaje mensaje) throws EmailException {
+    public void notificar(Comunidad comunidad, IncidenteXComunidad incidente, Mensaje mensaje) throws EmailException {
 
 
         String notificacion = mensaje.contenido(incidente);
