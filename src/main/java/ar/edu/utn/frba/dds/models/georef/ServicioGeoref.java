@@ -52,9 +52,9 @@ public class ServicioGeoref {
         return responseMunicipiosPorNombre.body();
     }
 
-    public ListadoDeMunicipios listadoDeMunicipiosPorID(int id) throws IOException {
+    public ListadoDeMunicipios listadoDeMunicipiosPorID(int idMunicipio) throws IOException {
         GeorefService georefService = this.retrofit.create(GeorefService.class);
-        Call<ListadoDeMunicipios> requestMunicipiosPorID = georefService.municipios(id);
+        Call<ListadoDeMunicipios> requestMunicipiosPorID = georefService.municipios(idMunicipio);
         Response<ListadoDeMunicipios> responseMunicipiosPorID = requestMunicipiosPorID.execute();
         return responseMunicipiosPorID.body();
     }
