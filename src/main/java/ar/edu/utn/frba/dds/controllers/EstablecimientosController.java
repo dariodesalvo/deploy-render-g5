@@ -151,8 +151,8 @@ public class EstablecimientosController extends Controller implements ICrudViews
         }
 
         //carga el selected de municipio
-        if(!Objects.equals(establecimiento.getIdMunicipio(), "")) {
-            ListadoDeMunicipios listadoDeMunicipiosPorID = servicioGeoref.listadoDeMunicipiosPorID(Integer.parseInt(context.pathParam("idMunicipio")));
+        if(!Objects.equals(establecimiento.getIdMunicipio(), 0)) {
+            ListadoDeMunicipios listadoDeMunicipiosPorID = servicioGeoref.listadoDeMunicipiosPorID(establecimiento.getIdMunicipio());
             model.put("municipio", listadoDeMunicipiosPorID.municipios.get(0));
             /*
             ListadoDeProvincias listadoDeProvinciasPorID = servicioGeoref.listadoDeProvinciasPorID(Integer.parseInt(establecimiento.getIdProvincia().toString()));
