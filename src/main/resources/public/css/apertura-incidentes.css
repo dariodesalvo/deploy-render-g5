@@ -8,19 +8,24 @@
     margin-top: 3px;
 }
 .header {
-    overflow: hidden;
     background-color: #f1f1f1;
-    padding: 20px 10px;
+     position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      text-align: center;
+      padding: 10px 0; /* Espaciado interno para dar altura al header*/
+      z-index: 1000; /* Asegura que el header se mantenga sobre el contenido */
 }
 
 .header a {
     float: left;
     color: black;
     text-align: center;
-    padding: 12px;
+    padding: 6px;
     text-decoration: none;
     font-size: 18px;
-    line-height: 25px;
+    line-height: 18px;
     border-radius: 4px;
 }
 
@@ -55,15 +60,18 @@
     }
 }
 
+#content {
+  margin-top: 156px; /* Ajustar este valor según la altura del header */
+  padding: 20px;
+  min-height: calc(83vh - 60px - 40px); /* Altura mínima para ocupar el espacio visible, ajusta 40px al alto de tu footer */
+}
+
 .footer {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
     background-color: #f1f1f1;
     color: white;
     text-align: center;
-    height: 10%;
+    padding: 10px 0;
+    /* Sin posición fija para permitir que se mueva con el contenido */
 }
 
 
