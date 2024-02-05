@@ -43,9 +43,9 @@ public class UsuarioController extends Controller implements ICrudViewsHandler {
     public void show(Context context) {
         List<Usuario> usuarios = repositorioDeUsuarios.buscarTodos();
 
+        List< Map<String, Object>> usuariosMappeados = new ArrayList<>();
         Map<String, Object> model = new HashMap<>();
 
-        Map<String,Object> usuariosMappeados = new HashMap<>();
         List<String> rolesUsuarios = new ArrayList<>();
 
         rolesUsuarios.add((TipoRol.Administrador.name()));
@@ -58,15 +58,13 @@ public class UsuarioController extends Controller implements ICrudViewsHandler {
             String rolUsuario = usuario.getRol().getClass().getSimpleName();
             List<String> roles = rolesUsuarios.stream().filter((rol)->!rol.equals(rolUsuario)).toList();
 
-            usuariosMappeados.put("email",email);
-            usuariosMappeados.put("rol",rolUsuario);
-            usuariosMappeados.put("roles",roles);
+            Map<String,Object> usuarioMappeado= new HashMap<>();
+            usuarioMappeado.put("email",email);
+            usuarioMappeado.put("rol",rolUsuario);
+            usuarioMappeado.put("roles",roles);
+            usuariosMappeados.add(usuarioMappeado);
         }
-
-
         model.put("usuarios",usuariosMappeados);
-
-        System.out.println(model);
         context.render("administracion_tipos_usuarios/administrar-usuarios.hbs", model);
 
     }
