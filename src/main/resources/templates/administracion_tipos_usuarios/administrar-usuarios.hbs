@@ -4,11 +4,15 @@
   <div class="administrar-usuarios">
     <h1 class="cargar-text">Administrar Usuarios</h1>
 
+  <form method="POST" action="/administrar-usuarios/{usuario}">
     <div class="input-group mb-2 buscar-usuarios">
-      <input type="text" class="form-control search" aria-label="Buscar Usuario" placeholder="Buscar usuario">
-      <span class="input-group-text search-button"><img src="/img/logos/search.svg" alt="icono-busqueda" class="icono-busqueda" />
+      <input type="text" class="form-control search" aria-label="Buscar Usuario" placeholder="Buscar usuario" value="" name="usuario">
+       <button method="post" action="/administrar-usuarios" class="btn btn-primary" type="submit">
+       <span><img src="/img/logos/search.svg" alt="icono-busqueda" />
+       </button>
       </span>
     </div>
+    </form>
     <table class="table tabla-usuarios">
       <thead>
         <tr>

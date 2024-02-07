@@ -49,7 +49,7 @@ public class RepositorioDeUsuarios implements WithSimplePersistenceUnit, ICrudRe
     }
 
 
-    public Object buscarXEmail(String email) {
+    public Usuario buscarXEmail(String email) {
         return entityManager().find(Usuario.class, email);
     }
     @Override

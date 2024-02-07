@@ -43,6 +43,26 @@ public class UsuarioController extends Controller implements ICrudViewsHandler {
     public void show(Context context) {
         List<Usuario> usuarios = repositorioDeUsuarios.buscarTodos();
 
+        Map<String, Object> model = this.mappearUsuarios(usuarios);
+
+        context.render("administracion_tipos_usuarios/administrar-usuarios.hbs", model);
+
+    }
+
+    public void buscarUsuario(Context context){
+        String usuario = context.formParam("usuario");
+        List<Usuario> usuarios = repositorioDeUsuarios.buscarTodos();
+
+        List<Usuario> usuariosFiltrados = usuarios.stream().filter(usuario1 -> usuario1.getEmail().equals(usuario)).toList();
+
+        Map<String, Object> model = this.mappearUsuarios(usuariosFiltrados);
+
+
+        System.out.println(usuarios);
+        context.render("administracion_tipos_usuarios/administrar-usuarios.hbs", model);
+    }
+    public Map<String, Object> mappearUsuarios(List<Usuario> usuarios){
+
         List< Map<String, Object>> usuariosMappeados = new ArrayList<>();
         Map<String, Object> model = new HashMap<>();
 
@@ -65,8 +85,7 @@ public class UsuarioController extends Controller implements ICrudViewsHandler {
             usuariosMappeados.add(usuarioMappeado);
         }
         model.put("usuarios",usuariosMappeados);
-        context.render("administracion_tipos_usuarios/administrar-usuarios.hbs", model);
-
+        return model;
     }
 
     @Override
