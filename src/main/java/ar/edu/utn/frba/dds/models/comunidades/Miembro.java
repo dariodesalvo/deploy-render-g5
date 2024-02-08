@@ -61,6 +61,12 @@ public class Miembro extends RolesUsuario {
     @Column(name = "activo")
     private Boolean activo;
 
+    @Column(name = "provincia_id")
+    private Long idProvincia;
+
+    @Column(name = "municipio_id")
+    private int idMunicipio;
+
     public Miembro(){
 
     }
