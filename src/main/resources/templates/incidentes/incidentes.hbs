@@ -17,16 +17,26 @@
                 <th>Acciones</th>
             </tr>
             <tbody>
-            {{#each incidentes}}
+
+            {{#each incidentesParaCerrar}}
                 <tr>
                     <td>{{this.servicio.nombre}}</td>
                     <td>{{this.fechaApertura}}</td>
                     <td>{{this.observacionesApertura}}</td>
                     <td>
-                {{#if Miembro}}
-                        <a class="btn btn-secondary" href="incidente/{{this.id}}/cerrar"> Cerrar </a>
-                {{/if}}
+                        {{#if Miembro}}
+                            <a class="btn btn-secondary" href="incidente/{{this.id}}/cerrar"> Cerrar </a>
+                        {{/if}}
                     </td>
+                </tr>
+            {{/each}}
+
+            {{#each incidentes}}
+                <tr>
+                    <td>{{this.servicio.nombre}}</td>
+                    <td>{{this.fechaApertura}}</td>
+                    <td>{{this.observacionesApertura}}</td>
+                    <td></td>
                 </tr>
             {{/each}}
             </tbody>

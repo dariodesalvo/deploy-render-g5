@@ -12,10 +12,10 @@ import io.javalin.http.Context;
 import io.javalin.http.HttpStatus;
 import org.apache.commons.mail.EmailException;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import javax.persistence.criteria.CriteriaBuilder;
+import java.time.LocalDateTime;
+import java.util.*;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 
 public class IncidenteController extends Controller implements ICrudViewsHandler {
@@ -49,10 +49,39 @@ public class IncidenteController extends Controller implements ICrudViewsHandler
     public void show(Context context) {
 
         List<Incidente> incidentes= this.repositorioDeIncidentes.buscarTodos();
+
         List<Incidente> incidentesAbiertos = incidentes
                 .stream()
                 .filter(incidente -> incidente.getEstado())
                 .collect(Collectors.toList());
+        List<Incidente> incidentesParaCerrar = new ArrayList<>();
+
+        if(context.sessionAttribute("Miembro")) {
+            Usuario usuario = (Usuario) repositorioDeUsuarios.buscar(Long.parseLong(context.sessionAttribute("usuario_id")));
+            Miembro miembro = (Miembro)  usuario.getRol();
+             incidentesAbiertos.forEach(
+                     incidente -> {
+                         //se busca entre los incidentes abiertos para recuperar las comunidades
+                         List<IncidenteXComunidad> listIncidenteXComunidad=(List<IncidenteXComunidad>) repositorioDeIncidentesXComunidad.buscarXIncidente(incidente.getId());
+
+                         // si al menos una comunidad coincide con las que pertenece el miembro se habilita el cierre
+                         if(listIncidenteXComunidad
+                                 .stream()
+                                 .anyMatch(incidenteXComunidad -> miembro.getComunidades().contains(incidenteXComunidad.getComunidad()))){
+                            incidentesParaCerrar.add(incidente);
+                         }
+
+
+                     }
+             );
+
+        }
+
+        incidentesAbiertos=incidentesAbiertos
+                .stream()
+                .filter(incidente -> !incidentesParaCerrar.contains(incidente))
+                .collect(Collectors.toList());
+
         List<Incidente> incidentesCerrados = incidentes
                 .stream()
                 .filter(incidente -> !incidente.getEstado())
@@ -60,6 +89,8 @@ public class IncidenteController extends Controller implements ICrudViewsHandler
 
 
         Map<String, Object> model = new HashMap<>();
+
+        model.put("incidentesParaCerrar", incidentesParaCerrar);
         model.put("incidentes", incidentesAbiertos);
         model.put("incidentesCerrados", incidentesCerrados);
         this.cargarVariablesSesion(context,model);
@@ -131,13 +162,41 @@ public class IncidenteController extends Controller implements ICrudViewsHandler
 
     }
 
+    public IncidenteXComunidad cerrarXComunidad(Incidente incidente, Comunidad comunidad, Miembro miembro, String observacionesCierre, LocalDateTime fechaCierre){
+
+        List<IncidenteXComunidad> listaIncidenteXComunidad = (List<IncidenteXComunidad>) repositorioDeIncidentesXComunidad.buscarIncidenteXComunidad(incidente.getId(), comunidad.getId());
+        IncidenteXComunidad incidenteXComunidad = listaIncidenteXComunidad.get(0);
+        incidenteXComunidad.setCerradoPor(miembro);
+        incidenteXComunidad.setFechaCierre(fechaCierre);
+        incidenteXComunidad.setObservacionesCierre(observacionesCierre);
+
+        return incidenteXComunidad;
+    }
+
     public void cerrando(Context context) throws EmailException {
+
         Incidente incidente= (Incidente) this.repositorioDeIncidentes.buscar(Long.parseLong(context.formParam("incidente")));
         Miembro miembro = (Miembro) this.repositorioDeRoles.buscar(Long.parseLong(context.formParam("miembro")));
+        String observacionesCierre = context.formParam("observaciones");
 
-      //  incidente.cerrar(miembro, context.formParam("observaciones"));
+        /*actualizando en cada comunidad correspondiente */
+        List<Comunidad> comunidades = miembro.getComunidades();
+        LocalDateTime fechaCiere = LocalDateTime.now();
+        Comunidad comunidad;
+
+        Integer index=-1;
+        while(!comunidades.isEmpty()){
+            index++;
+            comunidad = comunidades.get(index);
+                    try {
+                        IncidenteXComunidad incidenteXComunidad = this.cerrarXComunidad(incidente, comunidad, miembro, observacionesCierre, fechaCiere);
+                        repositorioDeIncidentesXComunidad.actualizar(incidenteXComunidad);
+                    } catch (Exception e) {
+                        System.out.println("fallo al cerrar comunidad" + comunidad.getId().toString());
+                    }
+                }
+
         incidente.cerrar();
-
         this.repositorioDeIncidentes.actualizar(incidente);
 
         Map<String, Object> model = new HashMap<>();

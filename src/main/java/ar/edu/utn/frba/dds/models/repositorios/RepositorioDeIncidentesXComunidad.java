@@ -24,6 +24,15 @@ public class RepositorioDeIncidentesXComunidad implements WithSimplePersistenceU
         return query.getResultList();
     }
 
+    public Object buscarIncidenteXComunidad(Long incidente_id, Long comunidad_id) {
+
+        String hql = "FROM " + IncidenteXComunidad.class.getName() + " WHERE incidente_id = :incidente_id AND comunidad_id = :comunidad_id";
+        Query query = entityManager().createQuery(hql);
+        query.setParameter("incidente_id", incidente_id);
+        query.setParameter("comunidad_id", comunidad_id);
+        return query.getResultList();
+    }
+
     @Override
     public Object buscar(Long id) {
 

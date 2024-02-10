@@ -7,6 +7,8 @@ import ar.edu.utn.frba.dds.models.comunidades.Usuario;
 import ar.edu.utn.frba.dds.models.georef.ServicioGeoref;
 import ar.edu.utn.frba.dds.models.georef.entities.ListadoDeMunicipios;
 import ar.edu.utn.frba.dds.models.georef.entities.ListadoDeProvincias;
+import ar.edu.utn.frba.dds.models.georef.entities.Municipio;
+import ar.edu.utn.frba.dds.models.georef.entities.Provincia;
 import ar.edu.utn.frba.dds.models.repositorios.RepositorioDeComunidades;
 import ar.edu.utn.frba.dds.models.repositorios.RepositorioDeRoles;
 import ar.edu.utn.frba.dds.models.repositorios.RepositorioDeUsuarios;
@@ -42,16 +44,29 @@ public class UsuarioController extends Controller implements ICrudViewsHandler {
 
         Map<String, Object> model = new HashMap<>();
 
+        ListadoDeProvincias listadoDeProvinciasPorID=null;
         //carga el selected
-        if (!Objects.equals(context.pathParam("idProvincia"), "")) {
-            ListadoDeProvincias listadoDeProvinciasPorID = servicioGeoref.listadoDeProvinciasPorID(Integer.parseInt(context.pathParam("idProvincia")));
-            model.put("provincia", listadoDeProvinciasPorID.provincias.get(0));
+        if (Objects.equals(context.pathParam("idProvincia"), "0")) {
+
+            if(Objects.equals(miembro.getIdProvincia(), "")){
+                // que tenga en la base y este editando el perfil
+                listadoDeProvinciasPorID = servicioGeoref.listadoDeProvinciasPorID(Integer.parseInt(context.pathParam("2")));
+            }else{
+                // estes editando el perfil y ya tengas cargado una provincia
+                listadoDeProvinciasPorID = servicioGeoref.listadoDeProvinciasPorID(Integer.parseInt(miembro.getIdProvincia().toString()));
+            }
+            }else{
+                // quieras cambiar de provincia
+            listadoDeProvinciasPorID = servicioGeoref.listadoDeProvinciasPorID(Integer.parseInt(context.pathParam("idProvincia")));
         }
+
+        Provincia provincia = listadoDeProvinciasPorID.provincias.get(0);
+        model.put("provincia", provincia);
 
         ListadoDeMunicipios listadoDeMunicipios = null;
         //carga todos los municipios que usa
-        if (!Objects.equals(context.pathParam("idProvincia"), "")) {
-            listadoDeMunicipios = servicioGeoref.listadoDeMunicipiosDeProvincia(Integer.parseInt(context.pathParam("idProvincia")));
+        if (!Objects.equals(listadoDeProvinciasPorID.provincias.get(0), null)) {
+            listadoDeMunicipios = servicioGeoref.listadoDeMunicipiosDeProvincia(Integer.parseInt(provincia.getId().toString()));
         }
 
         if (!Objects.equals(context.formParam("idMunicipio"), null)) {
@@ -113,26 +128,49 @@ public class UsuarioController extends Controller implements ICrudViewsHandler {
     }
 
     @Override
-    public void save(Context context) {
-
-    }
-
-    @Override
-    public void edit(Context context) throws IOException {
+    public void save(Context context) throws IOException {
         Usuario usuario = (Usuario) repositorioDeUsuarios.buscar(Long.parseLong(context.sessionAttribute("usuario_id")));
-        ListadoDeProvincias listadoDeProvincias = servicioGeoref.listadoDeProvincias();
         Miembro miembro = (Miembro) usuario.getRol();
-
-
 
         miembro.setApellido(context.formParam("apellido"));
         miembro.setNombre(context.formParam("nombre"));
         miembro.setCelular(context.formParam("celular"));
         miembro.setIdProvincia(Long.parseLong(context.formParam("idProvincia")));
         miembro.setIdMunicipio(Integer.parseInt(context.formParam("idMunicipio")));
-        /* falta medio de preferencia y municipio */
-
+        /* falta medio de preferencia  */
         repositorioDeRoles.actualizar((RolesUsuario) miembro);
+
+        ListadoDeProvincias listadoDeProvincias = servicioGeoref.listadoDeProvincias();
+        ListadoDeProvincias listadoDeProvinciasPorID = servicioGeoref.listadoDeProvinciasPorID(Integer.parseInt(miembro.getIdProvincia().toString()));
+        Provincia provincia = listadoDeProvinciasPorID.provincias.get(0);
+        ListadoDeMunicipios listadoDeMunicipios = servicioGeoref.listadoDeMunicipiosDeProvincia(Integer.parseInt(provincia.getId().toString()));
+        ListadoDeMunicipios listadoDeMunicipiosPorID = servicioGeoref.listadoDeMunicipiosPorID(miembro.getIdMunicipio());
+        Municipio municipio = listadoDeMunicipiosPorID.municipios.get(0);
+        Map<String, Object> model = new HashMap<>();
+
+        model.put("provincia", provincia);
+        model.put("provincias", listadoDeProvincias);
+        model.put("municipios", listadoDeMunicipios);
+        model.put("municipio", municipio);
+        model.put("miembro", miembro);
+        model.put("actualizado", "Actualizado correctamente");
+        this.cargarVariablesSesion(context,model);
+        context.render("/login/perfil.hbs", model);
+    }
+
+    @Override
+    public void edit(Context context) throws IOException {
+
+
+        Usuario usuario = (Usuario) repositorioDeUsuarios.buscar(Long.parseLong(context.sessionAttribute("usuario_id")));
+        ListadoDeProvincias listadoDeProvincias = servicioGeoref.listadoDeProvincias();
+        Miembro miembro = (Miembro) usuario.getRol();
+
+        miembro.setApellido(context.formParam("apellido"));
+        miembro.setNombre(context.formParam("nombre"));
+        miembro.setCelular(context.formParam("celular"));
+        miembro.setIdProvincia(Long.parseLong(context.formParam("idProvincia")));
+        miembro.setIdMunicipio(Integer.parseInt(context.formParam("idMunicipio")));
 
         Map<String, Object> model = new HashMap<>();
 
@@ -172,7 +210,6 @@ public class UsuarioController extends Controller implements ICrudViewsHandler {
         model.put("miembro", usuario.getRol());
         model.put("municipio", miembro.getIdMunicipio());
         model.put("provincia", miembro.getIdProvincia());
-        model.put("actualizado", "Actualizado correctamente");
         model.put("Miembro", context.sessionAttribute("Miembro"));
         context.render("/login/perfil.hbs", model);
     }
