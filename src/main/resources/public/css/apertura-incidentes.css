@@ -71,9 +71,11 @@
     display: flex;
     justify-content: center;
 }
-.tabla-usuarios, .buscar-usuarios{
-    width: 50%;
-    margin: auto;
+thead {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background-color: white;
 }
 
 .guardar-cambios, .formulario-apertura-incidente{
@@ -112,6 +114,21 @@
     color: var(--bd-callout-color, inherit);
     background-color: var(--bd-callout-bg, var(--bs-gray-100));
     border-left: 0.25rem solid var(--bd-callout-border, var(--bs-gray-300));
+}
+.administrar-usuarios{
+    height: 100%;
+}
+.tabla-administrar-usuarios{
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 50vh;
+}
+.tabla-usuarios{
+    top: 0;
+    z-index: 1;
+    overflow-y: scroll;
+    height: 60%;
 }
 /* .formulario-apertura-incidente{
     width: 50%;

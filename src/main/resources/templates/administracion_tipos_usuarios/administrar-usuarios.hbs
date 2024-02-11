@@ -3,40 +3,37 @@
 <body>
   <div class="administrar-usuarios">
     <h1 class="cargar-text">Administrar Usuarios</h1>
-
-  <form method="POST" action="/administrar-usuarios/{usuario}">
+  <form method="POST" action="/administrar-usuarios">
     <div class="input-group mb-2 buscar-usuarios">
       <input type="text" class="form-control search" aria-label="Buscar Usuario" placeholder="Buscar usuario" value="" name="usuario">
-       <button method="post" action="/administrar-usuarios" class="btn btn-primary" type="submit">
+       <button method="POST" action="/administrar-usuarios" class="btn btn-primary" type="submit">
        <span><img src="/img/logos/search.svg" alt="icono-busqueda" />
        </button>
       </span>
     </div>
     </form>
-    <table class="table tabla-usuarios">
+<div class="tabla-usuarios" >
+    <table class="table tabla-administrar-usuarios">
       <thead>
         <tr>
           <th scope="col">Usuario</th>
           <th scope="col">Rol</th>
+          <th scope="col">Acciones</th>
         </tr>
       </thead>
       <tbody>
        {{#each usuarios as |usuario|}}
             <tr>
                 <th scope="row">{{usuario.email}}</th>
-                <td>
-                  <select class="form-select" aria-label="Default select example">
-                   <option selected value="{{usuario.rol}}" selected disabled>{{usuario.rol}}</option>
-                   {{#each usuario.roles as |rol|}}
-                   <option value="{{this}}">{{rol}}</option>
-                   {{/each}}
-                  </select>
-                </td>
+                <th scope="row">{{usuario.rol}}</th>
+                <th>
+                <a class="btn btn-primary" href="/editar-rol/{{usuario.id}}"><i class="fa-solid fa-pen-to-square"></i></a>
+                </th>
                 </tr>
               {{/each}}
       </tbody>
     </table>
-    <button type="button" class="btn btn-primary guardar-cambios">Guardar cambios</button>
+    </div>
   </div>
   {{/partial}}
   {{> templates/base }}
