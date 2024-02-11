@@ -47,7 +47,15 @@ public class UsuarioController extends Controller implements ICrudViewsHandler {
         Map<String, Object> model = this.mappearUsuarios(usuarios);
 
         this.cargarVariablesSesion(context, model);
-        context.render("administracion_tipos_usuarios/administrar-usuarios.hbs", model);
+
+        Boolean rolActualEsAdmin = (Boolean) model.get("Administrador");
+        if(rolActualEsAdmin == null){
+            context.render("administracion_tipos_usuarios/admin-error.hbs", model);
+
+        }else{
+            context.render("administracion_tipos_usuarios/administrar-usuarios.hbs", model);
+
+        }
 
     }
 public void editarRol(Context context){

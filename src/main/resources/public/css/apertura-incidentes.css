@@ -130,6 +130,16 @@ thead {
     overflow-y: scroll;
     height: 60%;
 }
+.error{
+    padding:60px;
+    width: 50%;
+    margin: auto;
+    text-align: center;
+}
+.error-icon{
+    margin-left: 12px;
+    margin-top: 7px;
+}
 /* .formulario-apertura-incidente{
     width: 50%;
     display: inline-block;
