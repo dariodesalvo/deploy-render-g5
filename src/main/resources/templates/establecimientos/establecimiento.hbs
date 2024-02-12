@@ -2,7 +2,7 @@
 <script>
 function cargarMunicipios(idProvincia){
      leyenda = document.getElementById("leyenda").value;
-    window.location.href = '/establecimientos/{{establecimiento.id}}/'+idProvincia+'/editar/'+leyenda;
+    window.location.href = '/establecimientos/{{establecimiento.id}}/'+idProvincia+'/editar/'+leyenda+'%20';
 }
 </script>
     <h3>Establecimiento perteneciente a {{entidad.leyenda}}</h3>
@@ -22,8 +22,8 @@ function cargarMunicipios(idProvincia){
                 <div >
                     <label class="mb-2" for="municipios">Municipio:</label>
                     <select name="idMunicipio" class="form-control mt-10">
-                        <option selected>Selecione el Municipio</option>
                         {{#if municipio }}<option  selected value="{{municipio.id}}">{{municipio.nombre}}</option> {{/if}}
+                        <option value="22014">Selecione el Municipio</option>
                         {{#each municipios}}
                             <option value="{{this.id}}">{{this.nombre}}</option>
                         {{/each}}

@@ -42,7 +42,7 @@ public class Miembro extends RolesUsuario {
             joinColumns = @JoinColumn(name = "miembro_id"),
             inverseJoinColumns = @JoinColumn(name = "comunidad_id")
     )
-    private List<Comunidad> comunidades = new ArrayList<>();
+    private List<Comunidad> comunidades;
 
     @OneToMany(mappedBy = "miembro")
     private List<ServicioDeInteres> serviciosDeInteres;
@@ -61,6 +61,12 @@ public class Miembro extends RolesUsuario {
     @Column(name = "activo")
     private Boolean activo;
 
+    @Column(name = "provincia_id")
+    private Long idProvincia;
+
+    @Column(name = "municipio_id")
+    private int idMunicipio;
+
     public Miembro(){
 
     }
@@ -68,6 +74,7 @@ public class Miembro extends RolesUsuario {
     public Miembro(String nombre, String apellido){
         this.nombre=nombre;
         this.apellido=apellido;
+        this.comunidades= new ArrayList<>();
     }
 
     public void miembroAceptado(Comunidad comunidad){

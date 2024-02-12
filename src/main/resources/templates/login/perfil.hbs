@@ -1,33 +1,61 @@
 {{#partial "contenido" }}
+    <script type="text/javascript">
+        function cargarMunicipios(idProvincia){
+            window.location.href = '/perfil/'+idProvincia+'/editar';
+        }
+
+    </script>
     <p><h3>Editando perfil: </h3> <h6 class="color:red">{{actualizado}}</h6></p>
-    <form  method="POST"  action="/perfil/editar">
+    <form method="POST" action="/perfil/{{miembro.idProvincia}}/editar">
 
         <div class="form-group mb-3">
             <label for="nombre">Nombre:</label>
-            <input  name="nombre"  value="{{miembro.nombre}}"  class="form-control" placeholder="Nombre">
+            <input name="nombre" value="{{miembro.nombre}}" class="form-control" placeholder="Nombre">
         </div>
 
         <div class="form-group mb-3">
             <label for="apellido">Apellido:</label>
-            <input  name="apellido"  value="{{miembro.apellido}}" class="form-control" placeholder="apellido">
+            <input name="apellido" value="{{miembro.apellido}}" class="form-control" placeholder="apellido">
         </div>
 
         <div class="form-group mb-3">
             <label for="celular">Celular:</label>
-            <input  name="celular"  value="{{miembro.celular}}" class="form-control" placeholder="celular">
+            <input name="celular" value="{{miembro.celular}}" class="form-control" placeholder="celular">
         </div>
 
         <div class="form-group mb-3">
             <label for="medio">Medio de notificación preferido:</label>
-            <select  name="medio" class="form-control">
-                <option value="Email"  select >Email</option>
-                <option value="Whatsapp"  >Whatsapp</option>
+            <select name="medio" class="form-control">
+                <option value="Email" select>Email</option>
+                <option value="Whatsapp">Whatsapp</option>
             </select>
         </div>
+
         <div class="form-group mb-3">
-            <label for="ubicacion">Ubicación:</label>
-            <input  name="ubicacion"  value="{{municipio}}" class="form-control" placeholder="Ubicacion">
+            <label for="provincias">Provincia:</label>
+            <select name="idProvincia" onchange="cargarMunicipios(this.options[this.selectedIndex].value);"
+                    class="form-control">
+                {{#if provincia }}
+                    <option selected value="{{provincia.id}}">{{provincia.nombre}}</option> {{/if}}
+                <option value="2">Selecione la provincia</option>
+                {{#each provincias}}
+                    <option value="{{this.id}}">{{this.nombre}}</option>
+                {{/each}}
+            </select>
         </div>
+
+        <div class="form-group mb-3">
+            <label for="municipios">Municipio:</label>
+            <select name="idMunicipio" class="form-control">
+                {{#if municipio }}
+                    <option selected value="{{municipio.id}}">{{municipio.nombre}}</option> {{/if}}
+                <option value="22014">Selecione el Municipio</option>
+                {{#each municipios}}
+                    <option value="{{this.id}}">{{this.nombre}}</option>
+                {{/each}}
+            </select>
+        </div>
+
 
         <div class="mb-5">
             <button type="submit" class="btn btn-primary">Guardar</button>
