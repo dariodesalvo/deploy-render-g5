@@ -42,6 +42,10 @@ public class Router {
 
             /* Administracion de Usuarios */
             get("administrar-usuarios", ((UsuarioController) FactoryController.controller("Usuarios"))::show);
+            get("editar-rol/{id}", ((UsuarioController) FactoryController.controller("Usuarios"))::editarRol);
+            post("editar-rol/{id}", ((UsuarioController) FactoryController.controller("Usuarios"))::guardarRol);
+            post("administrar-usuarios", ((UsuarioController) FactoryController.controller("Usuarios"))::buscarUsuario);
+            post("perfil/editar", ((UsuarioController) FactoryController.controller("Usuarios"))::edit);
             get("perfil/{idProvincia}/editar",  ((UsuarioController) FactoryController.controller("Usuarios"))::perfil);
             post("perfil/{idProvincia}/editar", ((UsuarioController) FactoryController.controller("Usuarios"))::save);
 

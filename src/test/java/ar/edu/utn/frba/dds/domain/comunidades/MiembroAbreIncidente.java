@@ -46,7 +46,7 @@ public class MiembroAbreIncidente{
     @DisplayName("Un miembro que se encuentra en dos comunidades abre un incidente")
     public void abrirIndicente() throws Exception {
 
-        incidentes = miembro.abrirIncidente(servicio, observaciones);
+        incidentes = (List<Incidente>) miembro.abrirIncidente(servicio, observaciones);
         Assertions.assertEquals(incidentes.size(), 2);
         /* se crean dos instancias de incidentes */
     }

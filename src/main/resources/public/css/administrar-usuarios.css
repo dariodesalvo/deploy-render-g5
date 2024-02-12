@@ -88,7 +88,7 @@
 }
 
 .search, .search-button{
-    height: 30px;
+    height: 33px;
 }
 
 .app-logo-footer{
@@ -98,4 +98,7 @@
     float: right;
     margin-top: -42px;
     margin-right: 15px;
+}
+.administrar-usuarios{
+    height: 100%;
 }
