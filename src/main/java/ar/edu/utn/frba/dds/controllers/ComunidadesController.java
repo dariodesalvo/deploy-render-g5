@@ -148,22 +148,29 @@ public class ComunidadesController extends Controller implements ICrudViewsHandl
 
             comunidad.eliminarSolicitud(usuario);
             RolesUsuario rol = usuario.getRol();
+            Miembro miembro = null;
+            //solo llegan o lectores o miembros
+            if(rol.getClass().getSimpleName()=="Lector") {
 
-            Miembro miembro = new Miembro();
-            miembro.setNombre(usuario.getEmail());
-            miembro.setConfiabilidad(4.5);
+                miembro = new Miembro();
+                miembro.setNombre(usuario.getEmail());
+                miembro.setConfiabilidad(4.5);
+                MedioDeNotificacion medio = new EmailSender(new NotificarPorEmail());
+                miembro.setMedioNotificacionPreferido(medio);
+                usuario.setRol(miembro);
+                repositorioDeUsuarios.actualizar(usuario);
+                repositorioDeRoles.eliminar(rol);
+                System.out.println("rol eliminado");
+
+            }else{
+                miembro = (Miembro) rol;
+            }
+
             miembro.miembroAceptado(comunidad);
-            MedioDeNotificacion medio = new EmailSender(new NotificarPorEmail());
-            miembro.setMedioNotificacionPreferido(medio);
             repositorioDeRoles.guardar(miembro);
-            usuario.setRol(miembro);
             comunidad.agregarMiembro(miembro);
-
-
-            repositorioDeUsuarios.actualizar(usuario);
-            repositorioDeRoles.eliminar(rol);
-            System.out.println("rol eliminado");
             repositorioDeComunidades.actualizar(comunidad);
+
 
             Map<String, Object> model = new HashMap<>();
 

@@ -12,10 +12,7 @@ import io.javalin.http.Context;
 import io.javalin.http.HttpStatus;
 import org.apache.commons.mail.EmailException;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class IncidenteController extends Controller implements ICrudViewsHandler {
@@ -47,6 +44,8 @@ public class IncidenteController extends Controller implements ICrudViewsHandler
 
     @Override
     public void show(Context context) {
+        Usuario usuario = (Usuario) repositorioDeUsuarios.buscar(Long.parseLong(context.sessionAttribute("usuario_id")));
+        Miembro miembro = (Miembro)  usuario.getRol();
 
         List<Incidente> incidentes= this.repositorioDeIncidentes.buscarTodos();
         List<Incidente> incidentesAbiertos = incidentes
@@ -58,8 +57,28 @@ public class IncidenteController extends Controller implements ICrudViewsHandler
                 .filter(incidente -> !incidente.getEstado())
                 .collect(Collectors.toList());
 
+        List<Incidente> incidentesXCerrar = new ArrayList<>();
+        incidentesAbiertos.forEach(incidente -> {
+
+            List<IncidenteXComunidad> incidenteXComunidads = (List<IncidenteXComunidad>) this.repositorioDeIncidentesXComunidad.buscarXIncidente(incidente.getId());
+
+            Boolean busqueda = incidenteXComunidads.stream().anyMatch(
+                    incidenteXComunidad ->
+                        miembro.getComunidades().contains(incidenteXComunidad.getComunidad()));
+
+            if(busqueda){
+                incidentesXCerrar.add(incidente);
+            }
+
+        });
+
+        incidentesAbiertos = incidentesAbiertos
+                .stream()
+                .filter(incidente -> !incidentesXCerrar.contains(incidente))
+                .collect(Collectors.toList());
 
         Map<String, Object> model = new HashMap<>();
+        model.put("incidentesXCerrar", incidentesXCerrar);
         model.put("incidentes", incidentesAbiertos);
         model.put("incidentesCerrados", incidentesCerrados);
         this.cargarVariablesSesion(context,model);
@@ -95,7 +114,6 @@ public class IncidenteController extends Controller implements ICrudViewsHandler
         List<IncidenteXComunidad> incidentes = miembro.incidentesXComunidad(incidente, miembro.getComunidades());
 
         incidentes.forEach( incidenteXComunidad -> {
-
                     this.repositorioDeIncidentesXComunidad.guardar(incidenteXComunidad);
                 }
         );
@@ -134,11 +152,22 @@ public class IncidenteController extends Controller implements ICrudViewsHandler
     public void cerrando(Context context) throws EmailException {
         Incidente incidente= (Incidente) this.repositorioDeIncidentes.buscar(Long.parseLong(context.formParam("incidente")));
         Miembro miembro = (Miembro) this.repositorioDeRoles.buscar(Long.parseLong(context.formParam("miembro")));
+        String observaciones = context.formParam("observaciones");
 
-      //  incidente.cerrar(miembro, context.formParam("observaciones"));
         incidente.cerrar();
 
         this.repositorioDeIncidentes.actualizar(incidente);
+
+        List<IncidenteXComunidad> incidentesXComunidads = (List<IncidenteXComunidad>) this.repositorioDeIncidentesXComunidad.buscarXIncidente(incidente.getId());
+
+        incidentesXComunidads.forEach( incidenteXComunidad -> {
+
+                    if(miembro.getComunidades().contains(incidenteXComunidad.getComunidad())){
+                        incidenteXComunidad.cerrar(observaciones, miembro);
+                        this.repositorioDeIncidentesXComunidad.guardar(incidenteXComunidad);
+                    }
+                }
+        );
 
         Map<String, Object> model = new HashMap<>();
         this.cargarVariablesSesion(context,model);
