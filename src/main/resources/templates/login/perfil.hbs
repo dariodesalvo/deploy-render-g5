@@ -4,6 +4,15 @@
             window.location.href = '/perfil/'+idProvincia+'/editar';
         }
 
+        function show() {
+          var x = document.getElementById("activacion");
+          if (x.style.display === "none") {
+            x.style.display = "block";
+          } else {
+            x.style.display = "none";
+          }
+        }
+
     </script>
     <p><h3>Editando perfil: </h3> <h6 class="color:red">{{actualizado}}</h6></p>
     <form method="POST" action="/perfil/{{miembro.idProvincia}}/editar">
@@ -30,6 +39,25 @@
                 <option value="wpp" {{#if wpp }} selected {{/if}}  >Celular</option>
             </select>
         </div>
+
+        <p>
+            <a class="btn btn-primary"  onclick="show()" >
+                Activar mensajes de whatsapp
+            </a>
+        </p>
+        <div  id="activacion" class="col-md-4 mt-3 mb-3" style="display:none">
+            <div class="card card-body">
+                <h5>Envía un mensaje de whatsapp</h5>
+                <p>+1 415 523 8886 con el código
+                    "join aboard-salmon"
+                    ó
+                </p>
+                <a class="btn btn-primary" target="_blank"  href="http://wa.me/+14155238886?text=join%20aboard-salmon" role="button">
+                    Abrir whatsapp web
+                </a>
+            </div>
+        </div>
+
 
         <div class="form-group mb-3">
             <label for="tipo">Tipo de notificación:</label>

@@ -106,7 +106,7 @@ public class Miembro extends RolesUsuario {
             try {
                 incidentesXComunidad.add(new IncidenteXComunidad(comunidad, incidente));
             } catch (EmailException e) {
-                System.out.println("fallo al crear incidente x counidad");
+                System.out.println("Fallo al crear incidente x comunidad");
                 throw new RuntimeException(e);
             }
         });
