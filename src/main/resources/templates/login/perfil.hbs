@@ -26,8 +26,26 @@
         <div class="form-group mb-3">
             <label for="medio">Medio de notificación preferido:</label>
             <select name="medio" class="form-control">
-                <option value="Email" select>Email</option>
-                <option value="Whatsapp">Whatsapp</option>
+                <option value="email" {{#if email }} selected {{/if}}>Email</option>
+                <option value="wpp" {{#if wpp }} selected {{/if}}  >Celular</option>
+            </select>
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="tipo">Tipo de notificación:</label>
+            <select name="tipo" class="form-control">
+                <option value="True" {{#if inmediata }} selected {{/if}}>Inmediata</option>
+                <option value="False" {{#if noInmediata }} selected {{/if}}>No inmediata</option>
+            </select>
+        </div>
+
+
+        <div class="form-group mb-3">
+            <label for="turno">Turno de notificación:</label>
+            <select name="turno" class="form-control">
+                <option value="1" {{#if maniana }} selected {{/if}} >Mañana</option>
+                <option value="2" {{#if tarde }} selected {{/if}} >Tarde</option>
+                <option value="3" {{#if noche }} selected {{/if}} >Noche</option>
             </select>
         </div>
 

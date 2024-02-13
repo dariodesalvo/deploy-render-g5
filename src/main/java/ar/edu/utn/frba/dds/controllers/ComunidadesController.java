@@ -156,7 +156,9 @@ public class ComunidadesController extends Controller implements ICrudViewsHandl
                 miembro.setNombre(usuario.getEmail());
                 miembro.setConfiabilidad(4.5);
                 MedioDeNotificacion medio = new EmailSender(new NotificarPorEmail());
-                miembro.setMedioNotificacionPreferido(medio);
+                miembro.setMedioDeNotificacionPreferido(medio);
+                miembro.setIdProvincia(2L);
+                miembro.setIdMunicipio(22042);
                 usuario.setRol(miembro);
                 repositorioDeUsuarios.actualizar(usuario);
                 repositorioDeRoles.eliminar(rol);
@@ -310,7 +312,7 @@ public class ComunidadesController extends Controller implements ICrudViewsHandl
                 miembro.setNombre(usuario.getEmail());
                 miembro.setConfiabilidad(4.5);
                 MedioDeNotificacion medio = new EmailSender(new NotificarPorEmail());
-                miembro.setMedioNotificacionPreferido(medio);
+                miembro.setMedioDeNotificacionPreferido(medio);
                 repositorioDeRoles.guardar(miembro);
                 Thread.sleep(1000);
                 usuario.setRol(miembro);

@@ -35,6 +35,7 @@ public class Server {
             initTemplateEngine();
             AppHandlers.applyHandlers(app);
             Router.init();
+            Notificar.init();
 
             if(Boolean.parseBoolean(PrettyProperties.getInstance().propertyFromName("dev_mode"))) {
                 Initializer.init();

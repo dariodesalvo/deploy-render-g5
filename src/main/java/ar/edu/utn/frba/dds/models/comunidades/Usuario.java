@@ -16,11 +16,6 @@ import javax.persistence.*;
 @Entity
 @Table(name = "Usuario")
 public class Usuario extends Persistente {
-/*
-  @Id
-  @GeneratedValue(strategy= GenerationType.IDENTITY)
-  private Long id;
-*/
 
   @Column(name = "contrasenia")
   private String contrasenia;
@@ -30,11 +25,6 @@ public class Usuario extends Persistente {
   @OneToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = "rol_id")
   private RolesUsuario rol;
-
-/*  @OneToOne(cascade = CascadeType.ALL)
-  @JoinColumn(name = "municipio_id")
-  private Municipio municipio;*/
-
 
 
   public Usuario(){

@@ -11,8 +11,8 @@ public class CierreIncidente implements Mensaje {
 
     public String contenido(IncidenteXComunidad incidenteXComunidad){
 
-        return "Se cerró el incidente en el servicio"+incidenteXComunidad.getIncidente().getServicio()+"a las "
-                +incidenteXComunidad.getFechaCierre()+" con las siguientes observaciones: "+incidenteXComunidad.getObservacionesCierre();
+        return "Se cerró el incidente en el servicio "+incidenteXComunidad.getIncidente().getServicio().getNombre()+"a las "
+                +incidenteXComunidad.getFechaCierre().toString()+" con las siguientes observaciones: "+incidenteXComunidad.getObservacionesCierre();
 
     }
 }

@@ -49,7 +49,6 @@ public class Incidente extends Persistente {
         this.observacionesApertura = observaciones;
         this.fechaApertura = LocalDateTime.now();
         this.estado=Boolean.TRUE;
-
     }
 
     public Incidente(){

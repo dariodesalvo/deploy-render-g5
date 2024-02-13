@@ -1,6 +1,8 @@
 package ar.edu.utn.frba.dds.models.converters;
 
 import ar.edu.utn.frba.dds.models.incidentes.mediosNotificacion.MedioDeNotificacion;
+import ar.edu.utn.frba.dds.models.incidentes.mediosNotificacion.adapterImpl.NotificarPorEmail;
+import ar.edu.utn.frba.dds.models.incidentes.mediosNotificacion.adapterImpl.Twilio;
 import ar.edu.utn.frba.dds.models.incidentes.mediosNotificacion.sender.EmailSender;
 import ar.edu.utn.frba.dds.models.incidentes.mediosNotificacion.sender.WhatsappSender;
 
@@ -25,12 +27,16 @@ public class MedioDeNotificacionAttributeConverter implements AttributeConverter
     public MedioDeNotificacion convertToEntityAttribute(String s) {
         MedioDeNotificacion medio = null;
 
-        if(Objects.equals(s, "wpp"))
-        medio = new WhatsappSender();
+        if(Objects.equals(s, "wpp")){
+            Twilio adapterWpp = new Twilio();
+            medio = new WhatsappSender(adapterWpp);
+        }
 
-        if(Objects.equals(s, "email"))
-        medio = new EmailSender();
+        if(Objects.equals(s, "email")) {
 
+            NotificarPorEmail adapterEmail = new NotificarPorEmail();
+            medio = new EmailSender(adapterEmail);
+        }
         return medio;
     }
 }

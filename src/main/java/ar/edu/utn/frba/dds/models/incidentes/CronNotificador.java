@@ -1,4 +1,5 @@
 package ar.edu.utn.frba.dds.models.incidentes;
+import ar.edu.utn.frba.dds.models.incidentes.TurnoDeNotificaciones.Turno;
 import ar.edu.utn.frba.dds.models.incidentes.TurnoDeNotificaciones.TurnoNotificacion;
 
 import java.util.Timer;
@@ -7,13 +8,18 @@ import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.mail.EmailException;
 
+import static ar.edu.utn.frba.dds.models.incidentes.Notificador.turno;
+
 @Getter
 @Setter
-//otra forma de crear una tarea programada
+//Creando una tarea programada que se ejecuta cada 10 minutos
 public class CronNotificador {
 
     private Notificador notificador;
-    private TurnoNotificacion turno;
+
+    public CronNotificador(Notificador notificador) {
+        this.notificador=notificador;
+    }
 
     public void ejecutar(){
     Timer timer;

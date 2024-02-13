@@ -30,11 +30,15 @@ public class Miembro extends RolesUsuario {
 
     @Convert(converter = MedioDeNotificacionAttributeConverter.class)
     @Column(name = "medioNotificacionPreferido")
-    private MedioDeNotificacion medioNotificacionPreferido;
+    private MedioDeNotificacion medioDeNotificacionPreferido;
 
-    //Todo converter para el tipo de notificacion
-    @Transient
-    private TipoNotificacion tipoNotificacion;
+    @Column(name="notificacionInmediataa")
+    private Boolean notificacionInmediata;
+
+    @Column(name="turno")
+    private Integer turnoNotificacion;
+
+//    private TipoNotificacion tipoNotificacion;
 
     @ManyToMany()
     @JoinTable(
@@ -94,7 +98,7 @@ public class Miembro extends RolesUsuario {
         return incidente;
     }
 
-    public List<IncidenteXComunidad> incidentesXComunidad(Incidente incidente, List<Comunidad> comunidaes){
+    public List<IncidenteXComunidad> incidentesXComunidad(Incidente incidente, List<Comunidad> comunidades){
         List<IncidenteXComunidad> incidentesXComunidad = new ArrayList<>();
         Miembro yo = this;
         numero=0;
@@ -102,18 +106,13 @@ public class Miembro extends RolesUsuario {
             try {
                 incidentesXComunidad.add(new IncidenteXComunidad(comunidad, incidente));
             } catch (EmailException e) {
+                System.out.println("fallo al crear incidente x counidad");
                 throw new RuntimeException(e);
             }
         });
         return incidentesXComunidad;
     }
 
-/* este metodo no tiene que existir
-
-    public void cerrarIncidente(Incidente incidente) throws EmailException {
-        incidente.cerrar(this);
-    }
-*/
     public void sosParte(Comunidad comunidad){
         comunidades.add(comunidad);
     }

@@ -163,7 +163,11 @@ public class IncidenteController extends Controller implements ICrudViewsHandler
         incidentesXComunidads.forEach( incidenteXComunidad -> {
 
                     if(miembro.getComunidades().contains(incidenteXComunidad.getComunidad())){
-                        incidenteXComunidad.cerrar(observaciones, miembro);
+                        try {
+                            incidenteXComunidad.cerrar(observaciones, miembro);
+                        } catch (EmailException e) {
+                            throw new RuntimeException(e);
+                        }
                         this.repositorioDeIncidentesXComunidad.guardar(incidenteXComunidad);
                     }
                 }

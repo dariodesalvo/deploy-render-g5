@@ -4,6 +4,7 @@ import ar.edu.utn.frba.dds.models.comunidades.Miembro;
 import ar.edu.utn.frba.dds.models.comunidades.RolesUsuario;
 import ar.edu.utn.frba.dds.models.comunidades.TipoRol;
 import ar.edu.utn.frba.dds.models.comunidades.Usuario;
+import ar.edu.utn.frba.dds.models.converters.MedioDeNotificacionAttributeConverter;
 import ar.edu.utn.frba.dds.models.georef.ServicioGeoref;
 import ar.edu.utn.frba.dds.models.georef.entities.ListadoDeMunicipios;
 import ar.edu.utn.frba.dds.models.georef.entities.ListadoDeProvincias;
@@ -12,14 +13,13 @@ import ar.edu.utn.frba.dds.models.georef.entities.Provincia;
 import ar.edu.utn.frba.dds.models.comunidades.*;
 import ar.edu.utn.frba.dds.models.incidentes.mediosNotificacion.MedioDeNotificacion;
 import ar.edu.utn.frba.dds.models.incidentes.mediosNotificacion.adapterImpl.NotificarPorEmail;
+import ar.edu.utn.frba.dds.models.incidentes.mediosNotificacion.adapterImpl.Twilio;
 import ar.edu.utn.frba.dds.models.incidentes.mediosNotificacion.sender.EmailSender;
-import ar.edu.utn.frba.dds.models.georef.ServicioGeoref;
-import ar.edu.utn.frba.dds.models.repositorios.RepositorioDeComunidades;
+import ar.edu.utn.frba.dds.models.incidentes.mediosNotificacion.sender.WhatsappSender;
 import ar.edu.utn.frba.dds.models.repositorios.RepositorioDeRoles;
 import ar.edu.utn.frba.dds.models.repositorios.RepositorioDeUsuarios;
 import ar.edu.utn.frba.dds.server.utils.ICrudViewsHandler;
 import io.javalin.http.Context;
-import net.bytebuddy.dynamic.loading.ClassInjector;
 
 import java.io.IOException;
 import java.util.*;
@@ -40,7 +40,7 @@ public class UsuarioController extends Controller implements ICrudViewsHandler {
        // context.render("administracion_tipos_usuarios/administrar-usuarios.hbs");
     }
 
-    public void perfil(Context context){
+    public void perfil(Context context) throws IOException {
 
         Usuario usuario = (Usuario) repositorioDeUsuarios.buscar(Long.parseLong(context.sessionAttribute("usuario_id")));
         Miembro miembro = (Miembro) usuario.getRol();
@@ -82,10 +82,24 @@ public class UsuarioController extends Controller implements ICrudViewsHandler {
         if (!Objects.equals(miembro.getIdMunicipio(), 0)) {
             ListadoDeMunicipios listadoDeMunicipiosPorID = servicioGeoref.listadoDeMunicipiosPorID(miembro.getIdMunicipio());
             model.put("municipio", listadoDeMunicipiosPorID.municipios.get(0));
-            /*
-            ListadoDeProvincias listadoDeProvinciasPorID = servicioGeoref.listadoDeProvinciasPorID(Integer.parseInt(establecimiento.getIdProvincia().toString()));
-            model.put("municipio", listadoDeProvinciasPorID.provincias.get(0));
-        */
+        }
+
+        if(Objects.equals(miembro.getMedioDeNotificacionPreferido().getClass().getSimpleName(), "EmailSender")){
+            model.put("email", true);
+        }else{
+            model.put("wpp", true);
+        }
+
+        if(miembro.getNotificacionInmediata()){
+            model.put("inmediata", true);
+        }else{
+            model.put("noInmediata", true);
+        }
+
+        switch (miembro.getTurnoNotificacion()){
+            case 1:  model.put("maniana", true); break;
+            case 2:  model.put("tarde", true) ; break;
+            case 3:  model.put("noche", true); break;
         }
 
         model.put("municipios", listadoDeMunicipios.municipios);
@@ -109,7 +123,6 @@ public class UsuarioController extends Controller implements ICrudViewsHandler {
 
         }else{
             context.render("administracion_tipos_usuarios/administrar-usuarios.hbs", model);
-
         }
 
     }
@@ -167,7 +180,7 @@ public RolesUsuario asignarNuevoRol(String nuevoRol, Usuario usuario){
                 MedioDeNotificacion medio = new EmailSender(new NotificarPorEmail());
                 Miembro miembro = new Miembro();
                 miembro.setNombre(usuario_email);
-                miembro.setMedioNotificacionPreferido(medio);
+                miembro.setMedioDeNotificacionPreferido(medio);
                 return miembro;
             default:
                 return new Lector();
@@ -189,7 +202,6 @@ public RolesUsuario asignarNuevoRol(String nuevoRol, Usuario usuario){
         List< Map<String, Object>> usuariosMappeados = new ArrayList<>();
         Map<String, Object> model = new HashMap<>();
 
-        Map<String, Object> usuariosMappeados = new HashMap<>();
         List<String> rolesUsuarios = new ArrayList<>();
 
         rolesUsuarios.add((TipoRol.Administrador.name()));
@@ -197,12 +209,11 @@ public RolesUsuario asignarNuevoRol(String nuevoRol, Usuario usuario){
         rolesUsuarios.add((TipoRol.Prestador.name()));
         rolesUsuarios.add((TipoRol.Miembro.name()));
 
-        for (Usuario usuario : usuarios) {
+        for(Usuario usuario: usuarios){
             String email = usuario.getEmail();
             String rolUsuario = usuario.getRol().getClass().getSimpleName();
             Long usuario_id = usuario.getId();
             List<String> roles = rolesUsuarios.stream().filter((rol)->!rol.equals(rolUsuario)).toList();
-            List<String> roles = rolesUsuarios.stream().filter((rol) -> !rol.equals(rolUsuario)).toList();
 
             Map<String,Object> usuarioMappeado= new HashMap<>();
             usuarioMappeado.put("email",email);
@@ -210,19 +221,12 @@ public RolesUsuario asignarNuevoRol(String nuevoRol, Usuario usuario){
             usuarioMappeado.put("rol",rolUsuario);
             usuarioMappeado.put("roles",roles);
             usuariosMappeados.add(usuarioMappeado);
-            usuariosMappeados.put("email", email);
-            usuariosMappeados.put("rol", rolUsuario);
-            usuariosMappeados.put("roles", roles);
         }
-
-        model.put("usuarios", usuariosMappeados);
-
-        System.out.println(model);
-        context.render("administracion_tipos_usuarios/administrar-usuarios.hbs", model);
 
         model.put("usuarios",usuariosMappeados);
         return model;
     }
+
 
     @Override
     public void create(Context context) {
@@ -230,35 +234,69 @@ public RolesUsuario asignarNuevoRol(String nuevoRol, Usuario usuario){
     }
 
     @Override
-    public void save(Context context) {
-
-    }
-
-    @Override
-    public void edit(Context context) {
+    public void save(Context context) throws IOException {
         Usuario usuario = (Usuario) repositorioDeUsuarios.buscar(Long.parseLong(context.sessionAttribute("usuario_id")));
-
         Miembro miembro = (Miembro) usuario.getRol();
 
         miembro.setApellido(context.formParam("apellido"));
         miembro.setNombre(context.formParam("nombre"));
         miembro.setCelular(context.formParam("celular"));
-        /* falta medio de preferencia y municipio */
+        miembro.setIdProvincia(Long.parseLong(context.formParam("idProvincia")));
+        miembro.setIdMunicipio(Integer.parseInt(context.formParam("idMunicipio")));
 
-        repositorioDeRoles.actualizar((RolesUsuario) miembro);
+        MedioDeNotificacion medio=null;
 
+        if(Objects.equals(context.formParam("medio"),"email")){
+             medio = new EmailSender(new NotificarPorEmail());
+        }else{
+             medio = new WhatsappSender(new Twilio());
+        }
+
+        miembro.setMedioDeNotificacionPreferido(medio);
+        miembro.setNotificacionInmediata(Boolean.parseBoolean(context.formParam("tipo")));
+        miembro.setTurnoNotificacion(Integer.parseInt(context.formParam("turno")));
+
+        repositorioDeRoles.actualizar(miembro);
+
+        ListadoDeProvincias listadoDeProvincias = servicioGeoref.listadoDeProvincias();
+        ListadoDeProvincias listadoDeProvinciasPorID = servicioGeoref.listadoDeProvinciasPorID(Integer.parseInt(miembro.getIdProvincia().toString()));
+        Provincia provincia = listadoDeProvinciasPorID.provincias.get(0);
+        ListadoDeMunicipios listadoDeMunicipios = servicioGeoref.listadoDeMunicipiosDeProvincia(Integer.parseInt(provincia.getId().toString()));
+        ListadoDeMunicipios listadoDeMunicipiosPorID = servicioGeoref.listadoDeMunicipiosPorID(miembro.getIdMunicipio());
+        Municipio municipio = listadoDeMunicipiosPorID.municipios.get(0);
         Map<String, Object> model = new HashMap<>();
 
-        /* desde aca */
-        model.put("email", context.sessionAttribute("email"));
-        model.put("tipo_rol", context.sessionAttribute("tipo_rol"));
-        model.put("usuario_id", context.sessionAttribute("usuario_id"));
-        model.put("MiembroAdmin", context.sessionAttribute("MiembroAdmin"));
-        model.put("municipio", usuario.getMunicipio());
-        model.put("miembro", usuario.getRol());
+        if(Objects.equals(miembro.getMedioDeNotificacionPreferido().getClass().getSimpleName(), "EmailSender")){
+            model.put("email", true);
+        }else{
+            model.put("wpp", true);
+        }
+
+        if(miembro.getNotificacionInmediata()){
+            model.put("inmediata", true);
+        }else{
+            model.put("noInmediata", true);
+        }
+
+        switch (miembro.getTurnoNotificacion()){
+            case 1:  model.put("maniana", true); break;
+            case 2:  model.put("tarde", true); break;
+            case 3:  model.put("noche", true); break;
+        }
+
+        model.put("provincia", provincia);
+        model.put("provincias", listadoDeProvincias);
+        model.put("municipios", listadoDeMunicipios);
+        model.put("municipio", municipio);
+        model.put("miembro", miembro);
         model.put("actualizado", "Actualizado correctamente");
-        model.put("Miembro", context.sessionAttribute("Miembro"));
+        this.cargarVariablesSesion(context,model);
         context.render("/login/perfil.hbs", model);
+    }
+
+    @Override
+    public void edit(Context context) throws IOException {
+
     }
 
     @Override

@@ -18,7 +18,7 @@ public class NotificarPorEmail implements AdapterEmail {
         email.setAuthenticator(new DefaultAuthenticator(MY_SENDER_EMAIL, PASS));
         email.setSSLOnConnect(true);
         email.setFrom(MY_SENDER_EMAIL);
-        email.setSubject("TestMail");
+        email.setSubject("Notificación Sistema de Movilidad Reducida - Grupo 5");
         email.setMsg(notificacion);
         email.addTo(miembro.getEmail());
         email.send();

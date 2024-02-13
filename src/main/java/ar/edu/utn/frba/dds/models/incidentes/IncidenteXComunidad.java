@@ -15,6 +15,9 @@ import org.apache.commons.mail.EmailException;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
+import static ar.edu.utn.frba.dds.models.incidentes.Notificador.turno;
+import static ar.edu.utn.frba.dds.server.Notificar.notificador;
+
 @Getter
 @Setter
 @Entity
@@ -40,8 +43,6 @@ public class IncidenteXComunidad extends Persistente {
     @Column(name = "fechaCierre")
     private LocalDateTime fechaCierre;
 
-    @Transient
-    private Notificador notificador;
 
     public IncidenteXComunidad(Comunidad comunidad, Incidente incidente) throws EmailException {
 
@@ -52,18 +53,19 @@ public class IncidenteXComunidad extends Persistente {
 
         Mensaje mensaje = new AperturaIncidente();
 
-        //this.notificador.notificar(comunidad, this, mensaje);
+        notificador.notificar(comunidad, this, mensaje, turno);
 
     }
 
-    public void cerrar(String observacionesCierre, Miembro miembro){
+    public void cerrar(String observacionesCierre, Miembro miembro) throws EmailException {
 
         this.observacionesCierre=observacionesCierre;
         this.cerradoPor = miembro;
         this.fechaCierre = LocalDateTime.now();
 
         Mensaje mensaje = new CierreIncidente();
-        //this.notificador.notificar(comunidad, this, mensaje);
+
+        notificador.notificar(comunidad, this, mensaje, turno);
 
     }
 
