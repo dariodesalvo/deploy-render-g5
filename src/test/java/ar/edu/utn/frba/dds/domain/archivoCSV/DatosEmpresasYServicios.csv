@@ -1,21 +1,21 @@
-Codigo Empresa;Nombre Empresa;Usuario Responsable;Codigo Servicio;Nombre Servicio;Municipio;Es de elevacion;Esta Activo;Latitud;Longitud;Leyenda
-54720;BaniosDDS;carolina;49052;Banio;Tigre;No;Si;-34.613;-58.377;Banio-Tigre
-68888;AscensoresDDS;dario;46728;Ascensor;Villa Urquiza;No;No;-34.612;-58.376;Ascensor-Villa Urquiza
-93939;EscalerasDDS;mauro;70857;Escalera Mecanica;Salta;No;Si;-34.611;-58.375;Escalera Mecanica-Salta
-16087;MolientesDDS;agus;46388;Molinete;Cordoba;Si;Si;-34.610;-58.374;Molinete-Cordoba
-98624;BarrerasDDS;mica;74711;Barrera;Palermo;No;No;-34.609;-58.373;Barrera-Palermo
-66655;BaniosDDS;carolina;94722;Banio;San Martin;Si;No;-34.608;-58.372;Banio-San Martin
-17848;AscensoresDDS;carolina;23961;Ascensor;Constitucion;Si;Si;-34.607;-58.371;Ascensor-Constitucion
-44277;EscalerasDDS;carolina;10786;Escalera Mecanica;Lomas de Zamora;Si;No;-34.606;-58.370;Escalera Mecanica-Lomas de Zamora
-80325;MolientesDDS;dario;10229;Molinete;Ramos Mejia;No;Si;-34.605;-58.369;Molinete-Ramos Mejia
-52600;BarrerasDDS;dario;49142;Barrera;San Isidro;No;No;-34.604;-58.368;Barrera-San Isidro
-59759;BaniosDDS;agus;35352;Banio;Viedma;No;Si;-34.603;-58.367;Banio-Viedma
-74431;AscensoresDDS;agus;14955;Ascensor;Bariloche;Si;No;-34.602;-58.366;Ascensor-Bariloche
-76250;EscalerasDDS;agus;33410;Escalera Mecanica;Calafate;No;Si;-34.601;-58.365;Escalera Mecanica-Calafate
-89267;MolientesDDS;mauro;74131;Molinete;Almagro;Si;No;-34.600;-58.364;Molinete-Almagro
-15446;BarrerasDDS;mauro;36634;Barrera;Retiro;Si;Si;-34.599;-58.363;Barrera-Retiro
-54747;BaniosDDS;mauro;57599;Banio;Mar del Plata;No;Si;-34.598;-58.362;Banio-Mar del Plata
-15840;AscensoresDDS;dario;72452;Barrera;La Falda;No;No;-34.597;-58.361;Barrera-La Falda
-18487;EscalerasDDS;mica;81038;Escalera;Lanus;Si;Si;-34.596;-58.360;Escalera-Lanus
-71581;MolientesDDS;carolina;52813;Molinete;Rosario;Si;No;-34.595;-58.359;Molinete-Rosario
-33767;BarrerasDDS;dario;98519;Molinete;Parana;No;Si;-34.594;-58.358;Molinete-Parana
+Codigo Empresa;Nombre Empresa;Usuario Responsable;Codigo Servicio;Nombre Servicio;Provincia;Municipio;Es de elevacion;Esta Activo;Leyenda;Leyenda-entidad
+54720;BaniosDDS;carolina@gmail.com;49052;Banio;Buenos Aires;Tigre;No;Si;Banio-Tigre;BaniosDDS
+68888;AscensoresDDS;dario@gmail.com;46728;Ascensor;Ciudad Autónoma de Buenos Aires;Comuna 12;No;No;Ascensor-Villa-Urquiza;AscensoresDDS
+93939;EscalerasDDS;mauro@hotmail.com;70857;Escalera Mecanica;Salta;Salta;No;Si;Escalera Mecanica-Salta;EscalerasDDS
+16087;MolientesDDS;agus@gmail.com;46388;Molinete;Córdoba;Córdoba;Si;Si;Molinete-Cordoba;MolientesDDS
+98624;BarrerasDDS;mica@gmail.com;74711;Barrera;Ciudad Autónoma de Buenos Aires;Comuna 14;No;No;Barrera-Palermo;BarrerasDDS
+54720;BaniosDDS;carolina@gmail.com;94722;Banio;Buenos Aires;General San Martin;Si;No;Banio-General-San-Martin;BaniosDDS
+68888;AscensoresDDS;dario@gmail.com;23961;Ascensor;Ciudad Autónoma de Buenos Aires;Comuna 1;Si;Si;Ascensor-Constitucion;AscensoresDDS
+93939;EscalerasDDS;mauro@hotmail.com;10786;Escalera Mecanica;Buenos Aires;Lomas de Zamora;Si;No;Escalera Mecanica-Lomas de Zamora;EscalerasDDS
+16087;MolientesDDS;agus@gmail.com;10229;Molinete;Buenos Aires;La Matanza;No;Si;Molinete-Ramos-Mejia;MolientesDDS
+98624;BarrerasDDS;mica@gmail.com;49142;Barrera;Buenos Aires;San Isidro;No;No;Barrera-San-Isidro;BarrerasDDS
+54720;BaniosDDS;carolina@gmail.com;35352;Banio;Río Negro;Viedma;No;Si;Banio-Viedma;BaniosDDS
+68888;AscensoresDDS;dario@gmail.com;14955;Ascensor;Río Negro;San Carlos de Bariloche;Si;No;Ascensor-Bariloche;AscensoresDDS
+93939;EscalerasDDS;mauro@hotmail.com;33410;Escalera Mecanica;Mendoza;Mendoza;No;Si;Escalera Mecanica-Mendoza;EscalerasDDS
+16087;MolientesDDS;agus@gmail.com;74131;Molinete;Ciudad Autónoma de Buenos Aires;Comuna 5;Si;No;Molinete-Almagro;MolientesDDS
+98624;BarrerasDDS;mica@gmail.com;36634;Barrera;Ciudad Autónoma de Buenos Aires;Comuna 1;Si;Si;Barrera-Retiro;BarrerasDDS
+54720;BaniosDDS;carolina@hotmail.com;57599;Banio;Buenos Aires;General Pueyrredon;No;Si;Banio-Mar-del-Plata;BaniosDDS
+68888;AscensoresDDS;dario@gmail.com;72452;Barrera;Córdoba;La Falda;No;No;Barrera-La-Falda;AscensoresDDS
+93939;EscalerasDDS;mauro@hotmail.com;81038;Escalera;Buenos Aires;Lanús;Si;Si;Escalera-Lanus;EscalerasDDS
+16087;MolientesDDS;agus@gmail.com;52813;Molinete;Santa Fe;Rosario;Si;No;Molinete-Rosario;MolientesDDS
+98624;BarrerasDDS;mica@gmail.com;98519;Molinete;Entre Ríos;Paraná;No;Si;Molinete-Parana;BarrerasDDS

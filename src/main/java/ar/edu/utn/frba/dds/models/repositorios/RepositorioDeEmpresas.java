@@ -1,9 +1,11 @@
 package ar.edu.utn.frba.dds.models.repositorios;
 
+import ar.edu.utn.frba.dds.models.comunidades.Usuario;
 import ar.edu.utn.frba.dds.models.entidades.Empresa;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 
 import javax.persistence.EntityTransaction;
+import javax.persistence.Query;
 import java.util.List;
 
 public class RepositorioDeEmpresas  implements WithSimplePersistenceUnit, ICrudRepository {
@@ -19,6 +21,14 @@ public class RepositorioDeEmpresas  implements WithSimplePersistenceUnit, ICrudR
     public Object buscar(Long id)
     {
         return entityManager().find(Empresa.class, id);
+    }
+
+    public List<Object> buscarEmpresaXCodigo(Integer codigoEmpresa) {
+
+        String hql = "FROM " + Empresa.class.getName() + " WHERE codigoEmpresa = :codigoEmpresa";
+        Query query = entityManager().createQuery(hql);
+        query.setParameter("codigoEmpresa", codigoEmpresa);
+        return query.getResultList();
     }
 
     @Override

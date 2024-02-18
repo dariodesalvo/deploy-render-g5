@@ -13,7 +13,7 @@ public class LectorCSV implements AdapterCSVFileReader {
   @Override
   public List<String> leerArchivoCSV(UploadedFile archivoCSV) throws IOException {
     BufferedInputStream buff = new BufferedInputStream(archivoCSV.content());
-    BufferedReader bfr = new BufferedReader(new InputStreamReader(buff,StandardCharsets.UTF_8));
+    BufferedReader bfr = new BufferedReader(new InputStreamReader(buff,StandardCharsets.ISO_8859_1));
 
     List<String> lecturas = new ArrayList<>();
     String line;

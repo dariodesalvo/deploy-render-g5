@@ -13,4 +13,9 @@ public class ListadoDeProvincias {
         public List<String> campos;
         public int max;
     }
+
+    public Provincia buscarProvinciaPorNombre(String nombre){
+        List<Provincia> provinciasEncontradas = provincias.stream().filter((provincia -> provincia.nombre.equals(nombre))).toList();
+        return provinciasEncontradas.get(0);
+    }
 }

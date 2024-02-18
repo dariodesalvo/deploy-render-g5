@@ -7,13 +7,13 @@
             <th>Acciones</th>
         </tr>
         <tbody>
-        {{#each entidades}}
+        {{#each entidades as |entidad| }}
             <tr>
-                <td>{{this.leyenda}}</td>
-                <td>{{this.cantEstablecimientos}}</td>
+                <td>{{entidad.leyenda}}</td>
+                <td>{{entidad.cantEstablecimientos}}</td>
                 <td>
-                    <a class="btn btn-secondary" href="/entidades/{{this.id}}/editar">Editar<i class="fa-solid fa-pen-to-square"></i></a>
-                    <a class="btn btn-secondary" href="/entidades/{{this.id}}/establecimientos">Establecimientos<i class="fa-solid fa-list-check"></i></a>
+                    <a class="btn btn-secondary" href="/entidades/{{entidad.id}}/editar">Editar<i class="fa-solid fa-pen-to-square"></i></a>
+                    <a class="btn btn-secondary" href="/entidades/{{entidad.id}}/establecimientos">Establecimientos<i class="fa-solid fa-list-check"></i></a>
                 </td>
             </tr>
         {{/each}}

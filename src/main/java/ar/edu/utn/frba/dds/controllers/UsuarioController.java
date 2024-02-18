@@ -181,6 +181,8 @@ public RolesUsuario asignarNuevoRol(String nuevoRol, Usuario usuario){
                 Miembro miembro = new Miembro();
                 miembro.setNombre(usuario_email);
                 miembro.setMedioDeNotificacionPreferido(medio);
+                miembro.setIdMunicipio(0);
+                miembro.setConfiabilidad(4.5);
                 return miembro;
             default:
                 return new Lector();

@@ -1,11 +1,13 @@
 package ar.edu.utn.frba.dds.models.repositorios;
 
+import ar.edu.utn.frba.dds.models.entidades.Empresa;
 import ar.edu.utn.frba.dds.models.entidades.Establecimiento;
 import ar.edu.utn.frba.dds.models.servicios.Servicio;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 
 
 import javax.persistence.EntityTransaction;
+import javax.persistence.Query;
 import java.util.List;
 
 public class RepositorioDeServicios implements WithSimplePersistenceUnit, ICrudRepository {
@@ -13,6 +15,13 @@ public class RepositorioDeServicios implements WithSimplePersistenceUnit, ICrudR
     @Override
     public List buscarTodos() {
         return entityManager().createQuery("from " + Servicio.class.getName()).getResultList();
+    }
+    public List<Object> buscarServicioXCodigo(Integer codigoServicio) {
+
+        String hql = "FROM " + Servicio.class.getName() + " WHERE codigoServicio = :codigoServicio";
+        Query query = entityManager().createQuery(hql);
+        query.setParameter("codigoServicio", codigoServicio);
+        return query.getResultList();
     }
 
     @Override
