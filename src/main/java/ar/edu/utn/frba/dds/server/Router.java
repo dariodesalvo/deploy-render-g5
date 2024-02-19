@@ -96,6 +96,8 @@ public class Router {
             get("servicios/{id}/editar", ((ServiciosController) FactoryController.controller("Servicios"))::edit);
             post("servicios/{id}", ((ServiciosController) FactoryController.controller("Servicios"))::update);
 
+            /* Informe Controller */
+            get("generar-informes-incidentes",((InformeController) FactoryController.controller("Informes"))::show);
 
 
         });

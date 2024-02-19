@@ -150,7 +150,14 @@ public void editarRol(Context context){
         model.put("roles",roles);
 
     this.cargarVariablesSesion(context, model);
-    context.render("administracion_tipos_usuarios/editar-rol.hbs", model);
+
+    Boolean rolActualEsAdmin = (Boolean) model.get("Administrador");
+    if(rolActualEsAdmin == null){
+        context.render("administracion_tipos_usuarios/admin-error.hbs", model);
+
+    }else {
+        context.render("administracion_tipos_usuarios/editar-rol.hbs", model);
+    }
 }
 public void guardarRol(Context context){
 
@@ -180,6 +187,7 @@ public RolesUsuario asignarNuevoRol(String nuevoRol, Usuario usuario){
                 MedioDeNotificacion medio = new EmailSender(new NotificarPorEmail());
                 Miembro miembro = new Miembro();
                 miembro.setNombre(usuario_email);
+                miembro.setEmail(usuario_email);
                 miembro.setMedioDeNotificacionPreferido(medio);
                 miembro.setIdMunicipio(0);
                 miembro.setConfiabilidad(4.5);
