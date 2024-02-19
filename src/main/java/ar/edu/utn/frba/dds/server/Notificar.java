@@ -13,6 +13,7 @@ public class Notificar {
         Turno turno = new Turno();
         notificador = new Notificador(turno);
         CronNotificador cronNotificador = new CronNotificador(notificador);
+        cronNotificador.ejecutar();
         System.out.println("Ejecutando tarea programada");
 
     }

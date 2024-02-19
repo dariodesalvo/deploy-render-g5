@@ -33,6 +33,14 @@
         </div>
 
         <div class="form-group mb-3">
+            <label for="tipo">Afectado u Observador:</label>
+            <select name="esObservador" class="form-control">
+                <option value="True" {{#if esObservador }} selected {{/if}}>Observador</option>
+                <option value="False" {{#if noEsObservador }} selected {{/if}}>Afectado</option>
+            </select>
+        </div>
+
+        <div class="form-group mb-3">
             <label for="medio">Medio de notificación preferido:</label>
             <select name="medio" class="form-control">
                 <option value="email" {{#if email }} selected {{/if}}>Email</option>

@@ -102,6 +102,12 @@ public class UsuarioController extends Controller implements ICrudViewsHandler {
             case 3:  model.put("noche", true); break;
         }
 
+        if(miembro.getEsObservador()){
+            model.put("esObservador", true);
+        }else{
+            model.put("noEsObservador", true);
+        }
+
         model.put("municipios", listadoDeMunicipios.municipios);
         model.put("provincias", listadoDeProvincias.provincias);
         model.put("miembro", usuario.getRol());
@@ -189,6 +195,7 @@ public RolesUsuario asignarNuevoRol(String nuevoRol, Usuario usuario){
                 miembro.setNombre(usuario_email);
                 miembro.setEmail(usuario_email);
                 miembro.setMedioDeNotificacionPreferido(medio);
+                miembro.setEsObservador(Boolean.FALSE);
                 miembro.setIdMunicipio(0);
                 miembro.setConfiabilidad(4.5);
                 return miembro;
@@ -251,6 +258,7 @@ public RolesUsuario asignarNuevoRol(String nuevoRol, Usuario usuario){
         miembro.setApellido(context.formParam("apellido"));
         miembro.setNombre(context.formParam("nombre"));
         miembro.setCelular(context.formParam("celular"));
+        miembro.setEsObservador(Boolean.parseBoolean(context.formParam("esObservador")));
         miembro.setIdProvincia(Long.parseLong(context.formParam("idProvincia")));
         miembro.setIdMunicipio(Integer.parseInt(context.formParam("idMunicipio")));
 
@@ -286,6 +294,12 @@ public RolesUsuario asignarNuevoRol(String nuevoRol, Usuario usuario){
             model.put("inmediata", true);
         }else{
             model.put("noInmediata", true);
+        }
+
+        if(miembro.getEsObservador()){
+            model.put("esObservador", true);
+        }else{
+            model.put("noEsObservador", true);
         }
 
         switch (miembro.getTurnoNotificacion()){

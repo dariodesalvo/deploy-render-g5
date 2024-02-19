@@ -52,8 +52,8 @@ public class Miembro extends RolesUsuario {
     private List<ServicioDeInteres> serviciosDeInteres;
 
 
-    @Column(name = "numero")
-    private Integer numero;
+    @Column(name = "esObservador")
+    private Boolean esObservador;
 
     //revisar porque el email ya esta en usuario
     @Column(name = "email")
@@ -101,8 +101,8 @@ public class Miembro extends RolesUsuario {
     public List<IncidenteXComunidad> incidentesXComunidad(Incidente incidente, List<Comunidad> comunidades){
         List<IncidenteXComunidad> incidentesXComunidad = new ArrayList<>();
         Miembro yo = this;
-        numero=0;
-        comunidades.forEach(comunidad -> { numero++;
+
+        comunidades.forEach(comunidad -> {
             try {
                 incidentesXComunidad.add(new IncidenteXComunidad(comunidad, incidente));
             } catch (EmailException e) {

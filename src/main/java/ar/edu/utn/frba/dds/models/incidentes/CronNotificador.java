@@ -32,6 +32,7 @@ public class CronNotificador {
 
             try {
                 notificador.notificarPendientes(turno);
+                System.out.println("Se han notificado los pendientes.");
             } catch (EmailException e) {
                 throw new RuntimeException(e);
             }

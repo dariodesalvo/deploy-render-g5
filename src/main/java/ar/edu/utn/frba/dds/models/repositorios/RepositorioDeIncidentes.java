@@ -1,9 +1,12 @@
 package ar.edu.utn.frba.dds.models.repositorios;
 
+import ar.edu.utn.frba.dds.models.entidades.Entidad;
 import ar.edu.utn.frba.dds.models.incidentes.Incidente;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 
 import javax.persistence.EntityTransaction;
+import javax.persistence.Query;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class RepositorioDeIncidentes implements WithSimplePersistenceUnit, ICrudRepository {
@@ -18,6 +21,15 @@ public class RepositorioDeIncidentes implements WithSimplePersistenceUnit, ICrud
     public Object buscar(Long id) {
 
         return entityManager().find(Incidente.class, id);
+    }
+
+    public Object buscarCerrados(LocalDateTime desde, LocalDateTime hasta){
+        String hql = "SELECT id, servicio_id, fechaApertura FROM " + Incidente.class.getName() + " WHERE estado = False AND fechaApertura" +
+                "BETWEEN :desde AND :hasta GROUP BY id, servicio_id, date_format(fechaApertura, \"Y-m-d HH\")";
+        Query query = entityManager().createQuery(hql);
+        query.setParameter("desde", desde);
+        query.setParameter("hasta", hasta);
+        return query.getResultList();
     }
 
     @Override

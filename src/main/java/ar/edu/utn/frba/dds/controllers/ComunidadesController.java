@@ -311,6 +311,7 @@ public class ComunidadesController extends Controller implements ICrudViewsHandl
                 miembro = new Miembro();
                 miembro.setNombre(usuario.getEmail());
                 miembro.setConfiabilidad(4.5);
+                miembro.setEsObservador(Boolean.FALSE);
                 MedioDeNotificacion medio = new EmailSender(new NotificarPorEmail());
                 miembro.setMedioDeNotificacionPreferido(medio);
                 repositorioDeRoles.guardar(miembro);

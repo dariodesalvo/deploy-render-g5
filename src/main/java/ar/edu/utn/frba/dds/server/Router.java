@@ -98,6 +98,7 @@ public class Router {
 
             /* Informe Controller */
             get("generar-informes-incidentes",((InformeController) FactoryController.controller("Informes"))::show);
+            post("generar-informes-incidentes", ((InformeController) FactoryController.controller("Informes"))::create);
 
 
         });
