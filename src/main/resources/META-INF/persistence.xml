@@ -13,14 +13,14 @@
       <property name="hibernate.archive.autodetection" value="class"/>
 
       <property name="hibernate.connection.driver_class" value="com.mysql.cj.jdbc.Driver" />
-      <property name="hibernate.connection.url" value="jdbc:mysql://localhost/grupo5" />
-      <property name="hibernate.connection.username" value="grupo5" />
-      <property name="hibernate.connection.password" value="elgrupo5!" />
+      <property name="hibernate.connection.url" value="jdbc:mysql://sql10.freemysqlhosting.net/sql10685645" />
+      <property name="hibernate.connection.username" value="sql10685645" />
+      <property name="hibernate.connection.password" value="tDLCl5vUHH" />
 
       <property name="hibernate.show_sql" value="true"/>
       <property name="hibernate.format_sql" value="true"/>
       <property name="use_sql_comments" value="true"/>
-      <property name="hibernate.hbm2ddl.auto" value="update"/>
+      <property name="hibernate.hbm2ddl.auto" value="create"/>
       <property name="hibernate.connection.autocommit" value="true" />
     </properties>
 
