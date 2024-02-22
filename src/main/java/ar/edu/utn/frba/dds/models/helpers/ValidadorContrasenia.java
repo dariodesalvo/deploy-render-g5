@@ -65,7 +65,7 @@ public class ValidadorContrasenia implements IValidable {
 
     String regex = "^(?=.*[0-9])" //Al menos un dígito
             + "(?=.*[a-z])(?=.*[A-Z])" // Mayúsculas y minúsculas
-            + "(?=.*[*@#$%^&+=])" // Un carácter especial
+            + "(?=.*[*@#$%^&+=.!])" // Un carácter especial
             + "(?=\\S+$).{8,20}$"; // Sin espacios vacíos, entre 8 y 20 caracteres.
 
     Pattern pattern = Pattern.compile(regex);

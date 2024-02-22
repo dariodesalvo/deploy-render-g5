@@ -62,9 +62,6 @@ public class Miembro extends RolesUsuario {
     @Column(name = "confiabilidad")
     private Double confiabilidad;
 
-    @Column(name = "activo")
-    private Boolean activo;
-
     @Column(name = "provincia_id")
     private Long idProvincia;
 

@@ -261,6 +261,7 @@ public RolesUsuario asignarNuevoRol(String nuevoRol, Usuario usuario){
         miembro.setEsObservador(Boolean.parseBoolean(context.formParam("esObservador")));
         miembro.setIdProvincia(Long.parseLong(context.formParam("idProvincia")));
         miembro.setIdMunicipio(Integer.parseInt(context.formParam("idMunicipio")));
+        miembro.setEmail(context.formParam("email"));
 
         MedioDeNotificacion medio=null;
 

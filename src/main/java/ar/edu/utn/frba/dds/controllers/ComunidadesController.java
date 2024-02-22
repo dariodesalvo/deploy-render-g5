@@ -42,9 +42,8 @@ public class ComunidadesController extends Controller implements ICrudViewsHandl
         List<Comunidad> comunidades = this.repositorioDeComunidades.buscarTodos();
         List<Comunidad> otrasComunidades = null;
 
-        this.cargarVariablesSesion(context, model);
-
         Usuario usuario = (Usuario) repositorioDeUsuarios.buscar(Long.parseLong(context.sessionAttribute("usuario_id")));
+
 
         List<Comunidad> comunidadesPendientes = comunidades
                 .stream()
@@ -73,10 +72,9 @@ public class ComunidadesController extends Controller implements ICrudViewsHandl
         model.put("comunidadesPendientes", comunidadesPendientes);
         model.put("usuario", usuario);
         model.put("rol", usuario.getRol());
-
+        this.cargarVariablesSesion(context,model);
 
         context.render("comunidades/comunidades.hbs", model);
-
     }
 
     public void crearSolicitud(Context context) {
@@ -90,13 +88,6 @@ public class ComunidadesController extends Controller implements ICrudViewsHandl
         this.repositorioDeComunidades.actualizar(comunidad);
 
         Map<String, Object> model = new HashMap<>();
-        /*
-        model.put("email", context.sessionAttribute("email"));
-        model.put("tipo_rol", context.sessionAttribute("tipo_rol"));
-        model.put("usuario_id", context.sessionAttribute("usuario_id"));
-        model.put("MiembroAdmin", context.sessionAttribute("MiembroAdmin"));
-        model.put("Miembro", context.sessionAttribute("Miembro"));
-        */
         this.cargarVariablesSesion(context, model);
         model.put("comunidad", comunidad.getNombre());
         context.render("comunidades/solicitud_enviada.hbs", model);
@@ -126,13 +117,6 @@ public class ComunidadesController extends Controller implements ICrudViewsHandl
 
         Comunidad comunidad = (Comunidad) repositorioDeComunidades.buscar(Long.parseLong(context.pathParam("comunidad_id")));
         Map<String, Object> model = new HashMap<>();
-        /*
-        model.put("email", context.sessionAttribute("email"));
-        model.put("tipo_rol", context.sessionAttribute("tipo_rol"));
-        model.put("usuario_id", context.sessionAttribute("usuario_id"));
-        model.put("MiembroAdmin", context.sessionAttribute("MiembroAdmin"));
-        model.put("Miembro", context.sessionAttribute("Miembro"));
-         */
 
         this.cargarVariablesSesion(context, model);
 
@@ -154,10 +138,14 @@ public class ComunidadesController extends Controller implements ICrudViewsHandl
 
                 miembro = new Miembro();
                 miembro.setNombre(usuario.getEmail());
+                miembro.setEmail(usuario.getEmail());
                 miembro.setConfiabilidad(4.5);
                 MedioDeNotificacion medio = new EmailSender(new NotificarPorEmail());
                 miembro.setMedioDeNotificacionPreferido(medio);
+                miembro.setNotificacionInmediata(Boolean.TRUE);
+                miembro.setEsObservador(Boolean.FALSE);
                 miembro.setIdProvincia(2L);
+                miembro.setTurnoNotificacion(1);
                 miembro.setIdMunicipio(22042);
                 usuario.setRol(miembro);
                 repositorioDeUsuarios.actualizar(usuario);
@@ -168,7 +156,7 @@ public class ComunidadesController extends Controller implements ICrudViewsHandl
                 miembro = (Miembro) rol;
             }
 
-            miembro.miembroAceptado(comunidad);
+            //miembro.miembroAceptado(comunidad);
             repositorioDeRoles.guardar(miembro);
             comunidad.agregarMiembro(miembro);
             repositorioDeComunidades.actualizar(comunidad);
@@ -210,6 +198,7 @@ public class ComunidadesController extends Controller implements ICrudViewsHandl
         /*x si es admin */
         if (comunidad.getAdministradores().contains(rol)) {
             comunidad.getAdministradores().remove(rol);
+            repositorioDeComunidades.actualizar(comunidad);
         }
         /* en un futuro esta logica hay que hacerla mejor */
 
@@ -224,7 +213,6 @@ public class ComunidadesController extends Controller implements ICrudViewsHandl
         repositorioDeComunidades.actualizar(comunidad);
 
 
-        //context.redirect("/comunidades/" + comunidad.getId().toString() + "/gestionar");
         this.gestionar(context);
 
         repositorioDeUsuarios.limpiarCache();
@@ -296,6 +284,9 @@ public class ComunidadesController extends Controller implements ICrudViewsHandl
     public void create(Context context) {
 
         Comunidad comunidad = new Comunidad();
+
+        Map<String, Object> model = new HashMap<>();
+        this.cargarVariablesSesion(context, model);
        // revisar numero de confiabilidad
         comunidad.setConfiabilidad(5.0);
         repositorioDeComunidades.guardar(comunidad);
@@ -310,8 +301,13 @@ public class ComunidadesController extends Controller implements ICrudViewsHandl
                 RolesUsuario rol = usuario.getRol();
                 miembro = new Miembro();
                 miembro.setNombre(usuario.getEmail());
+                miembro.setEmail(usuario.getEmail());
                 miembro.setConfiabilidad(4.5);
                 miembro.setEsObservador(Boolean.FALSE);
+                miembro.setTurnoNotificacion(1);
+                miembro.setIdProvincia(2L);
+                miembro.setNotificacionInmediata(Boolean.TRUE);
+                miembro.setIdMunicipio(22042);
                 MedioDeNotificacion medio = new EmailSender(new NotificarPorEmail());
                 miembro.setMedioDeNotificacionPreferido(medio);
                 repositorioDeRoles.guardar(miembro);
@@ -347,8 +343,6 @@ public class ComunidadesController extends Controller implements ICrudViewsHandl
         }
 
 
-        Map<String, Object> model = new HashMap<>();
-        this.cargarVariablesSesion(context, model);
         model.put("comunidad", comunidad);
         context.render("comunidades/comunidad.hbs", model);
 

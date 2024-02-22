@@ -19,6 +19,7 @@ public class Usuario extends Persistente {
 
   @Column(name = "contrasenia")
   private String contrasenia;
+
   @Column(name = "email")
   private String email;
 

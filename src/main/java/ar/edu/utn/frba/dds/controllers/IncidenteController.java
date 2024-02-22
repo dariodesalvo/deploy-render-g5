@@ -1,7 +1,7 @@
 package ar.edu.utn.frba.dds.controllers;
 
-import ar.edu.utn.frba.dds.models.comunidades.Comunidad;
 import ar.edu.utn.frba.dds.models.comunidades.Miembro;
+import ar.edu.utn.frba.dds.models.comunidades.RolesUsuario;
 import ar.edu.utn.frba.dds.models.comunidades.Usuario;
 import ar.edu.utn.frba.dds.models.incidentes.Incidente;
 import ar.edu.utn.frba.dds.models.incidentes.IncidenteXComunidad;
@@ -45,9 +45,10 @@ public class IncidenteController extends Controller implements ICrudViewsHandler
     @Override
     public void show(Context context) {
         Usuario usuario = (Usuario) repositorioDeUsuarios.buscar(Long.parseLong(context.sessionAttribute("usuario_id")));
-        Miembro miembro = (Miembro)  usuario.getRol();
 
-        List<Incidente> incidentes= this.repositorioDeIncidentes.buscarTodos();
+        String rol = usuario.getRol().getClass().getSimpleName();
+
+        List<Incidente> incidentes = this.repositorioDeIncidentes.buscarTodos();
         List<Incidente> incidentesAbiertos = incidentes
                 .stream()
                 .filter(incidente -> incidente.getEstado())
@@ -58,24 +59,32 @@ public class IncidenteController extends Controller implements ICrudViewsHandler
                 .collect(Collectors.toList());
 
         List<Incidente> incidentesXCerrar = new ArrayList<>();
-        incidentesAbiertos.forEach(incidente -> {
 
-            List<IncidenteXComunidad> incidenteXComunidads = (List<IncidenteXComunidad>) this.repositorioDeIncidentesXComunidad.buscarXIncidente(incidente.getId());
+        if(Objects.equals(rol, "Miembro")) {
 
-            Boolean busqueda = incidenteXComunidads.stream().anyMatch(
-                    incidenteXComunidad ->
-                        miembro.getComunidades().contains(incidenteXComunidad.getComunidad()));
+            Miembro miembro = (Miembro) usuario.getRol();
 
-            if(busqueda){
-                incidentesXCerrar.add(incidente);
-            }
+            incidentesAbiertos.forEach(incidente -> {
 
-        });
+                List<IncidenteXComunidad> incidenteXComunidads = (List<IncidenteXComunidad>) this.repositorioDeIncidentesXComunidad.buscarXIncidente(incidente.getId());
 
-        incidentesAbiertos = incidentesAbiertos
-                .stream()
-                .filter(incidente -> !incidentesXCerrar.contains(incidente))
-                .collect(Collectors.toList());
+                Boolean busqueda = incidenteXComunidads.stream().anyMatch(
+                        incidenteXComunidad ->
+                                miembro.getComunidades().contains(incidenteXComunidad.getComunidad()));
+
+                if (busqueda) {
+                    incidentesXCerrar.add(incidente);
+                }
+
+            });
+
+            incidentesAbiertos = incidentesAbiertos
+                    .stream()
+                    .filter(incidente -> !incidentesXCerrar.contains(incidente))
+                    .collect(Collectors.toList());
+
+        }
+
 
         Map<String, Object> model = new HashMap<>();
         model.put("incidentesXCerrar", incidentesXCerrar);
